@@ -5,6 +5,7 @@ import "./index.css";
 import HomePage from "./Pages/HomePage";
 import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
+import { ModUser } from "./Pages/ModUser";
 // import { AuthProvider } from "./components/providers/AuthProvider";
 
 const router = createBrowserRouter([
@@ -23,6 +24,10 @@ const router = createBrowserRouter([
   {
     path: "/register",
     element: <RegisterPage />,
+  },
+  {
+    path: "/settings/profile",
+    element: <ModUser />,
   },
 ]);
 
