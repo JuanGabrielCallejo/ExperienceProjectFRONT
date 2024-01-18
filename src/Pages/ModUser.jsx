@@ -58,7 +58,6 @@ const ModUser = () => {
 
       const formData = new FormData();
 
-      // Verificar si userData.photo es null o undefined
       if (
         userData.photo &&
         userData.photo !== null &&
@@ -67,7 +66,6 @@ const ModUser = () => {
         formData.append("photo", userData.photo);
       }
 
-      // Añadir el resto de los campos incluso si no hay una nueva foto
       if (userData.name) {
         formData.append("name", userData.name);
       }
@@ -89,16 +87,15 @@ const ModUser = () => {
         body: formData,
       });
 
-      console.log(formData);
-
       if (response.ok) {
         console.log("Usuario actualizado con éxito");
+        console.log(userData.name);
       } else {
         const data = await response.json();
         console.error(data);
       }
     } catch (error) {
-      console.error("Error al enviar los datos", error.message);
+      console.error("Error al enviar los datos", error);
     }
   };
 
@@ -109,7 +106,7 @@ const ModUser = () => {
   return (
     <>
       <Menu />
-      <h2>Modificar Usuario</h2>
+
       <form onSubmit={modificarDatos}>
         <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
           <div className="relative py-3 sm:max-w-xl sm:mx-auto">
