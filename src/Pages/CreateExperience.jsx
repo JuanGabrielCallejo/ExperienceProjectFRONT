@@ -1,10 +1,34 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Menu } from "../components/Menu";
 import { NavLink } from "react-router-dom";
 
 const CreateExperience = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [exitoExperiencia, setExitoExperiencia] = useState(false);
+  const [categorias, setCategorias] = useState([]);
+
+  useEffect(() => {
+    async function obtenerCategorias() {
+      try {
+        const response = await fetch("http://localhost:3001/categories");
+        if (response.ok) {
+          const datosCategorias = await response.json();
+
+          console.log(datosCategorias.data[0]);
+          const nombresCategorias = datosCategorias.data[0];
+          setCategorias(nombresCategorias);
+        } else {
+          const datosCategorias = await response.json();
+          // responsabilidad del usuario
+          console.log(datosCategorias);
+          // setErrorMessage(body.message);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    obtenerCategorias();
+  }, []);
 
   const nuevaExperiencia = async (e) => {
     e.preventDefault();
@@ -55,40 +79,103 @@ const CreateExperience = () => {
   if (exitoExperiencia) {
     return (
       <>
-        <p>Experiencia creada con exito</p>
-        <NavLink to="/">Ir al inicio</NavLink>
+        <Menu />
+        <div className="bg-green-200 text-green-800 p-4 rounded-md shadow-md">
+          <p className="font-bold">{mensajeParaElUsuario}</p>
+          <NavLink to="/" className="text-blue-500 hover:underline">
+            Ir al inicio
+          </NavLink>
+        </div>
       </>
     );
   } else {
     return (
       <>
         <Menu />
-        <h1>Nueva entrada de experiencia</h1>
-        {statusMessage ? (
-          <div>{mensajeParaElUsuario}</div>
-        ) : (
-          <div>Introduce los datos:</div>
-        )}
-
-        <h2>Crea tu experiencia</h2>
-        <form onSubmit={nuevaExperiencia}>
-          <label htmlFor="category">Categoria</label>
-          <input type="text" name="category" id="category" />
-          <label htmlFor="title">Titulo:</label>
-          <input type="text" name="title" id="title"></input>
-          <br />
-          <label htmlFor="subTitle">Subtitulo:</label>
-          <input type="text" id="subTitle" name="subTitle" />
-          <br />
-          <label htmlFor="place">Lugar:</label>
-          <input type="text" id="place" name="place" />
-          <br />
-          <label htmlFor="text">Descripcion:</label>
-          <input type="text" id="text" name="text"></input>
-          <label htmlFor="photo">Fotos:</label>
-          <input type="file" id="photo" name="photo" />
-          <br />
-          <button>Enviar</button>
+        <div className="text-center mb-4">
+          <h1 className="text-2xl font-bold text-gray-800">
+            Crea tu experiencia
+          </h1>
+        </div>
+        <form
+          onSubmit={nuevaExperiencia}
+          className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md"
+        >
+          <div className="mb-4">
+            <label htmlFor="category" className="text-gray-700">
+              Categoria
+            </label>
+            <select
+              type="text"
+              name="category"
+              id="category"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+            >
+              {categorias.map((categoria) => (
+                <option key={categoria.id} value={categoria.name}>
+                  {categoria.name}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="mb-4">
+            <label htmlFor="title" className="text-gray-700">
+              Titulo:
+            </label>
+            <input
+              type="text"
+              name="title"
+              id="title"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="subTitle" className="text-gray-700">
+              Subtitulo:
+            </label>
+            <input
+              type="text"
+              id="subTitle"
+              name="subTitle"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="place" className="text-gray-700">
+              Lugar:
+            </label>
+            <input
+              type="text"
+              id="place"
+              name="place"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="text" className="text-gray-700">
+              Descripcion:
+            </label>
+            <input
+              type="text"
+              id="text"
+              name="text"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+          <div className="mb-4">
+            <label htmlFor="photo" className="text-gray-700">
+              Fotos:
+            </label>
+            <input
+              type="file"
+              id="photo"
+              name="photo"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+            />
+          </div>
+          <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+            Enviar
+          </button>
         </form>
       </>
     );
