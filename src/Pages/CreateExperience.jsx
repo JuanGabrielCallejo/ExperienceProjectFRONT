@@ -112,7 +112,7 @@ const CreateExperience = () => {
               className="w-full mt-2 p-2 border border-gray-300 rounded-md"
             >
               {categorias.map((categoria) => (
-                <option key={categoria.id} value={categoria.name}>
+                <option key={categoria.id} value={categoria.id}>
                   {categoria.name}
                 </option>
               ))}
