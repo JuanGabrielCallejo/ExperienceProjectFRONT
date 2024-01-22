@@ -1,7 +1,9 @@
 import { useState } from "react";
+import ExpList from "./ExpList";
 
 const ExperienceFilterForm = () => {
   const initialEmptyValue = "";
+  const [result, setResult] = useState("");
   const [selectedOption, setSelectedOption] = useState("");
   const [inputText, setInputText] = useState("");
   const [orderText, setOrderText] = useState("");
@@ -25,12 +27,12 @@ const ExperienceFilterForm = () => {
         const res = await fetch(
           `${
             import.meta.env.VITE_REACT_HOST
-          }/experiences?orderBy=${selectedOption}&orderDirection=${orderText}`
+          }/getexperiences?orderBy=${selectedOption}&orderDirection=${orderText}`
         );
 
         if (res.ok) {
           const data = await res.json();
-          console.log(data);
+          setResult(data.data);
           return data;
         } else {
           const data = await res.json();
@@ -40,22 +42,22 @@ const ExperienceFilterForm = () => {
         const res = await fetch(
           `${
             import.meta.env.VITE_REACT_HOST
-          }/experiences?orderBy=${selectedOption}&orderDirection=${orderText}&search=${inputText}`
+          }/getexperiences?orderBy=${selectedOption}&orderDirection=${orderText}&search=${inputText}`
         );
 
         if (res.ok) {
           const data = await res.json();
-          console.log(data);
+          setResult(data.data);
           return data;
         } else {
           const data = await res.json();
-          console.log(data);
+          console.log(data.data);
         }
       }
 
-      console.log("Opción seleccionada:", selectedOption);
-      console.log("Texto ingresado:", inputText);
-      console.log("Orden", orderText);
+      // console.log("Opción seleccionada:", selectedOption);
+      // console.log("Texto ingresado:", inputText);
+      // console.log("Orden", orderText);
     } catch (error) {
       console.error(error.message);
     }
@@ -102,6 +104,7 @@ const ExperienceFilterForm = () => {
         </label>
         <button type="submit">Buscar</button>
       </form>
+      <ul>{result ? <ExpList experience={result} /> : <></>}</ul>
     </>
   );
 };

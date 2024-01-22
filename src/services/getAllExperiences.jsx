@@ -1,7 +1,7 @@
 const getAllExperiences = async () => {
   try {
     const result = await fetch(
-      `${import.meta.env.VITE_REACT_HOST}/experiences`
+      `${import.meta.env.VITE_REACT_HOST}/getexperiences`
     );
 
     if (!result.ok) {
