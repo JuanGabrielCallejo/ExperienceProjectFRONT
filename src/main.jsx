@@ -7,6 +7,7 @@ import LoginPage from "./Pages/LoginPage";
 import RegisterPage from "./Pages/RegisterPage";
 import { ModUser } from "./Pages/ModUser";
 import { CreateExperience } from "./Pages/CreateExperience";
+import FilterExperience from "./Pages/FilterExperience";
 // import { AuthProvider } from "./components/providers/AuthProvider";
 
 const router = createBrowserRouter([
@@ -16,7 +17,7 @@ const router = createBrowserRouter([
   },
   {
     path: "/experiences",
-    element: "Experiences",
+    element: <FilterExperience />,
   },
   {
     path: "/compose/experience",

@@ -12,6 +12,9 @@ export const Menu = () => {
       <NavLink to="/register" className="mx-2 hover:bg-blue-600">
         Registro
       </NavLink>
+      <NavLink to="/experiences" className="mx-2 hover:bg-blue-600">
+        Buscar Experiencias
+      </NavLink>
       <NavLink to="/settings/profile" className="mx-2 hover:bg-blue-600">
         Modificar Perfil
       </NavLink>
