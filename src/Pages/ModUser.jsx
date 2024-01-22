@@ -15,12 +15,15 @@ const ModUser = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://localhost:3001/user/1", {
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkppbSIsImlhdCI6MTcwNTUxMDA2NiwiZXhwIjoxNzA1NjgyODY2fQ.QUkE7Lew1bJvt-NdlvlvIsIyIurD487pngxBAOfDxgA",
-          },
-        });
+        const response = await fetch(
+          `${import.meta.env.VITE_REACT_HOST}/user/10`,
+          {
+            headers: {
+              Authorization:
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA1NjgyODM4LCJleHAiOjE3MDU4NTU2Mzh9.J9neDZzDfLCLidd1j30Bv1yQ3xlHMFte1FqmOy_uOo8",
+            },
+          }
+        );
         if (response.ok) {
           const data = await response.json();
           setUserData(data);
@@ -78,14 +81,17 @@ const ModUser = () => {
       if (userData.password) {
         formData.append("password", userData.password);
       }
-      const response = await fetch("http://localhost:3001/user/1", {
-        method: "PUT",
-        headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkppbSIsImlhdCI6MTcwNTUxMDA2NiwiZXhwIjoxNzA1NjgyODY2fQ.QUkE7Lew1bJvt-NdlvlvIsIyIurD487pngxBAOfDxgA",
-        },
-        body: formData,
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_HOST}/user/10`,
+        {
+          method: "PUT",
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA1NjgyODM4LCJleHAiOjE3MDU4NTU2Mzh9.J9neDZzDfLCLidd1j30Bv1yQ3xlHMFte1FqmOy_uOo8",
+          },
+          body: formData,
+        }
+      );
 
       if (response.ok) {
         console.log("Usuario actualizado con éxito");
