@@ -5,7 +5,7 @@ const FilterExperience = () => {
   return (
     <>
       <Menu />
-      <h1>Página Home</h1>
+      <h1>Buscar Experiencias</h1>
       <ExperienceFilterForm />
     </>
   );

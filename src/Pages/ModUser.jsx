@@ -21,7 +21,6 @@ const ModUser = () => {
           throw new Error('Token no encontrado en localStorage')
           
         }
-        //const userId = localStorage.getItem('userId');
 
         const response = await fetch(
           `${import.meta.env.VITE_REACT_HOST}/user/2`,
@@ -36,7 +35,6 @@ const ModUser = () => {
           const data = await response.json();
           setUserData(data);
           setLoading(false);
-          console.log(data);
         } else {
           const data = await response.json();
           console.error(data);
@@ -69,6 +67,13 @@ const ModUser = () => {
 
       const formData = new FormData();
 
+      const token = localStorage.getItem('token');
+
+        if (!token) {
+          throw new Error('Token no encontrado en localStorage')
+          
+        }
+
       if (
         userData.photo &&
         userData.photo !== null &&
@@ -95,7 +100,7 @@ const ModUser = () => {
           method: "PUT",
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA1NjgyODM4LCJleHAiOjE3MDU4NTU2Mzh9.J9neDZzDfLCLidd1j30Bv1yQ3xlHMFte1FqmOy_uOo8",
+              `Bearer ${token}`,
           },
           body: formData,
         }
