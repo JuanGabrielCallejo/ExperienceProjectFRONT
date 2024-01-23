@@ -1,7 +1,20 @@
 const getAllExperiences = async () => {
   try {
+
+    const token = localStorage.getItem('token');
+
+    if (!token) {
+      throw new Error('Token no encontrado en localStorage')
+      
+    }
+    
     const result = await fetch(
-      `${import.meta.env.VITE_REACT_HOST}/experiences`
+      `${import.meta.env.VITE_REACT_HOST}/experiences`,
+        { 
+          headers: {
+          Authorization: `Bearer ${token}`
+        }
+      }
     );
 
     if (!result.ok) {

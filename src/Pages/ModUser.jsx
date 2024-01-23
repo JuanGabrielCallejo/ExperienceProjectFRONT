@@ -15,12 +15,20 @@ const ModUser = () => {
   useEffect(() => {
     async function fetchData() {
       try {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+          throw new Error('Token no encontrado en localStorage')
+          
+        }
+        //const userId = localStorage.getItem('userId');
+
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/10`,
+          `${import.meta.env.VITE_REACT_HOST}/user/2`,
           {
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA1NjgyODM4LCJleHAiOjE3MDU4NTU2Mzh9.J9neDZzDfLCLidd1j30Bv1yQ3xlHMFte1FqmOy_uOo8",
+              `Bearer ${token}`,
             },
           }
         );

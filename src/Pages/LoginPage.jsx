@@ -24,22 +24,31 @@ const LoginPage = () => {
 
       //Analizamos la respuesta del servidor como JSON
       const responseData = await response.json();
+
+      const token = responseData.token;
+      const userId = responseData.id;
+      const userName = responseData.name;
+      const userLastName = responseData.lastName;
+      const userPhoto = responseData.photoPath;
     
       // Comprobamos si la solicitud de inicio de sesión ha sido exitosa
       if (response.status === 200) {
         //Almacenamiento de datos en el localStorage
-        localStorage.setItem('token', responseData.token);
-        //console.log(responseData.token);
-        localStorage.setItem('userId', responseData.userId);
+        localStorage.setItem('token', token);
+        localStorage.setItem('id', userId);
+        localStorage.setItem('name', userName)
+        localStorage.setItem('lastName', userLastName)
+        localStorage.setItem('photo', userPhoto)
+        console.log(responseData);
 
         //Mensaje de inicio de sesión exitoso "BORRAR CONSOLE.LOG"
           console.log(`Inicio de sesión con éxito: ${responseData.message}`);
           setMessage(`Inicio de sesión con éxito: ${responseData.message}`);
 
-          //Redirección automática a Home Page (En proceso)
-          // setTimeout(() => {
-          //   history.push('http://localhost:5173');
-          // }, 3000)
+        //Redirección automática a Home Page (En proceso)
+        // setTimeout(() => {
+        //   history.push('http://localhost:5173');
+        // }, 3000)
 
       } else {
         //Mensaje de error en el inicio de sesión "BORRAR CONSOLE.LOG"
@@ -61,7 +70,6 @@ const LoginPage = () => {
     // creación del objeto data con los datos de inicio de sesión y envío de solucitud
     const data = { email, password };
     sendRequest('http://localhost:3030/login', data);
-
   };
 
   // Componente de la página LOGIN
