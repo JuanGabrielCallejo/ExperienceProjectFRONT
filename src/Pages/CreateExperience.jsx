@@ -10,7 +10,7 @@ const CreateExperience = () => {
   useEffect(() => {
     async function obtenerCategorias() {
       try {
-        const response = await fetch("http://localhost:3001/categories");
+        const response = await fetch("http://localhost:3000/categories");
         if (response.ok) {
           const datosCategorias = await response.json();
 
@@ -51,7 +51,7 @@ const CreateExperience = () => {
     console.log("evento", e, { title, subTitle, place, text, photo });
 
     try {
-      const res = await fetch("http://localhost:3001/experience", {
+      const res = await fetch("http://localhost:3000/experience", {
         method: "POST",
         body: experienceBody,
         headers: {
