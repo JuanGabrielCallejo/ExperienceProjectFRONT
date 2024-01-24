@@ -10,7 +10,7 @@ const CreateExperience = () => {
   useEffect(() => {
     async function obtenerCategorias() {
       try {
-        const response = await fetch("http://localhost:3001/categories");
+        const response = await fetch("http://localhost:3000/categories");
         if (response.ok) {
           const datosCategorias = await response.json();
 
@@ -51,12 +51,12 @@ const CreateExperience = () => {
     console.log("evento", e, { title, subTitle, place, text, photo });
 
     try {
-      const res = await fetch("http://localhost:3001/experience", {
+      const res = await fetch("http://localhost:3000/experience", {
         method: "POST",
         body: experienceBody,
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA1NTk3MDA5LCJleHAiOjE3MDU3Njk4MDl9.OBizxyjo9T8z390_Rzm2jzKLeGVk31otA51ll2QW-kE",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDYwOTMzMzAsImV4cCI6MTcwNjI2NjEzMH0.vjU53K00O2DeZqFrkUGLpmVKsc1kskL5GI4dIq094kc",
         },
       });
 
