@@ -34,7 +34,7 @@ const AnswersList = ({ comment }) => {
 
 AnswersList.propTypes = {
   comment: PropTypes.shape({
-    comment_id: PropTypes.string.isRequired,
+    comment_id: PropTypes.any.isRequired,
   }),
 };
 

@@ -20,7 +20,7 @@ const ModUser = () => {
           {
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA1NjgyODM4LCJleHAiOjE3MDU4NTU2Mzh9.J9neDZzDfLCLidd1j30Bv1yQ3xlHMFte1FqmOy_uOo8",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA2MDI5OTgyLCJleHAiOjE3MDYyMDI3ODJ9.kVWN3UnRdXxMdug3HJ5JV8Vfa7BoA_4suWV5E5Tyi-U",
             },
           }
         );
@@ -28,7 +28,6 @@ const ModUser = () => {
           const data = await response.json();
           setUserData(data);
           setLoading(false);
-          console.log(data);
         } else {
           const data = await response.json();
           console.error(data);
@@ -87,7 +86,7 @@ const ModUser = () => {
           method: "PUT",
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA1NjgyODM4LCJleHAiOjE3MDU4NTU2Mzh9.J9neDZzDfLCLidd1j30Bv1yQ3xlHMFte1FqmOy_uOo8",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA2MDI5OTgyLCJleHAiOjE3MDYyMDI3ODJ9.kVWN3UnRdXxMdug3HJ5JV8Vfa7BoA_4suWV5E5Tyi-U",
           },
           body: formData,
         }

@@ -1,4 +1,6 @@
 import PropTypes from "prop-types";
+import CommentsList from "./CommentsList";
+import ExpComment from "./ExpComment";
 
 const Experience = ({ exp }) => {
   return (
@@ -57,6 +59,9 @@ const Experience = ({ exp }) => {
             </article>
           </div>
         </div>
+        <ExpComment exp={exp} />
+        <h3>Lista de Comentarios</h3>
+        <CommentsList exp={exp} />
       </main>
     </>
   );
