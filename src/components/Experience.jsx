@@ -1,8 +1,68 @@
 import PropTypes from "prop-types";
 import CommentsList from "./CommentsList";
 import ExpComment from "./ExpComment";
+import { useNavigate } from 'react-router-dom';
 
 const Experience = ({ exp }) => {
+  const navigate = useNavigate();
+
+  async function peticionServidor(id) {
+    // console.log(JSON.stringify(usuario));
+    let datos;
+    try {
+      const url = `${import.meta.env.VITE_REACT_HOST
+        }/experience/` + id;
+      console.log(url);
+      const respuesta = await fetch(url
+        , {
+          method: "DELETE",
+          headers: {
+            Authorization:
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDYwOTMzMzAsImV4cCI6MTcwNjI2NjEzMH0.vjU53K00O2DeZqFrkUGLpmVKsc1kskL5GI4dIq094kc",
+          },
+        });
+      datos = await respuesta.json();
+      console.log(datos);
+      if (!respuesta.ok) {
+        // console.log(datos.message);
+        console.log("Error en la petición");
+        return datos;
+        // throw Error("Error en la petición");
+      }
+      navigate('/');
+      window.location.reload();
+
+    } catch (error) {
+      console.log("Error: " + error.message)
+    }
+  }
+
+  function eliminarExperiencia(id) {
+    console.log("id: " + id);
+    // if (!nombre || nombre === "" || nombre === null) {
+    //   setMensaje("El nombre no puede estar vacío");
+    //   return;
+    // }
+    // if (!apellido || apellido === "" || apellido === null) {
+    //   setMensaje("El apellido no puede estar vacío");
+    //   return;
+    // }
+    // const photo = evento.target.elements.file.files[0];
+
+    // let formData = new FormData();
+    // formData.append('name', nombre);
+    // formData.append('lastName', apellido);
+    // formData.append('email', email);
+    // formData.append('password', contrasinal);
+
+    // if (photo) {
+    //   formData.append('photo', photo);
+    // }
+
+    // // console.log(formData);
+    peticionServidor(id);
+  }
+
   return (
     <>
       <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased bg-white ">
@@ -34,6 +94,10 @@ const Experience = ({ exp }) => {
                         </time>
                       </p>
                     </div>
+                    <div className="p-2">
+                    </div>
+                    <div className="rounded-full bg-red-500 text-white p-2 text-sm hover:cursor-pointer" onClick={(evento) => { evento.preventDefault(); eliminarExperiencia(exp.id); }}>
+                      Eliminar</div>
                   </div>
                 </address>
                 <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">
