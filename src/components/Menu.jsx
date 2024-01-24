@@ -2,10 +2,25 @@ import { NavLink } from "react-router-dom";
 
 export const Menu = () => {
   return (
-    <>
-      <NavLink to="/">Home</NavLink>
-      <NavLink to="/login">Login</NavLink>
-      <NavLink to="/register">Registro</NavLink>
-    </>
+    <div className="bg-blue-500 text-white p-4 text-center font-bold">
+      <NavLink to="/" className="mx-2 hover:bg-blue-600">
+        Home
+      </NavLink>
+      <NavLink to="/login" className="mx-2 hover:bg-blue-600">
+        Login
+      </NavLink>
+      <NavLink to="/register" className="mx-2 hover:bg-blue-600">
+        Registro
+      </NavLink>
+      <NavLink to="/experiences" className="mx-2 hover:bg-blue-600">
+        Buscar Experiencias
+      </NavLink>
+      <NavLink to="/settings/profile" className="mx-2 hover:bg-blue-600">
+        Modificar Perfil
+      </NavLink>
+      <NavLink to="/compose/experience" className="mx-2 hover:bg-blue-600">
+        Crear Experiencia
+      </NavLink>
+    </div>
   );
 };

@@ -8,7 +8,6 @@ const Formulary = ({ setMensaje, setExito }) => {
 
   useEffect(() => { setMensaje("") }, [setMensaje]);
 
-
   async function peticionServidor(formData) {
     // console.log(JSON.stringify(usuario));
     let datos;
@@ -36,6 +35,8 @@ const Formulary = ({ setMensaje, setExito }) => {
     }
   }
 
+  function registrarUsuario(evento) {
+    evento.preventDefault();
 
   function registrarUsuario(evento) {
     evento.preventDefault();
@@ -65,10 +66,17 @@ const Formulary = ({ setMensaje, setExito }) => {
   }
   return (
     <>
-      <form onSubmit={registrarUsuario} className="max-w-sm mx-auto mt-8 p-4 bg-white rounded shadow-md text-xs">
 
+      <form
+        onSubmit={registrarUsuario}
+        className="max-w-sm mx-auto mt-8 p-4 bg-white rounded shadow-md text-xs"
+      >
         <div className="mb-3">
-          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="name">
+          <label
+            className="block text-gray-700 text-sm font-bold mb-2"
+            htmlFor="name"
+          >
+
             *Nombre:
           </label>
           <input
@@ -81,6 +89,7 @@ const Formulary = ({ setMensaje, setExito }) => {
 
         <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
+
             *Apellido:
           </label>
           <input
@@ -93,6 +102,7 @@ const Formulary = ({ setMensaje, setExito }) => {
 
         <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+        
             *Correo:
           </label>
           <input
@@ -105,6 +115,7 @@ const Formulary = ({ setMensaje, setExito }) => {
 
         <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+
             *Contraseña:
           </label>
           <input
@@ -117,6 +128,7 @@ const Formulary = ({ setMensaje, setExito }) => {
 
         <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="file">
+
             Foto:
           </label>
           <input type="file" name="file" className="w-full px-3 py-2" />
