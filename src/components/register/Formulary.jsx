@@ -38,9 +38,6 @@ const Formulary = ({ setMensaje, setExito }) => {
   function registrarUsuario(evento) {
     evento.preventDefault();
 
-  function registrarUsuario(evento) {
-    evento.preventDefault();
-
     if (!nombre || nombre === "" || nombre === null) {
       setMensaje("El nombre no puede estar vacío");
       return;
