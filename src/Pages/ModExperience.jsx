@@ -16,11 +16,11 @@ const ModExp = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/experience/1`,
+          `${import.meta.env.VITE_REACT_HOST}/experience/5`,
           {
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MDMwNTgxLCJleHAiOjE3MDYyMDMzODF9.8Qjg5wpZ7oT9fLuIYVh1jNCekcJGHqcNPMB0bnzvn8M",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
             },
           }
         );
@@ -66,14 +66,14 @@ const ModExp = () => {
         expData.photo !== null &&
         expData.photo !== undefined
       ) {
-        formData.append("photo", expData.photo);
+        formData.append("avatar", expData.photo);
       }
 
       if (expData.title) {
         formData.append("title", expData.title);
       }
-      if (expData.subtitle) {
-        formData.append("subTtitle", expData.subTitle);
+      if (expData.subTitle) {
+        formData.append("subTitle", expData.subTitle);
       }
       if (expData.place) {
         formData.append("place", expData.place);
@@ -82,12 +82,12 @@ const ModExp = () => {
         formData.append("text", expData.text);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/modExperience/1`,
+        `${import.meta.env.VITE_REACT_HOST}/modExperience/5`,
         {
           method: "PUT",
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MDMwNTgxLCJleHAiOjE3MDYyMDMzODF9.8Qjg5wpZ7oT9fLuIYVh1jNCekcJGHqcNPMB0bnzvn8M",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
           },
           body: formData,
         }

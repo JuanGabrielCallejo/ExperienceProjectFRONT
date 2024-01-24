@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu } from "../components/Menu";
-import { NavLink } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const CreateExperience = () => {
   const [statusMessage, setStatusMessage] = useState("");
@@ -10,7 +10,9 @@ const CreateExperience = () => {
   useEffect(() => {
     async function obtenerCategorias() {
       try {
-        const response = await fetch("http://localhost:3000/categories");
+        const response = await fetch(
+          `${import.meta.env.VITE_REACT_HOST}/categories`
+        );
         if (response.ok) {
           const datosCategorias = await response.json();
 
@@ -51,12 +53,12 @@ const CreateExperience = () => {
     console.log("evento", e, { title, subTitle, place, text, photo });
 
     try {
-      const res = await fetch("http://localhost:3000/experience", {
+      const res = await fetch(`${import.meta.env.VITE_REACT_HOST}/experience`, {
         method: "POST",
         body: experienceBody,
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDYwOTMzMzAsImV4cCI6MTcwNjI2NjEzMH0.vjU53K00O2DeZqFrkUGLpmVKsc1kskL5GI4dIq094kc",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
         },
       });
 
@@ -77,17 +79,13 @@ const CreateExperience = () => {
   const mensajeParaElUsuario = `${statusMessage}`;
 
   if (exitoExperiencia) {
-    return (
-      <>
-        <Menu />
-        <div className="bg-green-200 text-green-800 p-4 rounded-md shadow-md">
-          <p className="font-bold">{mensajeParaElUsuario}</p>
-          <NavLink to="/" className="text-blue-500 hover:underline">
-            Ir al inicio
-          </NavLink>
-        </div>
-      </>
-    );
+    Swal.fire({
+      title: mensajeParaElUsuario,
+      icon: "success",
+    }).then(() => {
+      // Redirigir a la página de inicio después de cerrar la alerta
+      window.location.href = "/";
+    });
   } else {
     return (
       <>

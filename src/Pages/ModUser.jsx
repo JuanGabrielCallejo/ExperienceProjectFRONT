@@ -20,7 +20,7 @@ const ModUser = () => {
           {
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA1NjgyODM4LCJleHAiOjE3MDU4NTU2Mzh9.J9neDZzDfLCLidd1j30Bv1yQ3xlHMFte1FqmOy_uOo8",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
             },
           }
         );
@@ -86,7 +86,7 @@ const ModUser = () => {
           method: "PUT",
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA1NjgyODM4LCJleHAiOjE3MDU4NTU2Mzh9.J9neDZzDfLCLidd1j30Bv1yQ3xlHMFte1FqmOy_uOo8",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
           },
           body: formData,
         }
