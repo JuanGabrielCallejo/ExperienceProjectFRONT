@@ -14,10 +14,13 @@ const Formulary = ({ setMensaje, setExito }) => {
     // console.log(JSON.stringify(usuario));
     let datos;
     try {
-      const respuesta = await fetch("http://localhost:3000/register", {
-        method: "POST",
-        body: formData,
-      });
+      const respuesta = await fetch(
+        `${import.meta.env.VITE_REACT_HOST}/register`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
       datos = await respuesta.json();
       setMensaje(datos.message);
       if (!respuesta.ok) {
