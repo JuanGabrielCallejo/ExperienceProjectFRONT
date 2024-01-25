@@ -6,21 +6,18 @@ const Formulary = ({ setMensaje, setExito }) => {
   const [email, setEmail] = useState("");
   const [contrasinal, setContrasinal] = useState();
 
-  useEffect(() => {
-    setMensaje("");
-  }, [setMensaje]);
+  useEffect(() => { setMensaje("") }, [setMensaje]);
 
   async function peticionServidor(formData) {
     // console.log(JSON.stringify(usuario));
     let datos;
     try {
       const respuesta = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/register`,
-        {
-          method: "POST",
-          body: formData,
-        }
-      );
+        `${import.meta.env.VITE_REACT_HOST
+        }/register`, {
+        method: "POST",
+        body: formData,
+      });
       datos = await respuesta.json();
       setMensaje(datos.message);
       if (!respuesta.ok) {
@@ -34,7 +31,7 @@ const Formulary = ({ setMensaje, setExito }) => {
       setExito(true);
       return datos;
     } catch (error) {
-      console.log("Error: " + error.message);
+      console.log("Error: " + error.message)
     }
   }
 
@@ -52,13 +49,13 @@ const Formulary = ({ setMensaje, setExito }) => {
     const photo = evento.target.elements.file.files[0];
 
     let formData = new FormData();
-    formData.append("name", nombre);
-    formData.append("lastName", apellido);
-    formData.append("email", email);
-    formData.append("password", contrasinal);
+    formData.append('name', nombre);
+    formData.append('lastName', apellido);
+    formData.append('email', email);
+    formData.append('password', contrasinal);
 
     if (photo) {
-      formData.append("photo", photo);
+      formData.append('photo', photo);
     }
 
     // console.log(formData);
@@ -66,6 +63,7 @@ const Formulary = ({ setMensaje, setExito }) => {
   }
   return (
     <>
+
       <form
         onSubmit={registrarUsuario}
         className="max-w-sm mx-auto mt-8 p-4 bg-white rounded shadow-md text-xs"
@@ -75,6 +73,7 @@ const Formulary = ({ setMensaje, setExito }) => {
             className="block text-gray-700 text-sm font-bold mb-2"
             htmlFor="name"
           >
+
             *Nombre:
           </label>
           <input
@@ -86,10 +85,8 @@ const Formulary = ({ setMensaje, setExito }) => {
         </div>
 
         <div className="mb-3">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="lastName"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="lastName">
+
             *Apellido:
           </label>
           <input
@@ -101,10 +98,8 @@ const Formulary = ({ setMensaje, setExito }) => {
         </div>
 
         <div className="mb-3">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
+        
             *Correo:
           </label>
           <input
@@ -116,10 +111,8 @@ const Formulary = ({ setMensaje, setExito }) => {
         </div>
 
         <div className="mb-3">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">
+
             *Contraseña:
           </label>
           <input
@@ -131,10 +124,8 @@ const Formulary = ({ setMensaje, setExito }) => {
         </div>
 
         <div className="mb-3">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="file"
-          >
+          <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="file">
+
             Foto:
           </label>
           <input type="file" name="file" className="w-full px-3 py-2" />
@@ -149,6 +140,7 @@ const Formulary = ({ setMensaje, setExito }) => {
           </button>
         </div>
       </form>
+
     </>
   );
 };

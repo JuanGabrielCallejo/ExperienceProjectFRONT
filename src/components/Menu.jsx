@@ -21,6 +21,9 @@ export const Menu = () => {
       <NavLink to="/compose/experience" className="mx-2 hover:bg-blue-600">
         Crear Experiencia
       </NavLink>
+      <NavLink to="/settings/experience" className="mx-2 hover:bg-blue-600">
+        Modificar experiencia
+      </NavLink>
     </div>
   );
 };

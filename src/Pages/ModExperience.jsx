@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Menu } from "../components/Menu";
-import BorrarUsuario from "../components/borrarUsuario";
 
-const ModUser = () => {
-  const [userData, setUserData] = useState({
-    name: "",
-    lastName: "",
-    email: "",
-    password: "",
+const ModExp = () => {
+  const [expData, setExpData] = useState({
+    title: "",
+    subTitle: "",
+    place: "",
+    text: "",
     photo: undefined,
   });
 
@@ -17,19 +16,19 @@ const ModUser = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/7`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
-          //RECOGER EL ID Y EL TOKEN DEL LOCALSTORAGE
+          `${import.meta.env.VITE_REACT_HOST}/experience/1`,
           {
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6IkdhYnJpZWwiLCJpYXQiOjE3MDYxNzgxMzksImV4cCI6MTcwNjM1MDkzOX0.Fro7u3o8XRuNO8RVxcK4sLq2qi5hrRKg74zMEVQxq7E",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MDMwNTgxLCJleHAiOjE3MDYyMDMzODF9.8Qjg5wpZ7oT9fLuIYVh1jNCekcJGHqcNPMB0bnzvn8M",
             },
           }
         );
         if (response.ok) {
           const data = await response.json();
-          setUserData(data);
+          setExpData(data);
           setLoading(false);
+          console.log(data);
         } else {
           const data = await response.json();
           console.error(data);
@@ -43,19 +42,19 @@ const ModUser = () => {
 
   const cambiarValorCampo = (e) => {
     const { name, value } = e.target;
-    setUserData({ ...userData, [name]: value });
+    setExpData({ ...expData, [name]: value });
   };
 
   const handleFileChange = (e) => {
     const file = e.target.files[0];
-    setUserData({ ...userData, photo: file });
+    setExpData({ ...expData, photo: file });
   };
 
   const modificarDatos = async (e) => {
     e.preventDefault();
 
     try {
-      if (!userData) {
+      if (!expData) {
         console.error("No hay datos de usuario");
         return;
       }
@@ -63,40 +62,40 @@ const ModUser = () => {
       const formData = new FormData();
 
       if (
-        userData.photo &&
-        userData.photo !== null &&
-        userData.photo !== undefined
+        expData.photo &&
+        expData.photo !== null &&
+        expData.photo !== undefined
       ) {
-        formData.append("photo", userData.photo);
+        formData.append("photo", expData.photo);
       }
 
-      if (userData.name) {
-        formData.append("name", userData.name);
+      if (expData.title) {
+        formData.append("title", expData.title);
       }
-      if (userData.lastName) {
-        formData.append("lastName", userData.lastName);
+      if (expData.subtitle) {
+        formData.append("subTtitle", expData.subTitle);
       }
-      if (userData.email) {
-        formData.append("email", userData.email);
+      if (expData.place) {
+        formData.append("place", expData.place);
       }
-      if (userData.password) {
-        formData.append("password", userData.password);
+      if (expData.text) {
+        formData.append("text", expData.text);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/10`,
+        `${import.meta.env.VITE_REACT_HOST}/modExperience/1`,
         {
           method: "PUT",
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA2MDI5OTgyLCJleHAiOjE3MDYyMDI3ODJ9.kVWN3UnRdXxMdug3HJ5JV8Vfa7BoA_4suWV5E5Tyi-U",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MDMwNTgxLCJleHAiOjE3MDYyMDMzODF9.8Qjg5wpZ7oT9fLuIYVh1jNCekcJGHqcNPMB0bnzvn8M",
           },
           body: formData,
         }
       );
 
       if (response.ok) {
-        console.log("Usuario actualizado con éxito");
-        console.log(userData.name);
+        console.log("Experiencia actualizada con éxito");
+        console.log(expData.title);
       } else {
         const data = await response.json();
         console.error(data);
@@ -107,7 +106,7 @@ const ModUser = () => {
   };
 
   if (loading) {
-    return <p>Cargando datos del usuario...</p>;
+    return <p>Cargando experiencia...</p>;
   }
 
   return (
@@ -121,7 +120,9 @@ const ModUser = () => {
             <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
               <div className="max-w-md mx-auto">
                 <div>
-                  <h1 className="text-2xl font-semibold">Edita tu perfil</h1>
+                  <h1 className="text-2xl font-semibold">
+                    Edita tu experiencia
+                  </h1>
                 </div>
                 <div className="divide-y divide-gray-200">
                   <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
@@ -144,66 +145,66 @@ const ModUser = () => {
                     </div>
                     <div className="relative">
                       <input
-                        id="name"
-                        name="name"
+                        id="title"
+                        name="title"
                         type="text"
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                        placeholder="Nombre"
+                        placeholder="Título"
                         onChange={cambiarValorCampo}
                       />
                       <label
-                        htmlFor="name"
+                        htmlFor="title"
                         className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                       >
-                        Nombre
+                        Título
                       </label>
                     </div>
                     <div className="relative">
                       <input
-                        id="lastName"
-                        name="lastName"
+                        id="subTitle"
+                        name="subTitle"
                         type="text"
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                        placeholder="Apellido"
+                        placeholder="Subtítulo"
                         onChange={cambiarValorCampo}
                       />
                       <label
-                        htmlFor="lastName"
+                        htmlFor="subTitle"
                         className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                       >
-                        Apellido
+                        Subtítulo
                       </label>
                     </div>
                     <div className="relative">
                       <input
-                        id="email"
-                        name="email"
-                        type="email"
+                        id="place"
+                        name="place"
+                        type="text"
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                        placeholder="Email address"
+                        placeholder="Lugar"
                         onChange={cambiarValorCampo}
                       />
                       <label
-                        htmlFor="email"
+                        htmlFor="place"
                         className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                       >
-                        Email Address
+                        Lugar
                       </label>
                     </div>
                     <div className="relative">
                       <input
-                        id="password"
-                        name="password"
-                        type="password"
+                        id="text"
+                        name="text"
+                        type="text"
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                        placeholder="Password"
+                        placeholder="Descripción"
                         onChange={cambiarValorCampo}
                       />
                       <label
-                        htmlFor="password"
+                        htmlFor="text"
                         className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
                       >
-                        Password
+                        Descripción
                       </label>
                     </div>
                     <div className="relative">
@@ -218,11 +219,8 @@ const ModUser = () => {
           </div>
         </div>
       </form>
-      <div className="my- grid grid-cols-1 gap-4 place-items-end h-50">
-        <BorrarUsuario />
-      </div>
     </>
   );
 };
 
-export { ModUser };
+export { ModExp };
