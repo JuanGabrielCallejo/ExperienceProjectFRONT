@@ -17,16 +17,12 @@ const ModUser = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/7`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
+          `${import.meta.env.VITE_REACT_HOST}/user/1`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
           //RECOGER EL ID Y EL TOKEN DEL LOCALSTORAGE
           {
             headers: {
               Authorization:
-<<<<<<< HEAD
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
-=======
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6IkdhYnJpZWwiLCJpYXQiOjE3MDYxNzgxMzksImV4cCI6MTcwNjM1MDkzOX0.Fro7u3o8XRuNO8RVxcK4sLq2qi5hrRKg74zMEVQxq7E",
->>>>>>> 2b98c22b4a2198be12884b1ff98379291745dd7a
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2MjExOTE3LCJleHAiOjE3MDYzODQ3MTd9.63MV-sHwJlo9PUq9Wa5RIvFO1qL7bjkUwdLUZJc1Zu8",
             },
           }
         );
@@ -87,16 +83,12 @@ const ModUser = () => {
         formData.append("password", userData.password);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/10`,
+        `${import.meta.env.VITE_REACT_HOST}/user/1`,
         {
           method: "PUT",
           headers: {
             Authorization:
-<<<<<<< HEAD
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
-=======
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA2MDI5OTgyLCJleHAiOjE3MDYyMDI3ODJ9.kVWN3UnRdXxMdug3HJ5JV8Vfa7BoA_4suWV5E5Tyi-U",
->>>>>>> 2b98c22b4a2198be12884b1ff98379291745dd7a
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2MjExOTE3LCJleHAiOjE3MDYzODQ3MTd9.63MV-sHwJlo9PUq9Wa5RIvFO1qL7bjkUwdLUZJc1Zu8",
           },
           body: formData,
         }
@@ -122,15 +114,15 @@ const ModUser = () => {
     <>
       <Menu />
 
-      <form onSubmit={modificarDatos}>
-        <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-          <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-            <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-            <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-              <div className="max-w-md mx-auto">
-                <div>
-                  <h1 className="text-2xl font-semibold">Edita tu perfil</h1>
-                </div>
+      <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
+        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
+          <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
+            <div className="max-w-md mx-auto">
+              <div>
+                <h1 className="text-2xl font-semibold">Edita tu perfil</h1>
+              </div>
+              <form onSubmit={modificarDatos}>
                 <div className="divide-y divide-gray-200">
                   <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                     <div className="relative">
@@ -221,13 +213,14 @@ const ModUser = () => {
                     </div>
                   </div>
                 </div>
+              </form>
+
+              <div className="absolute bottom-0 right-0 mb-6 mr-6">
+                <BorrarUsuario />
               </div>
             </div>
           </div>
         </div>
-      </form>
-      <div className="my- grid grid-cols-1 gap-4 place-items-end h-50">
-        <BorrarUsuario />
       </div>
     </>
   );

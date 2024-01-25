@@ -23,9 +23,9 @@ const BorrarUsuario = () => {
       });
 
       if (result.isConfirmed) {
-        const user_Id = 7;
+        const user_Id = 1;
         const token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6IkdhYnJpZWwiLCJpYXQiOjE3MDYxNzgxMzksImV4cCI6MTcwNjM1MDkzOX0.Fro7u3o8XRuNO8RVxcK4sLq2qi5hrRKg74zMEVQxq7E";
+          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MjEwMjg3LCJleHAiOjE3MDYzODMwODd9.-1By07ruCCuTsyg8WBCwdW-iz4aKv4RoMGIKfgnKLbI";
 
         const res = await fetch(
           `${import.meta.env.VITE_REACT_HOST}/user/${user_Id}`,

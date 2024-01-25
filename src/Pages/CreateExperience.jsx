@@ -58,7 +58,7 @@ const CreateExperience = () => {
         body: experienceBody,
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2MjExOTE3LCJleHAiOjE3MDYzODQ3MTd9.63MV-sHwJlo9PUq9Wa5RIvFO1qL7bjkUwdLUZJc1Zu8",
         },
       });
 
