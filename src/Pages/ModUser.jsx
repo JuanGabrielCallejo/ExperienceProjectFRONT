@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu } from "../components/Menu";
+import BorrarUsuario from "../components/borrarUsuario";
 
 const ModUser = () => {
   const [userData, setUserData] = useState({
@@ -16,11 +17,16 @@ const ModUser = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/1`,
+          `${import.meta.env.VITE_REACT_HOST}/user/7`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
+          //RECOGER EL ID Y EL TOKEN DEL LOCALSTORAGE
           {
             headers: {
               Authorization:
+<<<<<<< HEAD
                 "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
+=======
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NywibmFtZSI6IkdhYnJpZWwiLCJpYXQiOjE3MDYxNzgxMzksImV4cCI6MTcwNjM1MDkzOX0.Fro7u3o8XRuNO8RVxcK4sLq2qi5hrRKg74zMEVQxq7E",
+>>>>>>> 2b98c22b4a2198be12884b1ff98379291745dd7a
             },
           }
         );
@@ -81,12 +87,16 @@ const ModUser = () => {
         formData.append("password", userData.password);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/1`,
+        `${import.meta.env.VITE_REACT_HOST}/user/10`,
         {
           method: "PUT",
           headers: {
             Authorization:
+<<<<<<< HEAD
               "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
+=======
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA2MDI5OTgyLCJleHAiOjE3MDYyMDI3ODJ9.kVWN3UnRdXxMdug3HJ5JV8Vfa7BoA_4suWV5E5Tyi-U",
+>>>>>>> 2b98c22b4a2198be12884b1ff98379291745dd7a
           },
           body: formData,
         }
@@ -216,6 +226,9 @@ const ModUser = () => {
           </div>
         </div>
       </form>
+      <div className="my- grid grid-cols-1 gap-4 place-items-end h-50">
+        <BorrarUsuario />
+      </div>
     </>
   );
 };

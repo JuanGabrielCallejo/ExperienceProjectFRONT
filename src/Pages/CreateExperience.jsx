@@ -82,9 +82,13 @@ const CreateExperience = () => {
     Swal.fire({
       title: mensajeParaElUsuario,
       icon: "success",
-    }).then(() => {
-      // Redirigir a la página de inicio después de cerrar la alerta
-      window.location.href = "/";
+      showCancelButton: false,
+      confirmButtonColor: "#3085d6",
+      confirmButtonText: "OK",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        window.location.href = "/";
+      }
     });
   } else {
     return (
