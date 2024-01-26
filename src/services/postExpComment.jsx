@@ -1,7 +1,5 @@
 const postExpComment = async (exp_id, text) => {
   try {
-    console.log(exp_id);
-
     const formData = new FormData();
 
     formData.append("text", text);
@@ -13,7 +11,7 @@ const postExpComment = async (exp_id, text) => {
         body: formData,
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA2MDI2NzcwLCJleHAiOjE3MDYxOTk1NzB9.TJAjhEui72UYBipDRTFFkAmo3-zhR5ZaxWtBbHwPzU8",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA2MjA3MDY1LCJleHAiOjE3MDYzNzk4NjV9.e2U4UOiNjA7njm1E1EnHUldW-L53bBDoc8ph5g2zwJ4",
         },
       }
     );

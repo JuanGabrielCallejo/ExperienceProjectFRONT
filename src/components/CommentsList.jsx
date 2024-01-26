@@ -1,22 +1,22 @@
 import PropTypes from "prop-types";
 import Comments from "./Comments";
 
-const CommentsList = ({ exp }) => {
-  const { comments } = exp;
-
-  if (!comments) {
+const CommentsList = ({ newComment }) => {
+  // console.log(newComment);
+  if (!newComment) {
     return <p>No hay comentarios disponibles.</p>;
   }
 
   let parseComments = [];
   try {
-    parseComments = JSON.parse(comments);
+    parseComments = JSON.parse(newComment);
+    // console.log(parseComments);
   } catch (error) {
     console.error("Error al analizar los comentarios:", error.message);
 
     return <p>Error al cargar los comentarios.</p>;
   }
-
+  // console.log(newComment);
   return parseComments.map((comment) => (
     <div key={comment.comment_id}>
       <Comments com={comment} />
@@ -26,6 +26,7 @@ const CommentsList = ({ exp }) => {
 
 CommentsList.propTypes = {
   exp: PropTypes.any,
+  newComment: PropTypes.any,
 };
 
 export default CommentsList;

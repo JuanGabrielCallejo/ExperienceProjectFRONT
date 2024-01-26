@@ -3,43 +3,62 @@ import { useState } from "react";
 import postExpComment from "../services/postExpComment";
 import Swal from "sweetalert2";
 
-const ExpComment = ({ exp, setShowTextArea }) => {
+const ExpComment = ({ exp, newComment, setNewComment }) => {
   const [commentText, setCommentText] = useState("");
   const [length, setLength] = useState("");
-
   const postComment = async () => {
     if (commentText.length < 10) {
       setLength("El texto debe tener mínimo 10 carácteres");
       throw new Error("El texto debe tener mínimo 10 carácteres");
     }
 
-    await postExpComment(exp.id, commentText);
+    const createdComment = await postExpComment(exp.id, commentText);
+
     Swal.fire({
       title: "Comentario Enviado!",
       icon: "success",
     });
-    // setTimeout(() => {
-    //   window.location.reload();
-    // }, 2000);
+
+    return createdComment;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await postComment();
+      const createdComment = await postComment();
+
+      let parseComments = [];
+      try {
+        parseComments = JSON.parse(newComment);
+      } catch (error) {
+        console.error("Error al analizar los comentarios:", error.message);
+      }
+
+      const comment = {
+        comment_id: createdComment.id,
+        comment_text: createdComment.text,
+        comment_user: createdComment.name,
+        comment_user_photo: createdComment.photo,
+        comment_created_at: createdComment.createdAt,
+      };
+      // console.log(parseComments);
+      // console.log(newComment);
+      // console.log(comment);
+      const newCommentList = [...(parseComments || []), comment];
+      // console.log(newCommentList);
+      setNewComment(JSON.stringify(newCommentList));
 
       setCommentText("");
-      setShowTextArea(false);
     } catch (error) {
-      console.error("Error insertando mensaje:", error.message);
+      console.error("Error insertando mensaje:", error);
     }
   };
 
   return (
     <>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
+        <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-black">
           Comentario
         </h2>
       </div>
@@ -72,6 +91,8 @@ const ExpComment = ({ exp, setShowTextArea }) => {
 
 ExpComment.propTypes = {
   setShowTextArea: PropTypes.any,
+  newComment: PropTypes.any,
+  setNewComment: PropTypes.any,
   comment: PropTypes.any,
   exp: PropTypes.any,
 };
