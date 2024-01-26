@@ -8,6 +8,7 @@ import RegisterPage from "./Pages/RegisterPage";
 import { ModUser } from "./Pages/ModUser";
 import { CreateExperience } from "./Pages/CreateExperience";
 import FilterExperience from "./Pages/FilterExperience";
+import { ModExp } from "./Pages/ModExperience";
 // import { AuthProvider } from "./components/providers/AuthProvider";
 
 const router = createBrowserRouter([
@@ -34,6 +35,10 @@ const router = createBrowserRouter([
   {
     path: "/settings/profile",
     element: <ModUser />,
+  },
+  {
+    path: "/settings/experience",
+    element: <ModExp />,
   },
 ]);
 

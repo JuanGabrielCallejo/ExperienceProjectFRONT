@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Menu } from "../components/Menu";
+import BorrarUsuario from "../components/borrarUsuario";
 
 const ModUser = () => {
   const [userData, setUserData] = useState({
@@ -216,6 +217,9 @@ const ModUser = () => {
           </div>
         </div>
       </form>
+      <div className="my- grid grid-cols-1 gap-4 place-items-end h-50">
+        <BorrarUsuario />
+      </div>
     </>
   );
 };
