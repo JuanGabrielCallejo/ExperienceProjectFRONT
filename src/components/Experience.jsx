@@ -1,8 +1,23 @@
 import PropTypes from "prop-types";
 import CommentsList from "./CommentsList";
 import ExpComment from "./ExpComment";
+import { useState } from "react";
 
 const Experience = ({ exp }) => {
+  const { comments } = exp;
+  const [newComment, setNewComment] = useState(comments);
+  const date = exp.createdAt;
+  const formatedDate = new Date(date).toLocaleString("es-ES", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZone: "Europe/Madrid",
+  });
+  // console.log(exp);
+  // console.log(newComment);
   return (
     <>
       <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased bg-white ">
@@ -15,7 +30,7 @@ const Experience = ({ exp }) => {
                     <img
                       className="mr-4 w-16 h-16 rounded-full"
                       src={exp.user_photo}
-                      alt="Jese Leos"
+                      alt=""
                     />
                     <div>
                       <a
@@ -29,9 +44,7 @@ const Experience = ({ exp }) => {
                         {exp.place}
                       </p>
                       <p className="text-base text-gray-500 dark:text-gray-400">
-                        <time title="February 8th, 2022">
-                          {new Date(exp.createdAt).toLocaleDateString()}
-                        </time>
+                        <time title="February 8th, 2022">{formatedDate}</time>
                       </p>
                     </div>
                   </div>
@@ -59,9 +72,13 @@ const Experience = ({ exp }) => {
             </article>
           </div>
         </div>
-        <ExpComment exp={exp} />
+        <ExpComment
+          exp={exp}
+          newComment={newComment}
+          setNewComment={setNewComment}
+        />
         <h3>Lista de Comentarios</h3>
-        <CommentsList exp={exp} />
+        <CommentsList newComment={newComment} />
       </main>
     </>
   );

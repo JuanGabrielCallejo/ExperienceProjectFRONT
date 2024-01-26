@@ -1,5 +1,6 @@
 const getAnswers = async (id) => {
   try {
+    // console.log(id);
     const result = await fetch(
       `${import.meta.env.VITE_REACT_HOST}/comment/${id}/answer`
     );
@@ -9,9 +10,10 @@ const getAnswers = async (id) => {
     }
 
     const res = await result.json();
+    // console.log(res.data);
     return res.data;
   } catch (error) {
-    console.error(error.message);
+    console.error(error);
     throw error;
   }
 };
