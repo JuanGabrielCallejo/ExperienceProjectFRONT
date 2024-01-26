@@ -11,8 +11,6 @@ const ExpList = ({ experience }) => {
 
   return experience.map((exp) => {
     exp.self = userId === exp.user_id;
-
-    console.log(exp.user_id);
     return (
       <li key={exp.id}>
         <Experience exp={exp} />
