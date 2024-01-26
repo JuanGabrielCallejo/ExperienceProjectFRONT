@@ -17,12 +17,12 @@ const ModUser = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/1`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
+          `${import.meta.env.VITE_REACT_HOST}/user/9`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
           //RECOGER EL ID Y EL TOKEN DEL LOCALSTORAGE
           {
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2MjExOTE3LCJleHAiOjE3MDYzODQ3MTd9.63MV-sHwJlo9PUq9Wa5RIvFO1qL7bjkUwdLUZJc1Zu8",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibmFtZSI6InBpdG8iLCJpYXQiOjE3MDYyMTE2OTksImV4cCI6MTcwNjM4NDQ5OX0.D5oSIXdzalpWxSZTxE9TDr4g3o1ULQmHI1ieNCLKVUM",
             },
           }
         );
@@ -83,12 +83,12 @@ const ModUser = () => {
         formData.append("password", userData.password);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/1`,
+        `${import.meta.env.VITE_REACT_HOST}/user/9`,
         {
           method: "PUT",
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2MjExOTE3LCJleHAiOjE3MDYzODQ3MTd9.63MV-sHwJlo9PUq9Wa5RIvFO1qL7bjkUwdLUZJc1Zu8",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibmFtZSI6InBpdG8iLCJpYXQiOjE3MDYyMTE2OTksImV4cCI6MTcwNjM4NDQ5OX0.D5oSIXdzalpWxSZTxE9TDr4g3o1ULQmHI1ieNCLKVUM",
           },
           body: formData,
         }

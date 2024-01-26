@@ -2,8 +2,9 @@ import PropTypes from "prop-types";
 import { useState } from "react";
 import postReplyComment from "../services/postReplyComment";
 import Swal from "sweetalert2";
+import getAnswers from "../services/getAnswers";
 
-const ReplyComment = ({ comment, setShowTextArea }) => {
+const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
   const [commentText, setCommentText] = useState("");
   const [length, setLength] = useState("");
 
@@ -13,11 +14,12 @@ const ReplyComment = ({ comment, setShowTextArea }) => {
       throw new Error("El texto debe tener mínimo 10 carácteres");
     }
 
-    await postReplyComment(comment.comment_id, commentText);
+    const replyData = await postReplyComment(comment.comment_id, commentText);
     Swal.fire({
       title: "Respuesta Enviada!",
       icon: "success",
     });
+    return replyData;
   };
 
   const handleSubmit = async (e) => {
@@ -26,6 +28,9 @@ const ReplyComment = ({ comment, setShowTextArea }) => {
     try {
       await postComment();
 
+      const getAns = await getAnswers(comment.comment_id);
+
+      setAnswers(getAns);
       setCommentText("");
       setShowTextArea(false);
     } catch (error) {
@@ -36,9 +41,9 @@ const ReplyComment = ({ comment, setShowTextArea }) => {
   return (
     <>
       <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
+        <h3 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
           Comentario
-        </h2>
+        </h3>
       </div>
       <form className="mb-6" onSubmit={handleSubmit}>
         <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -69,6 +74,7 @@ const ReplyComment = ({ comment, setShowTextArea }) => {
 
 ReplyComment.propTypes = {
   setShowTextArea: PropTypes.any,
+  setAnswers: PropTypes.any,
   comment: PropTypes.any,
   exp: PropTypes.any,
 };
