@@ -4,15 +4,14 @@ import ExpComment from "./ExpComment";
 import { useNavigate } from 'react-router-dom';
 
 const Experience = ({ exp }) => {
-  const navigate = useNavigate();
 
+  const navigate = useNavigate();
   async function peticionServidor(id) {
     // console.log(JSON.stringify(usuario));
     let datos;
     try {
       const url = `${import.meta.env.VITE_REACT_HOST
         }/experience/` + id;
-      console.log(url);
       const respuesta = await fetch(url
         , {
           method: "DELETE",
@@ -39,27 +38,6 @@ const Experience = ({ exp }) => {
 
   function eliminarExperiencia(id) {
     console.log("id: " + id);
-    // if (!nombre || nombre === "" || nombre === null) {
-    //   setMensaje("El nombre no puede estar vacío");
-    //   return;
-    // }
-    // if (!apellido || apellido === "" || apellido === null) {
-    //   setMensaje("El apellido no puede estar vacío");
-    //   return;
-    // }
-    // const photo = evento.target.elements.file.files[0];
-
-    // let formData = new FormData();
-    // formData.append('name', nombre);
-    // formData.append('lastName', apellido);
-    // formData.append('email', email);
-    // formData.append('password', contrasinal);
-
-    // if (photo) {
-    //   formData.append('photo', photo);
-    // }
-
-    // // console.log(formData);
     peticionServidor(id);
   }
 
@@ -94,10 +72,13 @@ const Experience = ({ exp }) => {
                         </time>
                       </p>
                     </div>
-                    <div className="p-2">
-                    </div>
-                    <div className="rounded-full bg-red-500 text-white p-2 text-sm hover:cursor-pointer" onClick={(evento) => { evento.preventDefault(); eliminarExperiencia(exp.id); }}>
-                      Eliminar</div>
+                    {exp.self ?
+                      <><div className="p-2">
+                      </div>
+                        <div className="rounded-full bg-red-500 text-white p-2 text-sm hover:cursor-pointer" onClick={(evento) => { evento.preventDefault(); eliminarExperiencia(exp.id); }}>
+                          Eliminar</div></> : null
+
+                    }
                   </div>
                 </address>
                 <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">
