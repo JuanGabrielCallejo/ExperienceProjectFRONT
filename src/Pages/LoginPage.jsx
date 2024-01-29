@@ -1,13 +1,14 @@
+//import { AuthProvider } from "../components/providers/AuthProvider";
 import { useState } from "react";
-//import { useHistory } from "react-router-dom";
 import { Menu } from "../components/Menu";
 
-const LoginPage = () => {
+const Login = () => {
 
   //const history= useHistory();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [message, setMessage] = useState("");
+  
 
   // Función para enviar la solicitud de inicio de sesión al servidor
   const sendRequest = async (url, data) => {
@@ -24,16 +25,16 @@ const LoginPage = () => {
 
       //Analizamos la respuesta del servidor como JSON
       const responseData = await response.json();
-
-      const token = responseData.token;
-      const userId = responseData.id;
-      const userName = responseData.name;
-      const userLastName = responseData.lastName;
-      const userPhoto = responseData.photoPath;
     
       // Comprobamos si la solicitud de inicio de sesión ha sido exitosa
       if (response.status === 200) {
         //Almacenamiento de datos en el localStorage
+        
+        const token = responseData.token;
+        const userId = responseData.id;
+        const userName = responseData.name;
+        const userLastName = responseData.lastName;
+        const userPhoto = responseData.photoPath;
         localStorage.setItem('token', token);
         localStorage.setItem('id', userId);
         localStorage.setItem('name', userName)
@@ -44,11 +45,6 @@ const LoginPage = () => {
         //Mensaje de inicio de sesión exitoso "BORRAR CONSOLE.LOG"
           console.log(`Inicio de sesión con éxito: ${responseData.message}`);
           setMessage(`Inicio de sesión con éxito: ${responseData.message}`);
-
-        //Redirección automática a Home Page (En proceso)
-        // setTimeout(() => {
-        //   history.push('http://localhost:5173');
-        // }, 3000)
 
       } else {
         //Mensaje de error en el inicio de sesión "BORRAR CONSOLE.LOG"
@@ -121,4 +117,11 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+
+const LoginPage = () => (
+  //<AuthProvider>
+    <Login />
+  //</AuthProvider>
+);
+
+export default LoginPage

@@ -15,19 +15,28 @@ const ModUser = () => {
   useEffect(() => {
     async function fetchData() {
       try {
-        const token = localStorage.getItem('token');
+          const responseData = await response.json();
+          const token = responseData.token;
+          const userId = responseData.id;
+          const userName = responseData.name;
+          const userLastName = responseData.lastName;
+          const userPhoto = responseData.photoPath;
+          console.log(token);
+          console.log(userId);
+          console.log(userName);
+          console.log(userLastName);
+          console.log(userId);
+          console.log(userPhoto);
 
         if (!token) {
-          throw new Error('Token no encontrado en localStorage')
-          
+          throw new Error('Token no encontrado en localStorage')          
         }
 
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/2`,
+          `${import.meta.env.VITE_REACT_HOST}/user/${userId}`,
           {
             headers: {
-              Authorization:
-              `Bearer ${token}`,
+              Authorization: `Bearer ${token}`,
             },
           }
         );
