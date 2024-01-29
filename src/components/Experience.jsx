@@ -3,6 +3,7 @@ import CommentsList from "./CommentsList";
 import ExpComment from "./ExpComment";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LikeHeart from "../services/likeHeart";
 
 const Experience = ({ exp }) => {
   const { comments } = exp;
@@ -96,6 +97,7 @@ const Experience = ({ exp }) => {
                         </div>
                       </>
                     ) : null}
+                    <LikeHeart exp_id={exp.id} />
                   </div>
                 </address>
                 <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">

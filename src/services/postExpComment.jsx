@@ -11,7 +11,7 @@ const postExpComment = async (exp_id, text) => {
         body: formData,
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTMsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA2MjA3MDY1LCJleHAiOjE3MDYzNzk4NjV9.e2U4UOiNjA7njm1E1EnHUldW-L53bBDoc8ph5g2zwJ4",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDYzNDg5MzksImV4cCI6MTcwNjUyMTczOX0.RtrzpzOURXBDnFamMb6pXzEMfP3mTRRgv9jRBdOt000",
         },
       }
     );
