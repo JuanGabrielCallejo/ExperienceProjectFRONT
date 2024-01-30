@@ -1,12 +1,38 @@
 import PropTypes from "prop-types";
 import AnswersList from "./AnswersList";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import ReplyComment from "./ReplyComment";
+import getAnswers from "../services/getAnswers";
 
 const Comments = ({ com }) => {
   const [showAnswers, setShowAnswers] = useState(false);
   const [showTextArea, setShowTextArea] = useState(false);
+  const date = com.comment_created_at;
+  const formatedDate = new Date(date).toLocaleString("es-ES", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZone: "Europe/Madrid",
+  });
   // console.log(com);
+  const [answers, setAnswers] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedAnswers = await getAnswers(com.comment_id);
+        // console.log(fetchedAnswers);
+        setAnswers(fetchedAnswers);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   return (
     <>
@@ -16,15 +42,13 @@ const Comments = ({ com }) => {
             <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">
               <img
                 className="mr-2 w-6 h-6 rounded-full"
-                src="https://flowbite.com/docs/images/people/profile-picture-2.jpg"
-                alt="Michael Gough"
+                src={com.comment_user_photo}
+                alt=""
               />
               {com.comment_user}
             </p>
             <p className="text-sm text-gray-600 dark:text-gray-400">
-              <time title="February 8th, 2022">
-                {new Date(com.createdAt).toLocaleDateString()}
-              </time>
+              <time title="February 8th, 2022">{formatedDate}</time>
             </p>
           </div>
         </footer>
@@ -65,15 +89,17 @@ const Comments = ({ com }) => {
             {showAnswers ? <p>Ocultar Respuestas</p> : <p>Ver Respuestas</p>}
           </button>
           <p className="dark:text-white">
-            {showAnswers ? <AnswersList comment={com} /> : <></>}
+            {showAnswers && <AnswersList answers={answers} />}
           </p>
-          <p className="dark:text-white">
-            {showTextArea ? (
-              <ReplyComment comment={com} setShowTextArea={setShowTextArea} />
-            ) : (
-              <></>
+          <div className="dark:text-white">
+            {showTextArea && (
+              <ReplyComment
+                comment={com}
+                setShowTextArea={setShowTextArea}
+                setAnswers={setAnswers}
+              />
             )}
-          </p>
+          </div>
         </div>
       </article>
     </>

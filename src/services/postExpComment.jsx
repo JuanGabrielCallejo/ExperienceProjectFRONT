@@ -1,7 +1,5 @@
 const postExpComment = async (exp_id, text) => {
   try {
-    console.log(exp_id);
-
     const formData = new FormData();
 
     formData.append("text", text);
