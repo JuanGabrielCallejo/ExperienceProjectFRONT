@@ -10,7 +10,7 @@ const CreateExperience = () => {
   useEffect(() => {
     async function obtenerCategorias() {
       try {
-        const response = await fetch("http://localhost:3000/categories");
+        const response = await fetch(`${import.meta.env.VITE_REACT_HOST}/categories`);
         if (response.ok) {
           const datosCategorias = await response.json();
 

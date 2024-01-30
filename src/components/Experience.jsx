@@ -1,11 +1,14 @@
 import PropTypes from "prop-types";
 import CommentsList from "./CommentsList";
 import ExpComment from "./ExpComment";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LikeHeart from "../services/likeHeart";
+import { authContext } from "./providers/AuthProvider";
+
 
 const Experience = ({ exp }) => {
+  const [token] = useContext(authContext);
   const { comments } = exp;
   const [newComment, setNewComment] = useState(comments);
   const date = exp.createdAt;
@@ -31,7 +34,7 @@ const Experience = ({ exp }) => {
         method: "DELETE",
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDYwOTMzMzAsImV4cCI6MTcwNjI2NjEzMH0.vjU53K00O2DeZqFrkUGLpmVKsc1kskL5GI4dIq094kc",
+            `Bearer ${token}`,
         },
       });
       datos = await respuesta.json();

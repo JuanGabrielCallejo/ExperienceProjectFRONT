@@ -38,7 +38,6 @@ const [password, setPassword] = useState("");
           //Mensaje de error en el inicio de sesión
           setMessage(`Usuario y/o contraseña incorrectos: ${responseData.message}`);
         } 
-        
       }catch(error) {
         console.error(`Error al intentar iniciar sesión: ${error.message}`);
       }
