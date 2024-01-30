@@ -1,4 +1,4 @@
-//import { AuthProvider } from "../components/providers/AuthProvider";
+
 import { useState } from "react";
 import { Menu } from "../components/Menu";
 
@@ -65,7 +65,7 @@ const Login = () => {
     } 
     // creación del objeto data con los datos de inicio de sesión y envío de solucitud
     const data = { email, password };
-    sendRequest('http://localhost:3030/login', data);
+    sendRequest(`${import.meta.env.VITE_REACT_HOST}/login`, data);
   };
 
   // Componente de la página LOGIN
@@ -119,9 +119,7 @@ const Login = () => {
 
 
 const LoginPage = () => (
-  //<AuthProvider>
     <Login />
-  //</AuthProvider>
 );
 
 export default LoginPage
