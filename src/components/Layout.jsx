@@ -1,22 +1,23 @@
 import { Menu } from "./Menu";
+import { Header } from "./Header";
 import { Outlet } from "react-router-dom";
 
 const Layout = () => {
   return (
-    <div>
-      <header className="cabecera">
-        Cabecera
+    <main>
+      <header>
+        <Header />
       </header>
-      <nav className="navbar">
+      <nav>
         <Menu />
       </nav>
-      <article className="main">
+      <article>
         <Outlet />
       </article>
-      <footer className="pie">
+      <footer>
         Pié
       </footer>
-    </div>
+    </main>
   );
 };
 
