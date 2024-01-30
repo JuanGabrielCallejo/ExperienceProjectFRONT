@@ -11,16 +11,13 @@ const LikeHeart = ({ exp_id }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log(isClick);
         const data = await Votes(exp_id);
-        setVotesData(data);
-        console.log("Votes Data:", data);
+
         if (data.length > 0) {
-          setClick(false);
-        } else {
           setClick(true);
+        } else {
+          setClick(false);
         }
-        console.log(isClick);
       } catch (error) {
         console.error(error);
       }
@@ -34,7 +31,6 @@ const LikeHeart = ({ exp_id }) => {
 
     try {
       const updatedVotes = await postVote(exp_id);
-
       setVotesData(updatedVotes);
 
       setClick(!isClick);

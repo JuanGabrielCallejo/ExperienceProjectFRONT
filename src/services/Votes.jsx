@@ -2,7 +2,7 @@ const Votes = async (exp_id) => {
   console.log(exp_id);
   const url = `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}/vote`;
   const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDY1NDUwMDEsImV4cCI6MTcwNjcxNzgwMX0.0zq2x-oNuVl9rh0u0yQNVMQ4dzf-coWVkPU2zJ3Q2-I";
+    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDY2MzU3NDYsImV4cCI6MTcwNjgwODU0Nn0.oKhQPHeW63OJB4ykPJvnYDS643I3xNPrZXKzQBymhLc";
 
   const res = await fetch(url, {
     headers: {
