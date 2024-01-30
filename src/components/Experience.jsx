@@ -30,8 +30,7 @@ const Experience = ({ exp }) => {
       const respuesta = await fetch(url, {
         method: "DELETE",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDYwOTMzMzAsImV4cCI6MTcwNjI2NjEzMH0.vjU53K00O2DeZqFrkUGLpmVKsc1kskL5GI4dIq094kc",
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
         },
       });
       datos = await respuesta.json();
@@ -136,7 +135,7 @@ const Experience = ({ exp }) => {
 };
 
 Experience.propTypes = {
-  exp: PropTypes.object,
+  exp: PropTypes.any,
 };
 
 export default Experience;

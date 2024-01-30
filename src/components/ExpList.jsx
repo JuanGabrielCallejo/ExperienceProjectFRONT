@@ -3,8 +3,7 @@ import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
 
 const ExpList = ({ experience }) => {
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDYyNTk3MjYsImV4cCI6MTcwNjQzMjUyNn0.XbM7OTWHplISE9c_NuO9MEEpurO13vzCNwvaSQd-sW0";
+  const token = import.meta.env.VITE_TOKEN;
   const decodedToken = jwtDecode(token);
 
   const userId = decodedToken.id;

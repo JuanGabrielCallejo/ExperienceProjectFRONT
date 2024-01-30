@@ -32,7 +32,7 @@ const Comments = ({ com }) => {
     };
 
     fetchData();
-  }, []);
+  }, [com.comment_id]);
 
   return (
     <>
@@ -88,9 +88,9 @@ const Comments = ({ com }) => {
             </svg>
             {showAnswers ? <p>Ocultar Respuestas</p> : <p>Ver Respuestas</p>}
           </button>
-          <p className="dark:text-white">
+          <div className="dark:text-white">
             {showAnswers && <AnswersList answers={answers} />}
-          </p>
+          </div>
           <div className="dark:text-white">
             {showTextArea && (
               <ReplyComment

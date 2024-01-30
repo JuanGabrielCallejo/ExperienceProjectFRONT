@@ -10,7 +10,9 @@ const CreateExperience = () => {
   useEffect(() => {
     async function obtenerCategorias() {
       try {
-        const response = await fetch("http://localhost:3000/categories");
+        const response = await fetch(
+          `${import.meta.env.VITE_REACT_HOST}/categories`
+        );
         if (response.ok) {
           const datosCategorias = await response.json();
 
@@ -19,7 +21,6 @@ const CreateExperience = () => {
           setCategorias(nombresCategorias);
         } else {
           const datosCategorias = await response.json();
-          // responsabilidad del usuario
           console.log(datosCategorias);
           // setErrorMessage(body.message);
         }
@@ -51,12 +52,11 @@ const CreateExperience = () => {
     console.log("evento", e, { title, subTitle, place, text, photo });
 
     try {
-      const res = await fetch("http://localhost:3000/experience", {
+      const res = await fetch(`${import.meta.env.VITE_REACT_HOST}/experience`, {
         method: "POST",
         body: experienceBody,
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDY2MzQzMTgsImV4cCI6MTcwNjgwNzExOH0.1AopLogbCpMj2uTEubyeo9WgFySy2VyB-9JF1mG-uHU",
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
         },
       });
 
