@@ -1,17 +1,17 @@
 const Votes = async (exp_id) => {
-  console.log(exp_id);
+  // console.log(exp_id);
   const url = `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}/vote`;
-  const token =
-    "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDY1NDUwMDEsImV4cCI6MTcwNjcxNzgwMX0.0zq2x-oNuVl9rh0u0yQNVMQ4dzf-coWVkPU2zJ3Q2-I";
+  // const token =
+  //   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDY2MzczNDUsImV4cCI6MTcwNjgxMDE0NX0.FUDox1D9uoRYZ4Tc5HrQaFI-zxjRylMWUfg4qa2u50Q";
 
   const res = await fetch(url, {
     headers: {
-      Authorization: `Bearer ${token}`,
+      Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
     },
   });
 
   const data = await res.json();
-  console.log(data.data);
+  // console.log(data.data);
 
   return data.data;
 };

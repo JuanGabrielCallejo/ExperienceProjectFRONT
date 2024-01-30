@@ -139,7 +139,7 @@ const Experience = ({ exp }) => {
 };
 
 Experience.propTypes = {
-  exp: PropTypes.object,
+  exp: PropTypes.any,
 };
 
 export default Experience;

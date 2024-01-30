@@ -19,8 +19,7 @@ const ModExp = () => {
           `${import.meta.env.VITE_REACT_HOST}/experience/3`,
           {
             headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsIm5hbWUiOiJIdWdvIiwiaWF0IjoxNzA2MjcwMTExLCJleHAiOjE3MDY0NDI5MTF9.mjwDMSQPOmpv9J5IkQ-blE2gNk5xaPzuFsJUeIR1W0c",
+              Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
             },
           }
         );
@@ -86,8 +85,7 @@ const ModExp = () => {
         {
           method: "PUT",
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MDMwNTgxLCJleHAiOjE3MDYyMDMzODF9.8Qjg5wpZ7oT9fLuIYVh1jNCekcJGHqcNPMB0bnzvn8M",
+            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
           },
           body: formData,
         }
