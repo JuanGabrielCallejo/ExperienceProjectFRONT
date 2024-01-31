@@ -1,4 +1,7 @@
-const postReplyComment = async (comment_id, text) => {
+import { useContext } from "react";
+import { AuthContext } from "../components/providers/AuthProvider";
+
+const PostReplyComment = async (comment_id, text) => {
   try {
     const getId = await fetch(
       `${import.meta.env.VITE_REACT_HOST}/comments/${comment_id}`
@@ -12,12 +15,7 @@ const postReplyComment = async (comment_id, text) => {
 
     formData.append("text", text);
 
-    const token = localStorage.getItem('token');
-
-        if (!token) {
-          throw new Error('Token no encontrado en localStorage')
-          
-        }
+    const [user] = useContext(AuthContext);
 
     const result = await fetch(
       `${
@@ -28,7 +26,7 @@ const postReplyComment = async (comment_id, text) => {
         body: formData,
         headers: {
           Authorization:
-          `Bearer ${token}`,
+          `Bearer ${user.token}`,
         },
       }
     );
@@ -47,4 +45,4 @@ const postReplyComment = async (comment_id, text) => {
   }
 };
 
-export default postReplyComment;
+export default PostReplyComment;

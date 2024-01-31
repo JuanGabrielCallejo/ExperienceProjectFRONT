@@ -1,11 +1,11 @@
 import { useState, useContext } from "react";
 import { Menu } from "../components/Menu";
-import { authContext } from "../components/providers/AuthProvider";
+import { AuthContext } from "../components/providers/AuthProvider";
 
 const LoginPage = () => {
 
 const [message, setMessage] = useState("");
-const [, setToken] = useContext(authContext);
+const [, setUser] = useContext(AuthContext);
 const [email, setEmail] = useState("");
 const [password, setPassword] = useState("");
 
@@ -23,7 +23,7 @@ const [password, setPassword] = useState("");
         });
         const responseData = response.status !== 204 ? await response.json() : {};
         console.log("Respuesta del servidor:", responseData);
-
+        const user = {id: responseData.id, token: responseData.token}
         if (!email || !password) {
           setMessage("Por favor, completa todos los campos.");
           return;
@@ -31,9 +31,8 @@ const [password, setPassword] = useState("");
         if (response.status === 200) {
         //Mensaje de inicio de sesión exitoso
           setMessage(`Inicio de sesión con éxito: ${responseData.message}`);
-          setToken(responseData.token);
-          localStorage.setItem('token', responseData.token);
-          console.log(responseData.token);
+          setUser(user);
+          console.log(user);
         } else {
           //Mensaje de error en el inicio de sesión
           setMessage(`Usuario y/o contraseña incorrectos: ${responseData.message}`);

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Menu } from "../components/Menu";
+import { AuthContext } from "../components/providers/AuthProvider";
 
 const ModExp = () => {
   const [expData, setExpData] = useState({
@@ -11,6 +12,7 @@ const ModExp = () => {
   });
 
   const [loading, setLoading] = useState(true);
+  const [user] = useContext(AuthContext)
 
   useEffect(() => {
     async function fetchData() {
@@ -19,7 +21,7 @@ const ModExp = () => {
           `${import.meta.env.VITE_REACT_HOST}/experience/3`,
           {
             headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+              Authorization: `Bearer ${user.token}`,
             },
           }
         );
@@ -28,6 +30,8 @@ const ModExp = () => {
           setExpData(data);
           setLoading(false);
           console.log(data);
+          console.log(user.token);
+          console.log(user.id);
         } else {
           const data = await response.json();
           console.error(data);
@@ -85,7 +89,7 @@ const ModExp = () => {
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: formData,
         }

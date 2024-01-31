@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import { Menu } from "../components/Menu";
 import BorrarUsuario from "../components/borrarUsuario";
-import { authContext } from "../components/providers/AuthProvider";
+import { AuthContext } from "../components/providers/AuthProvider";
 
 const ModUser = () => {
-  const [token] = useContext(authContext);
+  const [user] = useContext(AuthContext);
   const [userData, setUserData] = useState({
     name: "",
     lastName: "",
@@ -19,11 +19,10 @@ const ModUser = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/3`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
-          //RECOGER EL ID Y EL TOKEN DEL LOCALSTORAGE
+          `${import.meta.env.VITE_REACT_HOST}/user/${user.id}`,
           {
             headers: {
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${user.token}`,
             },
           }
         );
@@ -63,13 +62,6 @@ const ModUser = () => {
 
       const formData = new FormData();
 
-      const token = localStorage.getItem('token');
-
-        if (!token) {
-          throw new Error('Token no encontrado en localStorage')
-          
-        }
-
       if (
         userData.photo &&
         userData.photo !== null &&
@@ -91,12 +83,12 @@ const ModUser = () => {
         formData.append("password", userData.password);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/3`,
+        `${import.meta.env.VITE_REACT_HOST}/user/${user.id}`,
         {
           method: "PUT",
           headers: {
             Authorization:
-              `Bearer ${token}`,
+              `Bearer ${user.token}`,
           },
           body: formData,
         }

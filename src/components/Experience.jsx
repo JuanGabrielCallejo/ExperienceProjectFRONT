@@ -4,11 +4,11 @@ import ExpComment from "./ExpComment";
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LikeHeart from "../services/likeHeart";
-import { authContext } from "./providers/AuthProvider";
+import { AuthContext } from "./providers/AuthProvider";
 
 
 const Experience = ({ exp }) => {
-  const [token] = useContext(authContext);
+  const [token] = useContext(AuthContext);
   const { comments } = exp;
   const [newComment, setNewComment] = useState(comments);
   const date = exp.createdAt;

@@ -1,15 +1,13 @@
-const postExpComment = async (exp_id, text) => {
+import { useContext } from "react";
+import { AuthContext } from "../components/providers/AuthProvider";
+
+const PostExpComment = async (exp_id, text) => {
   try {
     const formData = new FormData();
+    const [user] = useContext(AuthContext);
 
     formData.append("text", text);
 
-    const token = localStorage.getItem('token');
-
-        if (!token) {
-          throw new Error('Token no encontrado en localStorage')
-          
-        }
 
     const result = await fetch(
       `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}/comment/`,
@@ -18,7 +16,7 @@ const postExpComment = async (exp_id, text) => {
         body: formData,
         headers: {
           Authorization:
-          `Bearer ${token}`,
+          `Bearer ${user.token}`,
         },
       }
     );
@@ -35,4 +33,4 @@ const postExpComment = async (exp_id, text) => {
   }
 };
 
-export default postExpComment;
+export default PostExpComment;
