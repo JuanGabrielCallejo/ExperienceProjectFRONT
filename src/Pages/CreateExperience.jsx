@@ -88,7 +88,7 @@ const CreateExperience = () => {
     );
   } else {
     return (
-      <>
+      <div className="flex flex-col">
         <div className="text-center mb-4">
           <h1 className="text-2xl font-bold text-gray-800">
             Crea tu experiencia
@@ -174,7 +174,7 @@ const CreateExperience = () => {
             Enviar
           </button>
         </form>
-      </>
+      </div>
     );
   }
 };
