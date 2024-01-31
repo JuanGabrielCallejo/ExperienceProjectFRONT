@@ -1,25 +1,38 @@
 import PropTypes from "prop-types";
 import CommentsList from "./CommentsList";
 import ExpComment from "./ExpComment";
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import LikeHeart from "../services/likeHeart";
 
 const Experience = ({ exp }) => {
+  const { comments } = exp;
+  const [newComment, setNewComment] = useState(comments);
+  const date = exp.createdAt;
+  const formatedDate = new Date(date).toLocaleString("es-ES", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZone: "Europe/Madrid",
+  });
+  // console.log(exp);
+  // console.log(newComment);
 
   const navigate = useNavigate();
   async function peticionServidor(id) {
     // console.log(JSON.stringify(usuario));
     let datos;
     try {
-      const url = `${import.meta.env.VITE_REACT_HOST
-        }/experience/` + id;
-      const respuesta = await fetch(url
-        , {
-          method: "DELETE",
-          headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDYwOTMzMzAsImV4cCI6MTcwNjI2NjEzMH0.vjU53K00O2DeZqFrkUGLpmVKsc1kskL5GI4dIq094kc",
-          },
-        });
+      const url = `${import.meta.env.VITE_REACT_HOST}/experience/` + id;
+      const respuesta = await fetch(url, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+        },
+      });
       datos = await respuesta.json();
       console.log(datos);
       if (!respuesta.ok) {
@@ -28,11 +41,10 @@ const Experience = ({ exp }) => {
         return datos;
         // throw Error("Error en la petición");
       }
-      navigate('/');
+      navigate("/");
       window.location.reload();
-
     } catch (error) {
-      console.log("Error: " + error.message)
+      console.log("Error: " + error.message);
     }
   }
 
@@ -53,7 +65,7 @@ const Experience = ({ exp }) => {
                     <img
                       className="mr-4 w-16 h-16 rounded-full"
                       src={exp.user_photo}
-                      alt="Jese Leos"
+                      alt=""
                     />
                     <div>
                       <a
@@ -67,18 +79,24 @@ const Experience = ({ exp }) => {
                         {exp.place}
                       </p>
                       <p className="text-base text-gray-500 dark:text-gray-400">
-                        <time title="February 8th, 2022">
-                          {new Date(exp.createdAt).toLocaleDateString()}
-                        </time>
+                        <time title="February 8th, 2022">{formatedDate}</time>
                       </p>
                     </div>
-                    {exp.self ?
-                      <><div className="p-2">
-                      </div>
-                        <div className="rounded-full bg-red-500 text-white p-2 text-sm hover:cursor-pointer" onClick={(evento) => { evento.preventDefault(); eliminarExperiencia(exp.id); }}>
-                          Eliminar</div></> : null
-
-                    }
+                    {exp.self ? (
+                      <>
+                        <div className="p-2"></div>
+                        <div
+                          className="rounded-full bg-red-500 text-white p-2 text-sm hover:cursor-pointer"
+                          onClick={(evento) => {
+                            evento.preventDefault();
+                            eliminarExperiencia(exp.id);
+                          }}
+                        >
+                          Eliminar
+                        </div>
+                      </>
+                    ) : null}
+                    <LikeHeart exp_id={exp.id} />
                   </div>
                 </address>
                 <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">
@@ -104,16 +122,20 @@ const Experience = ({ exp }) => {
             </article>
           </div>
         </div>
-        <ExpComment exp={exp} />
+        <ExpComment
+          exp={exp}
+          newComment={newComment}
+          setNewComment={setNewComment}
+        />
         <h3>Lista de Comentarios</h3>
-        <CommentsList exp={exp} />
+        <CommentsList newComment={newComment} />
       </main>
     </>
   );
 };
 
 Experience.propTypes = {
-  exp: PropTypes.object,
+  exp: PropTypes.any,
 };
 
 export default Experience;
