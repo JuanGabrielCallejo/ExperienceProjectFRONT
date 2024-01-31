@@ -1,3 +1,104 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Arial", sans-serif;
+  font-size: 1.2rem;
+}
+
+/* Estilo contenedor principal */
+main {
+  background-color: beige;
+  display: grid;
+  min-height: 100vh;
+  min-width: 100vw;
+
+  grid-template-areas:
+    "header"
+    "nav"
+    "article"
+    "footer";
+
+  /* Crea aquí la cuadrícula */
+  grid-template-rows: 80px 50px 4fr 50px;
+}
+
+/* Estilo texto de las secciones */
+main > * {
+  /* align-items: center; */
+  color: #fff;
+  display: flex;
+  /* justify-content: center; */
+}
+
+/* Estilo de cada elemento */
+/* Añade a cada uno el área correspondiente */
+header {
+  background-color: #bddcfc;
+  grid-area: header;
+  justify-content: center;
+  min-width: 100vw;
+}
+
+/* header .content {
+  align-items: center;
+  color: #921919;
+  display: flex;
+  justify-content: center;
+} */
+
+nav {
+  background-color: rgb(188, 196, 250);
+  grid-area: nav;
+  justify-content: center;
+}
+
+article {
+  background-color: azure;
+  color: rgb(53, 53, 53);
+  grid-area: article;
+  justify-content: center;
+}
+
+footer {
+  background-color: chocolate;
+  grid-area: footer;
+  justify-content: center;
+}
+/* 
+@media (min-width: 768px) {
+  main {
+    background-color: beige;
+    display: grid;
+    min-height: 100vh;
+
+    grid-template-areas:
+      "header"
+      "nav"
+      "article"
+      "footer";
+    grid-template-rows: 50px 100px 1fr 50px;
+  }
+}
+
+@media (min-width: 992px) {
+  main {
+    background-color: beige;
+    display: grid;
+    min-height: 100vh;
+
+    grid-template-areas:
+      "header"
+      "nav"
+      "article"
+      "footer";
+    grid-template-rows: 50px 100px 1fr 50px;
+  } 
+}*/
+
+.ancho_total {
+  min-width: 100vw;
+}

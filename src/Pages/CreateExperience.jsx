@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Menu } from "../components/Menu";
 import { NavLink } from "react-router-dom";
 
 const CreateExperience = () => {
@@ -79,7 +78,6 @@ const CreateExperience = () => {
   if (exitoExperiencia) {
     return (
       <>
-        <Menu />
         <div className="bg-green-200 text-green-800 p-4 rounded-md shadow-md">
           <p className="font-bold">{mensajeParaElUsuario}</p>
           <NavLink to="/" className="text-blue-500 hover:underline">
@@ -90,8 +88,7 @@ const CreateExperience = () => {
     );
   } else {
     return (
-      <>
-        <Menu />
+      <div className="flex flex-col">
         <div className="text-center mb-4">
           <h1 className="text-2xl font-bold text-gray-800">
             Crea tu experiencia
@@ -177,7 +174,7 @@ const CreateExperience = () => {
             Enviar
           </button>
         </form>
-      </>
+      </div>
     );
   }
 };

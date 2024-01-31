@@ -1,13 +1,11 @@
 import ExperienceFilterForm from "../components/ExperienceFilterForm";
-import { Menu } from "../components/Menu";
 
 const FilterExperience = () => {
   return (
-    <>
-      <Menu />
+    <div className="flex flex-col">
       <h1>Buscar Experiencias</h1>
       <ExperienceFilterForm />
-    </>
+    </div>
   );
 };
 

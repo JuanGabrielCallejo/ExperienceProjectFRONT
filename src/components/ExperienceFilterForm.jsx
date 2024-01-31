@@ -25,8 +25,7 @@ const ExperienceFilterForm = () => {
     try {
       if (!inputText) {
         const res = await fetch(
-          `${
-            import.meta.env.VITE_REACT_HOST
+          `${import.meta.env.VITE_REACT_HOST
           }/getexperiences?orderBy=${selectedOption}&orderDirection=${orderText}`
         );
 
@@ -40,8 +39,7 @@ const ExperienceFilterForm = () => {
         }
       } else {
         const res = await fetch(
-          `${
-            import.meta.env.VITE_REACT_HOST
+          `${import.meta.env.VITE_REACT_HOST
           }/getexperiences?orderBy=${selectedOption}&orderDirection=${orderText}&search=${inputText}`
         );
 
@@ -64,8 +62,8 @@ const ExperienceFilterForm = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <div className="flex flex-col">
+      <form onSubmit={handleSubmit} className="flex flex-col">
         <label htmlFor="inputText">
           Filtrar por texto:
           <input
@@ -105,7 +103,7 @@ const ExperienceFilterForm = () => {
         <button type="submit">Buscar</button>
       </form>
       <ul>{result ? <ExpList experience={result} /> : <></>}</ul>
-    </>
+    </div>
   );
 };
 
