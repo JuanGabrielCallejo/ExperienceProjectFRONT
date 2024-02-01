@@ -9,40 +9,43 @@ import { ModUser } from "./Pages/ModUser";
 import { CreateExperience } from "./Pages/CreateExperience";
 import FilterExperience from "./Pages/FilterExperience";
 import { ModExp } from "./Pages/ModExperience";
-import { AuthProvider } from "./components/providers/AuthProvider";
+import { Layout } from "./components/style/Layout";
+// import { AuthProvider } from "./components/providers/AuthProvider";
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <HomePage />,
-  },
-  {
-    path: "/experiences",
-    element: <FilterExperience />,
-  },
-  {
-    path: "/compose/experience",
-    element: <CreateExperience />,
-  },
-  {
-    path: "/compose/experience",
-    element: <CreateExperience />,
-  },
-  {
-    path: "/login",
-    element: <LoginPage />,
-  },
-  {
-    path: "/register",
-    element: <RegisterPage />,
-  },
-  {
-    path: "/settings/profile",
-    element: <ModUser />,
-  },
-  {
-    path: "/settings/experience",
-    element: <ModExp />,
+    element: <Layout />,
+    children: [
+      {
+        path: "",
+        element: <HomePage />,
+      },
+      {
+        path: "/experiences",
+        element: <FilterExperience />,
+      },
+      {
+        path: "/compose/experience",
+        element: <CreateExperience />,
+      },
+      {
+        path: "/login",
+        element: <LoginPage />,
+      },
+      {
+        path: "/register",
+        element: <RegisterPage />,
+      },
+      {
+        path: "/settings/profile",
+        element: <ModUser />,
+      },
+      {
+        path: "/settings/experience",
+        element: <ModExp />,
+      },
+    ],
   },
 ]);
 

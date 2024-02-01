@@ -2,7 +2,7 @@ import { NavLink } from "react-router-dom";
 
 export const Menu = () => {
   return (
-    <div className="bg-blue-500 text-white p-4 text-center font-bold">
+    <div className="bg-blue-500 text-white p-3 font-bold flex justify-between ancho_total">
       <NavLink to="/" className="mx-2 hover:bg-blue-600">
         Home
       </NavLink>

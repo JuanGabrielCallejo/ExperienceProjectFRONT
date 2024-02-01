@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "./providers/AuthProvider";
 
 const BorrarUsuario = () => {
-  const [message, setMessage] = useState("");
+  const [, setMessage] = useState("");
   const navigate = useNavigate();
   const [user] = useContext(AuthContext)
   const borrarUsuario = async (event) => {

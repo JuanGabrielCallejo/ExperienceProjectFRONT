@@ -64,8 +64,8 @@ const ExperienceFilterForm = () => {
   };
 
   return (
-    <>
-      <form onSubmit={handleSubmit}>
+    <div className="flex flex-col">
+      <form onSubmit={handleSubmit} className="flex flex-col">
         <label htmlFor="inputText">
           Filtrar por texto:
           <input
@@ -105,7 +105,7 @@ const ExperienceFilterForm = () => {
         <button type="submit">Buscar</button>
       </form>
       <ul>{result ? <ExpList experience={result} /> : <></>}</ul>
-    </>
+    </div>
   );
 };
 

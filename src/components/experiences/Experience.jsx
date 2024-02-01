@@ -1,14 +1,11 @@
 import PropTypes from "prop-types";
-import CommentsList from "./CommentsList";
+import CommentsList from "../commentsAndAnswers/CommentsList";
 import ExpComment from "./ExpComment";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LikeHeart from "../services/likeHeart";
-import { AuthContext } from "./providers/AuthProvider";
-
+import LikeHeart from "../../services/likeHeart";
 
 const Experience = ({ exp }) => {
-  const [token] = useContext(AuthContext);
   const { comments } = exp;
   const [newComment, setNewComment] = useState(comments);
   const date = exp.createdAt;
@@ -33,8 +30,7 @@ const Experience = ({ exp }) => {
       const respuesta = await fetch(url, {
         method: "DELETE",
         headers: {
-          Authorization:
-            `Bearer ${token}`,
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
         },
       });
       datos = await respuesta.json();
