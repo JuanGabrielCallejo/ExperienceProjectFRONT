@@ -1,7 +1,5 @@
 const postExpComment = async (exp_id, text) => {
   try {
-    console.log(exp_id);
-
     const formData = new FormData();
 
     formData.append("text", text);
@@ -12,8 +10,7 @@ const postExpComment = async (exp_id, text) => {
         method: "POST",
         body: formData,
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsIm5hbWUiOiJKdWFuIiwiaWF0IjoxNzA2MDI2NzcwLCJleHAiOjE3MDYxOTk1NzB9.TJAjhEui72UYBipDRTFFkAmo3-zhR5ZaxWtBbHwPzU8",
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
         },
       }
     );
