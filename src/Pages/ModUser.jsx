@@ -1,6 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { Menu } from "../components/Menu";
-import BorrarUsuario from "../components/borrarUsuario";
+import BorrarUsuario from "../components/users/borrarUsuario";
 import { AuthContext } from "../components/providers/AuthProvider";
 
 const ModUser = () => {

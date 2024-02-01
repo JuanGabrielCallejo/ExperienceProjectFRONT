@@ -1,5 +1,4 @@
 import { useState, useContext } from "react";
-import { Menu } from "../components/Menu";
 import { AuthContext } from "../components/providers/AuthProvider";
 
 const LoginPage = () => {
@@ -43,7 +42,6 @@ const [password, setPassword] = useState("");
   };
   return (
     <>
-      <Menu />
       <div className="text-center mb-4">
           <h1 className="text-2xl font-bold text-gray-800">
             LOGIN
