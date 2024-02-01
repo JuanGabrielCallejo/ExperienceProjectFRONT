@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import { Menu } from "../components/Menu";
-import BorrarUsuario from "../components/borrarUsuario";
+import { useContext, useEffect, useState } from "react";
+import BorrarUsuario from "../components/users/borrarUsuario";
+import { AuthContext } from "../components/providers/AuthProvider";
 
 const ModUser = () => {
+  const [user] = useContext(AuthContext);
   const [userData, setUserData] = useState({
     name: "",
     lastName: "",
@@ -17,11 +18,10 @@ const ModUser = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/3`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
-          //RECOGER EL ID Y EL TOKEN DEL LOCALSTORAGE
+          `${import.meta.env.VITE_REACT_HOST}/user/${user.id}`,
           {
             headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+              Authorization: `Bearer ${user.token}`,
             },
           }
         );
@@ -82,11 +82,12 @@ const ModUser = () => {
         formData.append("password", userData.password);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/3`,
+        `${import.meta.env.VITE_REACT_HOST}/user/${user.id}`,
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+            Authorization:
+              `Bearer ${user.token}`,
           },
           body: formData,
         }

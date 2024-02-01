@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import CommentsList from "./CommentsList";
+import CommentsList from "../commentsAndAnswers/CommentsList";
 import ExpComment from "./ExpComment";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import LikeHeart from "../services/likeHeart";
+import LikeHeart from "../../services/likeHeart";
 
 const Experience = ({ exp }) => {
   const { comments } = exp;

@@ -1,14 +1,16 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
+import { AuthContext } from "../providers/AuthProvider";
 
 const BorrarUsuario = () => {
-  const [message, setMessage] = useState("");
+  const [, setMessage] = useState("");
   const navigate = useNavigate();
+  const [user] = useContext(AuthContext)
   const borrarUsuario = async (event) => {
     try {
       event.stopPropagation();
-
+      
       // AÑADIR UNA VENTANA DE CONFIRMACIÓN DE ELIMINACIÓN DE
       // USUARIO PARA ASEGURAR QUE QUIERES BORRAR
 
@@ -24,7 +26,7 @@ const BorrarUsuario = () => {
 
       if (result.isConfirmed) {
         const user_Id = 9;
-        const token = import.meta.env.VITE_TOKEN;
+        
 
         const res = await fetch(
           `${import.meta.env.VITE_REACT_HOST}/user/${user_Id}`,
@@ -32,13 +34,15 @@ const BorrarUsuario = () => {
             method: "DELETE",
             headers: {
               "Content-type": "application/json", // Corregir la tipografía de 'application'
-              Authorization: `Bearer ${token}`,
+              Authorization: `Bearer ${user.token}`,
             },
           }
         );
 
         if (res.ok) {
           const data = await res.json();
+          console.log(user.token);
+
           Swal.fire({
             title: "Usuario borrado!",
             text: "Se ha eliminado este usuario",

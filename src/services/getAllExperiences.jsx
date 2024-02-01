@@ -1,9 +1,8 @@
 const getAllExperiences = async () => {
-  try {
+  try { 
     const result = await fetch(
-      `${import.meta.env.VITE_REACT_HOST}/getexperiences`
+      `${import.meta.env.VITE_REACT_HOST}/getexperiences`,
     );
-
     if (!result.ok) {
       throw new Error(`Error: ${result.status} - ${result.statusText}`);
     }

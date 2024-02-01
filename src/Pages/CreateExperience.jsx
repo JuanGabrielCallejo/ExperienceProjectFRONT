@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { NavLink } from "react-router-dom";
+import { AuthContext } from "../components/providers/AuthProvider";
 
 const CreateExperience = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [exitoExperiencia, setExitoExperiencia] = useState(false);
   const [categorias, setCategorias] = useState([]);
+  const [user] = useContext(AuthContext);
 
   useEffect(() => {
     async function obtenerCategorias() {
@@ -55,7 +57,7 @@ const CreateExperience = () => {
         method: "POST",
         body: experienceBody,
         headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+          Authorization: `Bearer ${user.token}`,
         },
       });
 
@@ -63,6 +65,7 @@ const CreateExperience = () => {
         const body = await res.json();
         setStatusMessage("Tu experiencia ha sido creada con exito", body);
         setExitoExperiencia(true);
+        console.log(user.token);
       } else {
         const body = await res.json();
         console.log("Error de datos", body);

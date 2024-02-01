@@ -1,4 +1,4 @@
-import ExperienceFilterForm from "../components/ExperienceFilterForm";
+import ExperienceFilterForm from "../components/experiences/ExperienceFilterForm";
 
 const FilterExperience = () => {
   return (

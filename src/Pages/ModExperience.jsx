@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../components/providers/AuthProvider";
 
 const ModExp = () => {
   const [expData, setExpData] = useState({
+    id:"",
     title: "",
     subTitle: "",
     place: "",
@@ -10,15 +12,16 @@ const ModExp = () => {
   });
 
   const [loading, setLoading] = useState(true);
+  const [user] = useContext(AuthContext)
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/experience/3`,
+          `${import.meta.env.VITE_REACT_HOST}/experience/${user.id}`,
           {
             headers: {
-              Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+              Authorization: `Bearer ${user.token}`,
             },
           }
         );
@@ -36,7 +39,7 @@ const ModExp = () => {
       }
     }
     fetchData();
-  }, []);
+  }, [user.id, user.token]);
 
   const cambiarValorCampo = (e) => {
     const { name, value } = e.target;
@@ -80,11 +83,11 @@ const ModExp = () => {
         formData.append("text", expData.text);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/modExperience/1`,
+        `${import.meta.env.VITE_REACT_HOST}/modExperience/${expData.id}`,
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: formData,
         }

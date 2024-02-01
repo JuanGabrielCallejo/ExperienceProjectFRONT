@@ -25,7 +25,8 @@ const ExperienceFilterForm = () => {
     try {
       if (!inputText) {
         const res = await fetch(
-          `${import.meta.env.VITE_REACT_HOST
+          `${
+            import.meta.env.VITE_REACT_HOST
           }/getexperiences?orderBy=${selectedOption}&orderDirection=${orderText}`
         );
 
@@ -39,7 +40,8 @@ const ExperienceFilterForm = () => {
         }
       } else {
         const res = await fetch(
-          `${import.meta.env.VITE_REACT_HOST
+          `${
+            import.meta.env.VITE_REACT_HOST
           }/getexperiences?orderBy=${selectedOption}&orderDirection=${orderText}&search=${inputText}`
         );
 

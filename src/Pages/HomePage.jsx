@@ -1,5 +1,5 @@
-import useExperiences from "../components/useExperiences";
-import ExpList from "../components/ExpList";
+import useExperiences from "../components/experiences/useExperiences";
+import ExpList from "../components/experiences/ExpList";
 
 const HomePage = () => {
   const { exp } = useExperiences();

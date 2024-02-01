@@ -9,9 +9,8 @@ import { ModUser } from "./Pages/ModUser";
 import { CreateExperience } from "./Pages/CreateExperience";
 import FilterExperience from "./Pages/FilterExperience";
 import { ModExp } from "./Pages/ModExperience";
-import { Layout } from "./components/Layout";
-// import { AuthProvider } from "./components/providers/AuthProvider";
-
+import { Layout } from "./components/style/Layout";
+import { AuthProvider } from "./components/providers/AuthProvider";
 
 const router = createBrowserRouter([
   {
@@ -48,11 +47,12 @@ const router = createBrowserRouter([
       },
     ],
   },
-
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );

@@ -1,10 +1,13 @@
 import Experience from "./Experience";
 import PropTypes from "prop-types";
 import { jwtDecode } from "jwt-decode";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+
 
 const ExpList = ({ experience }) => {
-  const token = import.meta.env.VITE_TOKEN;
-  const decodedToken = jwtDecode(token);
+  const [user] = useContext(AuthContext);
+  const decodedToken = jwtDecode(user.token);
 
   const userId = decodedToken.id;
 
