@@ -10,7 +10,7 @@ body {
 }
 
 /* Estilo contenedor principal */
-main {
+/* main {
   background-color: beige;
   display: grid;
   min-height: 100vh;
@@ -22,20 +22,15 @@ main {
     "article"
     "footer";
 
-  /* Crea aquí la cuadrícula */
   grid-template-rows: 80px 50px 4fr 50px;
-}
+} */
 
 /* Estilo texto de las secciones */
-main > * {
-  /* align-items: center; */
+/* main > * {
   color: #fff;
   display: flex;
-  /* justify-content: center; */
 }
 
-/* Estilo de cada elemento */
-/* Añade a cada uno el área correspondiente */
 header {
   background-color: #bddcfc;
   grid-area: header;
@@ -43,12 +38,6 @@ header {
   min-width: 100vw;
 }
 
-/* header .content {
-  align-items: center;
-  color: #921919;
-  display: flex;
-  justify-content: center;
-} */
 
 nav {
   background-color: rgb(188, 196, 250);
@@ -67,7 +56,7 @@ footer {
   background-color: chocolate;
   grid-area: footer;
   justify-content: center;
-}
+} */
 /* 
 @media (min-width: 768px) {
   main {
