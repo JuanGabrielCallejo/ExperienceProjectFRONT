@@ -1,8 +1,9 @@
 import PropTypes from "prop-types";
-import CommentsList from "./CommentsList";
+import CommentsList from "../commentsAndAnswers/CommentsList";
 import ExpComment from "./ExpComment";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import LikeHeart from "../../services/likeHeart";
 
 const Experience = ({ exp }) => {
   const { comments } = exp;
@@ -29,8 +30,7 @@ const Experience = ({ exp }) => {
       const respuesta = await fetch(url, {
         method: "DELETE",
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6Ikp1YW4iLCJpYXQiOjE3MDYwOTMzMzAsImV4cCI6MTcwNjI2NjEzMH0.vjU53K00O2DeZqFrkUGLpmVKsc1kskL5GI4dIq094kc",
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
         },
       });
       datos = await respuesta.json();
@@ -96,6 +96,7 @@ const Experience = ({ exp }) => {
                         </div>
                       </>
                     ) : null}
+                    <LikeHeart exp_id={exp.id} />
                   </div>
                 </address>
                 <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">
@@ -134,7 +135,7 @@ const Experience = ({ exp }) => {
 };
 
 Experience.propTypes = {
-  exp: PropTypes.object,
+  exp: PropTypes.any,
 };
 
 export default Experience;

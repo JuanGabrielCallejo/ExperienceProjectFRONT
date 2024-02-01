@@ -1,49 +1,66 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import postReplyComment from "../services/postReplyComment";
+import postExpComment from "../../services/postExpComment";
 import Swal from "sweetalert2";
-import getAnswers from "../services/getAnswers";
 
-const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
+const ExpComment = ({ exp, newComment, setNewComment }) => {
   const [commentText, setCommentText] = useState("");
   const [length, setLength] = useState("");
-
   const postComment = async () => {
     if (commentText.length < 10) {
       setLength("El texto debe tener mínimo 10 carácteres");
       throw new Error("El texto debe tener mínimo 10 carácteres");
     }
 
-    const replyData = await postReplyComment(comment.comment_id, commentText);
+    const createdComment = await postExpComment(exp.id, commentText);
+
     Swal.fire({
-      title: "Respuesta Enviada!",
+      title: "Comentario Enviado!",
       icon: "success",
     });
-    return replyData;
+
+    return createdComment;
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      await postComment();
+      const createdComment = await postComment();
 
-      const getAns = await getAnswers(comment.comment_id);
+      let parseComments = [];
+      try {
+        parseComments = JSON.parse(newComment);
+      } catch (error) {
+        console.error("Error al analizar los comentarios:", error.message);
+      }
 
-      setAnswers(getAns);
+      const comment = {
+        comment_id: createdComment.id,
+        comment_text: createdComment.text,
+        comment_user: createdComment.name,
+        comment_user_photo: createdComment.photo,
+        comment_created_at: createdComment.createdAt,
+      };
+      // console.log(parseComments);
+      // console.log(newComment);
+      // console.log(comment);
+      const newCommentList = [comment, ...(parseComments || [])];
+      // console.log(newCommentList);
+      setNewComment(JSON.stringify(newCommentList));
+
       setCommentText("");
-      setShowTextArea(false);
     } catch (error) {
-      console.error("Error insertando mensaje:", error.message);
+      console.error("Error insertando mensaje:", error);
     }
   };
 
   return (
     <>
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
+        <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-black">
           Comentario
-        </h3>
+        </h2>
       </div>
       <form className="mb-6" onSubmit={handleSubmit}>
         <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
@@ -63,7 +80,7 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
         <div>{length}</div>
         <button
           type="submit"
-          className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+          className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
         >
           Enviar comentario
         </button>
@@ -72,11 +89,12 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
   );
 };
 
-ReplyComment.propTypes = {
+ExpComment.propTypes = {
   setShowTextArea: PropTypes.any,
-  setAnswers: PropTypes.any,
+  newComment: PropTypes.any,
+  setNewComment: PropTypes.any,
   comment: PropTypes.any,
   exp: PropTypes.any,
 };
 
-export default ReplyComment;
+export default ExpComment;

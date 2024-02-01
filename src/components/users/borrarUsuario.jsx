@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const BorrarUsuario = () => {
-  const [message, setMessage] = useState("");
+  const [, setMessage] = useState("");
   const navigate = useNavigate();
   const borrarUsuario = async (event) => {
     try {
@@ -24,8 +24,7 @@ const BorrarUsuario = () => {
 
       if (result.isConfirmed) {
         const user_Id = 9;
-        const token =
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibmFtZSI6InBpdG8iLCJpYXQiOjE3MDYyMTE2OTksImV4cCI6MTcwNjM4NDQ5OX0.D5oSIXdzalpWxSZTxE9TDr4g3o1ULQmHI1ieNCLKVUM";
+        const token = import.meta.env.VITE_TOKEN;
 
         const res = await fetch(
           `${import.meta.env.VITE_REACT_HOST}/user/${user_Id}`,

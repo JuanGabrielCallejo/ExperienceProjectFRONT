@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import AnswersList from "./AnswersList";
 import { useEffect, useState } from "react";
 import ReplyComment from "./ReplyComment";
-import getAnswers from "../services/getAnswers";
+import getAnswers from "../../services/getAnswers";
 
 const Comments = ({ com }) => {
   const [showAnswers, setShowAnswers] = useState(false);
@@ -32,7 +32,7 @@ const Comments = ({ com }) => {
     };
 
     fetchData();
-  }, []);
+  }, [com.comment_id]);
 
   return (
     <>
@@ -88,9 +88,9 @@ const Comments = ({ com }) => {
             </svg>
             {showAnswers ? <p>Ocultar Respuestas</p> : <p>Ver Respuestas</p>}
           </button>
-          <p className="dark:text-white">
+          <div className="dark:text-white">
             {showAnswers && <AnswersList answers={answers} />}
-          </p>
+          </div>
           <div className="dark:text-white">
             {showTextArea && (
               <ReplyComment

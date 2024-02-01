@@ -17,6 +17,7 @@
     "process": "^0.11.10",
     "prop-types": "^15.8.1",
     "react": "^18.2.0",
+    "react-animated-heart": "^0.0.8",
     "react-dom": "^18.2.0",
     "react-hook-form": "^7.49.3",
     "react-router-dom": "^6.21.2",

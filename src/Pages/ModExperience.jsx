@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Menu } from "../components/Menu";
 
 const ModExp = () => {
   const [expData, setExpData] = useState({
@@ -20,8 +19,7 @@ const ModExp = () => {
           `${import.meta.env.VITE_REACT_HOST}/experience/10`,
           {
             headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2NjE5MTc4LCJleHAiOjE3MDY3OTE5Nzh9.nkTWGUm6GAP97wDF6-Tl0r8ZOox0DFd7M_L5lm3neZ0",
+              Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
             },
           }
         );
@@ -87,8 +85,7 @@ const ModExp = () => {
         {
           method: "PUT",
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2NjE5MTc4LCJleHAiOjE3MDY3OTE5Nzh9.nkTWGUm6GAP97wDF6-Tl0r8ZOox0DFd7M_L5lm3neZ0",
+            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
           },
           body: formData,
         }
@@ -119,8 +116,6 @@ const ModExp = () => {
 
   return (
     <>
-      <Menu />
-
       <form onSubmit={modificarDatos}>
         <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
           <div className="relative py-3 sm:max-w-xl sm:mx-auto">

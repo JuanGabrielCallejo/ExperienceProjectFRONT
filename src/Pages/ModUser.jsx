@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu } from "../components/Menu";
-import BorrarUsuario from "../components/borrarUsuario";
+import BorrarUsuario from "../components/users/borrarUsuario";
 
 const ModUser = () => {
   const [exitoModUser, setExitoModUser] = useState(false);
@@ -22,8 +21,7 @@ const ModUser = () => {
           //RECOGER EL ID Y EL TOKEN DEL LOCALSTORAGE
           {
             headers: {
-              Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2NjE5MTc4LCJleHAiOjE3MDY3OTE5Nzh9.nkTWGUm6GAP97wDF6-Tl0r8ZOox0DFd7M_L5lm3neZ0",
+              Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
             },
           }
         );
@@ -89,8 +87,7 @@ const ModUser = () => {
         {
           method: "PUT",
           headers: {
-            Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2NjE5MTc4LCJleHAiOjE3MDY3OTE5Nzh9.nkTWGUm6GAP97wDF6-Tl0r8ZOox0DFd7M_L5lm3neZ0",
+            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
           },
           body: formData,
         }

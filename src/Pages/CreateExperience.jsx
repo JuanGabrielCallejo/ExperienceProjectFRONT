@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { Menu } from "../components/Menu";
 import Swal from "sweetalert2";
 
 const CreateExperience = () => {
@@ -21,7 +20,6 @@ const CreateExperience = () => {
           setCategorias(nombresCategorias);
         } else {
           const datosCategorias = await response.json();
-          // responsabilidad del usuario
           console.log(datosCategorias);
           // setErrorMessage(body.message);
         }
@@ -57,8 +55,7 @@ const CreateExperience = () => {
         method: "POST",
         body: experienceBody,
         headers: {
-          Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2NjE5MTc4LCJleHAiOjE3MDY3OTE5Nzh9.nkTWGUm6GAP97wDF6-Tl0r8ZOox0DFd7M_L5lm3neZ0",
+          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
         },
       });
 
@@ -92,8 +89,7 @@ const CreateExperience = () => {
     });
   } else {
     return (
-      <>
-        <Menu />
+      <div className="flex flex-col">
         <div className="text-center mb-4">
           <h1 className="text-2xl font-bold text-gray-800">
             Crea tu experiencia
@@ -196,7 +192,7 @@ const CreateExperience = () => {
             Enviar
           </button>
         </form>
-      </>
+      </div>
     );
   }
 };

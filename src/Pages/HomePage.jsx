@@ -1,12 +1,10 @@
-import useExperiences from "../components/useExperiences";
-import { Menu } from "../components/Menu";
-import ExpList from "../components/ExpList";
+import useExperiences from "../components/experiences/useExperiences";
+import ExpList from "../components/experiences/ExpList";
 
 const HomePage = () => {
   const { exp } = useExperiences();
   return (
     <>
-      <Menu />
       <h1>Página Home</h1>
       <ul>
         <ExpList experience={exp} />
