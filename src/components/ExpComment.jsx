@@ -45,7 +45,7 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
       // console.log(parseComments);
       // console.log(newComment);
       // console.log(comment);
-      const newCommentList = [...(parseComments || []), comment];
+      const newCommentList = [comment, ...(parseComments || [])];
       // console.log(newCommentList);
       setNewComment(JSON.stringify(newCommentList));
 
