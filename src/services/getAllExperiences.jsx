@@ -9,7 +9,7 @@ const getAllExperiences = async () => {
     }
 
     const res = await result.json();
-
+    console.log(res);
     return res.data;
   } catch (error) {
     console.error(error.message);
