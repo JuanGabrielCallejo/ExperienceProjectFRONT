@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { Menu } from "../components/Menu";
-import BorrarUsuario from "../components/borrarUsuario";
+import BorrarUsuario from "../components/users/borrarUsuario";
 
 const ModUser = () => {
   const [userData, setUserData] = useState({

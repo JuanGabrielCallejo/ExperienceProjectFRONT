@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import getAllExperiences from "../services/getAllExperiences";
+import getAllExperiences from "../../services/getAllExperiences";
 
 const useExperiences = () => {
   const [exp, setExp] = useState([]);

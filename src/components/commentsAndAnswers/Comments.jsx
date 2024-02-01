@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import AnswersList from "./AnswersList";
 import { useEffect, useState } from "react";
 import ReplyComment from "./ReplyComment";
-import getAnswers from "../services/getAnswers";
+import getAnswers from "../../services/getAnswers";
 
 const Comments = ({ com }) => {
   const [showAnswers, setShowAnswers] = useState(false);

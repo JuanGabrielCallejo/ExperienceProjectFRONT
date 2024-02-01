@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const BorrarUsuario = () => {
-  const [message, setMessage] = useState("");
+  const [, setMessage] = useState("");
   const navigate = useNavigate();
   const borrarUsuario = async (event) => {
     try {
