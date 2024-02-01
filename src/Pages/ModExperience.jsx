@@ -11,16 +11,17 @@ const ModExp = () => {
   });
 
   const [loading, setLoading] = useState(true);
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/experience/3`,
+          `${import.meta.env.VITE_REACT_HOST}/experience/10`,
           {
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTEsIm5hbWUiOiJIdWdvIiwiaWF0IjoxNzA2MjcwMTExLCJleHAiOjE3MDY0NDI5MTF9.mjwDMSQPOmpv9J5IkQ-blE2gNk5xaPzuFsJUeIR1W0c",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2NjE5MTc4LCJleHAiOjE3MDY3OTE5Nzh9.nkTWGUm6GAP97wDF6-Tl0r8ZOox0DFd7M_L5lm3neZ0",
             },
           }
         );
@@ -82,20 +83,27 @@ const ModExp = () => {
         formData.append("text", expData.text);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/modExperience/5`,
+        `${import.meta.env.VITE_REACT_HOST}/modExperience/10`,
         {
           method: "PUT",
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwibmFtZSI6IkphaW1lIiwiaWF0IjoxNzA2MTE0NTY1LCJleHAiOjE3MDYyODczNjV9.WjpeLQAvhrT-gTo3J3JCBHiX5twORgQhKHKk6GLrbCg",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2NjE5MTc4LCJleHAiOjE3MDY3OTE5Nzh9.nkTWGUm6GAP97wDF6-Tl0r8ZOox0DFd7M_L5lm3neZ0",
           },
           body: formData,
         }
       );
 
       if (response.ok) {
+        setSuccessMessage("¡Experiencia actualizada con éxito!");
+        setExpData({
+          title: "",
+          subTitle: "",
+          place: "",
+          text: "",
+          photo: undefined,
+        });
         console.log("Experiencia actualizada con éxito");
-        console.log(expData.title);
       } else {
         const data = await response.json();
         console.error(data);
@@ -124,6 +132,11 @@ const ModExp = () => {
                     Edita tu experiencia
                   </h1>
                 </div>
+                {successMessage && (
+                  <p className="text-green-600 font-semibold">
+                    {successMessage}
+                  </p>
+                )}
                 <div className="divide-y divide-gray-200">
                   <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
                     <div className="relative">
@@ -148,6 +161,7 @@ const ModExp = () => {
                         id="title"
                         name="title"
                         type="text"
+                        value={expData.title}
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                         placeholder="Título"
                         onChange={cambiarValorCampo}
@@ -164,6 +178,7 @@ const ModExp = () => {
                         id="subTitle"
                         name="subTitle"
                         type="text"
+                        value={expData.subTitle}
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                         placeholder="Subtítulo"
                         onChange={cambiarValorCampo}
@@ -180,6 +195,7 @@ const ModExp = () => {
                         id="place"
                         name="place"
                         type="text"
+                        value={expData.place}
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                         placeholder="Lugar"
                         onChange={cambiarValorCampo}
@@ -196,6 +212,7 @@ const ModExp = () => {
                         id="text"
                         name="text"
                         type="text"
+                        value={expData.text}
                         className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
                         placeholder="Descripción"
                         onChange={cambiarValorCampo}

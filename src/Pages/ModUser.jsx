@@ -3,6 +3,7 @@ import { Menu } from "../components/Menu";
 import BorrarUsuario from "../components/borrarUsuario";
 
 const ModUser = () => {
+  const [exitoModUser, setExitoModUser] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
     lastName: "",
@@ -17,12 +18,12 @@ const ModUser = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/9`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
+          `${import.meta.env.VITE_REACT_HOST}/user/2`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
           //RECOGER EL ID Y EL TOKEN DEL LOCALSTORAGE
           {
             headers: {
               Authorization:
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibmFtZSI6InBpdG8iLCJpYXQiOjE3MDYyMTE2OTksImV4cCI6MTcwNjM4NDQ5OX0.D5oSIXdzalpWxSZTxE9TDr4g3o1ULQmHI1ieNCLKVUM",
+                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2NjE5MTc4LCJleHAiOjE3MDY3OTE5Nzh9.nkTWGUm6GAP97wDF6-Tl0r8ZOox0DFd7M_L5lm3neZ0",
             },
           }
         );
@@ -30,6 +31,7 @@ const ModUser = () => {
           const data = await response.json();
           setUserData(data);
           setLoading(false);
+          console.log(data);
         } else {
           const data = await response.json();
           console.error(data);
@@ -83,12 +85,12 @@ const ModUser = () => {
         formData.append("password", userData.password);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/9`,
+        `${import.meta.env.VITE_REACT_HOST}/user/2`,
         {
           method: "PUT",
           headers: {
             Authorization:
-              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6OSwibmFtZSI6InBpdG8iLCJpYXQiOjE3MDYyMTE2OTksImV4cCI6MTcwNjM4NDQ5OX0.D5oSIXdzalpWxSZTxE9TDr4g3o1ULQmHI1ieNCLKVUM",
+              "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2NjE5MTc4LCJleHAiOjE3MDY3OTE5Nzh9.nkTWGUm6GAP97wDF6-Tl0r8ZOox0DFd7M_L5lm3neZ0",
           },
           body: formData,
         }
@@ -97,6 +99,7 @@ const ModUser = () => {
       if (response.ok) {
         console.log("Usuario actualizado con éxito");
         console.log(userData.name);
+        setExitoModUser(true);
       } else {
         const data = await response.json();
         console.error(data);
@@ -111,118 +114,105 @@ const ModUser = () => {
   }
 
   return (
-    <>
+    <div className="min-h-screen bg-white flex flex-col items-center">
       <Menu />
 
-      <div className="min-h-screen bg-gray-100 py-6 flex flex-col justify-center sm:py-12">
-        <div className="relative py-3 sm:max-w-xl sm:mx-auto">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-300 to-blue-600 shadow-lg transform -skew-y-6 sm:skew-y-0 sm:-rotate-6 sm:rounded-3xl"></div>
-          <div className="relative px-4 py-10 bg-white shadow-lg sm:rounded-3xl sm:p-20">
-            <div className="max-w-md mx-auto">
-              <div>
-                <h1 className="text-2xl font-semibold">Edita tu perfil</h1>
-              </div>
-              <form onSubmit={modificarDatos}>
-                <div className="divide-y divide-gray-200">
-                  <div className="py-8 text-base leading-6 space-y-4 text-gray-700 sm:text-lg sm:leading-7">
-                    <div className="relative">
-                      <input
-                        id="photo"
-                        name="photo"
-                        type="file"
-                        accept="image/*"
-                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:border-rose-600"
-                        placeholder="photo"
-                        onChange={handleFileChange}
-                      />
-                      <label
-                        htmlFor="photo"
-                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                      >
-                        Foto
-                      </label>
-                    </div>
-                    <div className="relative">
-                      <input
-                        id="name"
-                        name="name"
-                        type="text"
-                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                        placeholder="Nombre"
-                        onChange={cambiarValorCampo}
-                      />
-                      <label
-                        htmlFor="name"
-                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                      >
-                        Nombre
-                      </label>
-                    </div>
-                    <div className="relative">
-                      <input
-                        id="lastName"
-                        name="lastName"
-                        type="text"
-                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                        placeholder="Apellido"
-                        onChange={cambiarValorCampo}
-                      />
-                      <label
-                        htmlFor="lastName"
-                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                      >
-                        Apellido
-                      </label>
-                    </div>
-                    <div className="relative">
-                      <input
-                        id="email"
-                        name="email"
-                        type="email"
-                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                        placeholder="Email address"
-                        onChange={cambiarValorCampo}
-                      />
-                      <label
-                        htmlFor="email"
-                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                      >
-                        Email Address
-                      </label>
-                    </div>
-                    <div className="relative">
-                      <input
-                        id="password"
-                        name="password"
-                        type="password"
-                        className="peer placeholder-transparent h-10 w-full border-b-2 border-gray-300 text-gray-900 focus:outline-none focus:borer-rose-600"
-                        placeholder="Password"
-                        onChange={cambiarValorCampo}
-                      />
-                      <label
-                        htmlFor="password"
-                        className="absolute left-0 -top-3.5 text-gray-600 text-sm peer-placeholder-shown:text-base peer-placeholder-shown:text-gray-440 peer-placeholder-shown:top-2 transition-all peer-focus:-top-3.5 peer-focus:text-gray-600 peer-focus:text-sm"
-                      >
-                        Password
-                      </label>
-                    </div>
-                    <div className="relative">
-                      <button className="bg-blue-500 text-white rounded-md px-2 py-1">
-                        Modificar
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </form>
-
-              <div className="absolute bottom-0 right-0 mb-6 mr-6">
-                <BorrarUsuario />
-              </div>
-            </div>
+      <div className="mt-8 p-8 bg-gray-100 rounded-lg shadow-md max-w-lg w-full">
+        <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
+          Editar perfil
+        </h1>
+        <form onSubmit={modificarDatos} className="space-y-6">
+          <div className="flex flex-col">
+            <label htmlFor="photo" className="text-gray-600 mb-1">
+              Subir Foto
+            </label>
+            <input
+              id="photo"
+              name="photo"
+              type="file"
+              accept="image/*"
+              className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+              placeholder="photo"
+              onChange={handleFileChange}
+            />
           </div>
-        </div>
+          <div className="flex flex-col">
+            <label htmlFor="name" className="text-gray-600 mb-1">
+              Nombre
+            </label>
+            <input
+              id="name"
+              name="name"
+              type="text"
+              className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+              placeholder="Nombre"
+              onChange={cambiarValorCampo}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="lastName" className="text-gray-600 mb-1">
+              Apellido
+            </label>
+            <input
+              id="lastName"
+              name="lastName"
+              type="text"
+              className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+              placeholder="Apellido"
+              onChange={cambiarValorCampo}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="email" className="text-gray-600 mb-1">
+              Correo electrónico
+            </label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+              placeholder="Correo electrónico"
+              onChange={cambiarValorCampo}
+            />
+          </div>
+          <div className="flex flex-col">
+            <label htmlFor="password" className="text-gray-600 mb-1">
+              Contraseña
+            </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+              placeholder="Contraseña"
+              onChange={cambiarValorCampo}
+            />
+            {exitoModUser && (
+              <p className="text-green-500 text-center mt-4">
+                ¡Usuario modificado con éxito!
+              </p>
+            )}
+          </div>
+          <div className="flex justify-center">
+            <button
+              className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
+              type="submit"
+            >
+              Guardar Cambios
+            </button>
+          </div>
+          <div className="flex justify-center mt-4">
+            <button
+              className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
+              type="button"
+              onClick={BorrarUsuario}
+            >
+              Eliminar Usuario
+            </button>
+          </div>
+        </form>
       </div>
-    </>
+    </div>
   );
 };
 

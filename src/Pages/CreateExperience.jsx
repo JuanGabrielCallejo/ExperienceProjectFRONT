@@ -58,7 +58,7 @@ const CreateExperience = () => {
         body: experienceBody,
         headers: {
           Authorization:
-            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2MjExOTE3LCJleHAiOjE3MDYzODQ3MTd9.63MV-sHwJlo9PUq9Wa5RIvFO1qL7bjkUwdLUZJc1Zu8",
+            "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwibmFtZSI6ImphaW1lIiwiaWF0IjoxNzA2NjE5MTc4LCJleHAiOjE3MDY3OTE5Nzh9.nkTWGUm6GAP97wDF6-Tl0r8ZOox0DFd7M_L5lm3neZ0",
         },
       });
 
@@ -101,17 +101,19 @@ const CreateExperience = () => {
         </div>
         <form
           onSubmit={nuevaExperiencia}
-          className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md"
+          className="max-w-md mx-auto p-6 bg-gray-100 shadow-md rounded-md"
         >
           <div className="mb-4">
-            <label htmlFor="category" className="text-gray-700">
-              Categoria
+            <label
+              htmlFor="category"
+              className="block text-sm font-semibold text-gray-700"
+            >
+              Categoría
             </label>
             <select
-              type="text"
-              name="category"
               id="category"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+              name="category"
+              className="mt-1 block w-full p-2 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             >
               {categorias.map((categoria) => (
                 <option key={categoria.id} value={categoria.id}>
@@ -121,61 +123,76 @@ const CreateExperience = () => {
             </select>
           </div>
           <div className="mb-4">
-            <label htmlFor="title" className="text-gray-700">
-              Titulo:
+            <label
+              htmlFor="title"
+              className="block text-sm font-semibold text-gray-700"
+            >
+              Título
             </label>
             <input
               type="text"
               name="title"
               id="title"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+              className="mt-1 block w-full p-2 bg-white-100 border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="subTitle" className="text-gray-700">
-              Subtitulo:
+            <label
+              htmlFor="subTitle"
+              className="block text-sm font-semibold text-gray-700"
+            >
+              Subtítulo
             </label>
             <input
               type="text"
               id="subTitle"
               name="subTitle"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+              className="mt-1 block w-full p-2 bg-white-100 border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="place" className="text-gray-700">
-              Lugar:
+            <label
+              htmlFor="place"
+              className="block text-sm font-semibold text-gray-700"
+            >
+              Lugar
             </label>
             <input
               type="text"
               id="place"
               name="place"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+              className="mt-1 block w-full p-2 bg-white-100 border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="text" className="text-gray-700">
-              Descripcion:
+            <label
+              htmlFor="text"
+              className="block text-sm font-semibold text-gray-700"
+            >
+              Descripción
             </label>
-            <input
-              type="text"
+            <textarea
               id="text"
               name="text"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+              rows="3"
+              className="mt-1 block w-full p-2 bg-white-100 border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
           <div className="mb-4">
-            <label htmlFor="photo" className="text-gray-700">
-              Fotos:
+            <label
+              htmlFor="photo"
+              className="block text-sm font-semibold text-gray-700"
+            >
+              Fotos
             </label>
             <input
               type="file"
               id="photo"
               name="photo"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+              className="mt-1 block w-full p-2 bg-white-100 border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
             />
           </div>
-          <button className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600">
+          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">
             Enviar
           </button>
         </form>
