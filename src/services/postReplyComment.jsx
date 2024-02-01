@@ -1,7 +1,4 @@
-import { useContext } from "react";
-import { AuthContext } from "../components/providers/AuthProvider";
-
-const PostReplyComment = async (comment_id, text) => {
+const PostReplyComment = async (comment_id, text, user) => {
   try {
     const getId = await fetch(
       `${import.meta.env.VITE_REACT_HOST}/comments/${comment_id}`
@@ -14,8 +11,6 @@ const PostReplyComment = async (comment_id, text) => {
     const formData = new FormData();
 
     formData.append("text", text);
-
-    const [user] = useContext(AuthContext);
 
     const result = await fetch(
       `${

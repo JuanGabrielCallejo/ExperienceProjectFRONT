@@ -1,10 +1,6 @@
-import { useContext } from "react";
-import { AuthContext } from "../components/providers/AuthProvider";
-
-const PostExpComment = async (exp_id, text) => {
+const PostExpComment = async (exp_id, text, user) => {
   try {
     const formData = new FormData();
-    const [user] = useContext(AuthContext);
 
     formData.append("text", text);
 

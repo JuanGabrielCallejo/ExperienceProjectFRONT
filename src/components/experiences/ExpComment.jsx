@@ -1,18 +1,19 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import PostExpComment from "../../services/postExpComment";
 import Swal from "sweetalert2";
+import { AuthContext } from "../providers/AuthProvider";
 
 const ExpComment = ({ exp, newComment, setNewComment }) => {
   const [commentText, setCommentText] = useState("");
   const [length, setLength] = useState("");
-  const PostComment = async () => {
+  const[user] = useContext(AuthContext);
+  const postComment = async () => {
     if (commentText.length < 10) {
       setLength("El texto debe tener mínimo 10 carácteres");
       throw new Error("El texto debe tener mínimo 10 carácteres");
     }
-
-    const createdComment = await PostExpComment(exp.id, commentText);
+    const createdComment = await PostExpComment(exp.id, commentText, user);
 
     Swal.fire({
       title: "Comentario Enviado!",
@@ -26,7 +27,7 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
     e.preventDefault();
 
     try {
-      const createdComment = await PostComment();
+      const createdComment = await postComment();
 
       let parseComments = [];
       try {

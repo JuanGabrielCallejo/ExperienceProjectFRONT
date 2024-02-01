@@ -1,5 +1,5 @@
 const Votes = async (exp_id,user) => {
-  console.log(user.token);
+  //console.log(user.token);
   const url = `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}/vote`;
 
 
