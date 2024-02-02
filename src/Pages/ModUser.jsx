@@ -16,7 +16,7 @@ const ModUser = () => {
     async function fetchData() {
       try {
         const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/3`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
+          `${import.meta.env.VITE_REACT_HOST}/user/4`, //ATENCIÓN: DE MOMENTO ESTA HARDCODEADO TANTO AQUÍ COMO EN ModUser.jsx, FALTA IMPLEMENTAR EL
           //RECOGER EL ID Y EL TOKEN DEL LOCALSTORAGE
           {
             headers: {
@@ -81,7 +81,7 @@ const ModUser = () => {
         formData.append("password", userData.password);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/3`,
+        `${import.meta.env.VITE_REACT_HOST}/user/4`,
         {
           method: "PUT",
           headers: {
@@ -93,7 +93,7 @@ const ModUser = () => {
 
       if (response.ok) {
         console.log("Usuario actualizado con éxito");
-        console.log(userData.name);
+        // console.log(userData.name);
       } else {
         const data = await response.json();
         console.error(data);

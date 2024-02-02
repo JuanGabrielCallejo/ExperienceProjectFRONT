@@ -4,9 +4,10 @@ import Votes from "./Votes";
 import { useEffect, useState } from "react";
 import postVote from "./postVote";
 
-const LikeHeart = ({ exp_id }) => {
+const LikeHeart = ({ exp_id, likes }) => {
   const [isClick, setClick] = useState(false);
   const [votesData, setVotesData] = useState([]);
+  const [like, setLike] = useState(likes);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,7 +33,7 @@ const LikeHeart = ({ exp_id }) => {
     try {
       const updatedVotes = await postVote(exp_id);
       setVotesData(updatedVotes);
-
+      setLike((prevLike) => (isClick ? prevLike - 1 : prevLike + 1));
       setClick(!isClick);
     } catch (error) {
       console.error(error);
@@ -50,12 +51,14 @@ const LikeHeart = ({ exp_id }) => {
   return (
     <div>
       <Heart isClick={isClick} onClick={handleSubmit} />
+      <p>{like}</p>
     </div>
   );
 };
 
 LikeHeart.propTypes = {
   exp_id: PropTypes.any,
+  likes: PropTypes.any,
   isClick: PropTypes.any,
   setClick: PropTypes.any,
 };

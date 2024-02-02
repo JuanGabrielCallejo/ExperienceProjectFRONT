@@ -5,7 +5,6 @@ const HomePage = () => {
   const { exp } = useExperiences();
   return (
     <>
-      <h1>Página Home</h1>
       <ul>
         <ExpList experience={exp} />
       </ul>

@@ -15,7 +15,7 @@ const CreateExperience = () => {
         if (response.ok) {
           const datosCategorias = await response.json();
 
-          console.log(datosCategorias.data[0]);
+          // console.log(datosCategorias.data[0]);
           const nombresCategorias = datosCategorias.data[0];
           setCategorias(nombresCategorias);
         } else {
@@ -48,7 +48,7 @@ const CreateExperience = () => {
     experienceBody.append("photo", photo);
     experienceBody.append("category", category);
 
-    console.log("evento", e, { title, subTitle, place, text, photo });
+    // console.log("evento", e, { title, subTitle, place, text, photo });
 
     try {
       const res = await fetch(`${import.meta.env.VITE_REACT_HOST}/experience`, {
@@ -65,7 +65,7 @@ const CreateExperience = () => {
         setExitoExperiencia(true);
       } else {
         const body = await res.json();
-        console.log("Error de datos", body);
+        // console.log("Error de datos", body);
         setStatusMessage(body.message);
       }
     } catch (error) {
