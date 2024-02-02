@@ -1,7 +1,9 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import BorrarUsuario from "../components/users/borrarUsuario";
+import { AuthContext } from "../components/providers/AuthProvider";
 
 const ModUser = () => {
+  const [user] = useContext(AuthContext);
   const [exitoModUser, setExitoModUser] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
@@ -89,7 +91,7 @@ const ModUser = () => {
         {
           method: "PUT",
           headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+            Authorization: `Bearer ${user.token}`,
           },
           body: formData,
         }

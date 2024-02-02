@@ -7,6 +7,7 @@ import LikeHeart from "../../services/likeHeart";
 
 const Experience = ({ exp }) => {
   const { comments } = exp;
+  // console.log(comments);
   const [newComment, setNewComment] = useState(comments);
   const date = exp.createdAt;
   const formatedDate = new Date(date).toLocaleString("es-ES", {
@@ -34,7 +35,7 @@ const Experience = ({ exp }) => {
         },
       });
       datos = await respuesta.json();
-      console.log(datos);
+      // console.log(datos);
       if (!respuesta.ok) {
         // console.log(datos.message);
         console.log("Error en la petición");
@@ -49,14 +50,14 @@ const Experience = ({ exp }) => {
   }
 
   function eliminarExperiencia(id) {
-    console.log("id: " + id);
+    // console.log("id: " + id);
     peticionServidor(id);
   }
 
   return (
     <>
       <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased bg-white ">
-        <div className="flex justify-center items-center h-screen">
+        <div className="flex justify-center items-center">
           <div className="shadow-2xl">
             <article className="mx-auto w-full max-w-3xl bg-blue-100 dark:bg-blue-900 p-6 lg:p-8 rounded-lg ">
               <header className="mb-8">
@@ -96,7 +97,7 @@ const Experience = ({ exp }) => {
                         </div>
                       </>
                     ) : null}
-                    <LikeHeart exp_id={exp.id} />
+                    <LikeHeart exp_id={exp.id} likes={exp.likes} />
                   </div>
                 </address>
                 <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">

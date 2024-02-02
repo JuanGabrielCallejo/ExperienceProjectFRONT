@@ -1,10 +1,12 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
+import { AuthContext } from "../components/providers/AuthProvider";
 
 const CreateExperience = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [exitoExperiencia, setExitoExperiencia] = useState(false);
   const [categorias, setCategorias] = useState([]);
+  const [user] = useContext(AuthContext);
 
   useEffect(() => {
     async function obtenerCategorias() {
@@ -15,7 +17,7 @@ const CreateExperience = () => {
         if (response.ok) {
           const datosCategorias = await response.json();
 
-          console.log(datosCategorias.data[0]);
+          // console.log(datosCategorias.data[0]);
           const nombresCategorias = datosCategorias.data[0];
           setCategorias(nombresCategorias);
         } else {
@@ -48,14 +50,14 @@ const CreateExperience = () => {
     experienceBody.append("photo", photo);
     experienceBody.append("category", category);
 
-    console.log("evento", e, { title, subTitle, place, text, photo });
+    // console.log("evento", e, { title, subTitle, place, text, photo });
 
     try {
       const res = await fetch(`${import.meta.env.VITE_REACT_HOST}/experience`, {
         method: "POST",
         body: experienceBody,
         headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+          Authorization: `Bearer ${user.token}`,
         },
       });
 
@@ -63,9 +65,10 @@ const CreateExperience = () => {
         const body = await res.json();
         setStatusMessage("Tu experiencia ha sido creada con exito", body);
         setExitoExperiencia(true);
+        console.log(user.token);
       } else {
         const body = await res.json();
-        console.log("Error de datos", body);
+        // console.log("Error de datos", body);
         setStatusMessage(body.message);
       }
     } catch (error) {

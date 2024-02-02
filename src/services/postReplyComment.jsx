@@ -1,4 +1,4 @@
-const postReplyComment = async (comment_id, text) => {
+const PostReplyComment = async (comment_id, text, user) => {
   try {
     const getId = await fetch(
       `${import.meta.env.VITE_REACT_HOST}/comments/${comment_id}`
@@ -20,7 +20,8 @@ const postReplyComment = async (comment_id, text) => {
         method: "POST",
         body: formData,
         headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+          Authorization:
+          `Bearer ${user.token}`,
         },
       }
     );
@@ -39,4 +40,4 @@ const postReplyComment = async (comment_id, text) => {
   }
 };
 
-export default postReplyComment;
+export default PostReplyComment;
