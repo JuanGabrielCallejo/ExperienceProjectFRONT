@@ -1,18 +1,20 @@
 import Heart from "react-animated-heart";
 import PropTypes from "prop-types";
 import Votes from "./Votes";
-import { useEffect, useState } from "react";
-import postVote from "./postVote";
+import { useContext, useEffect, useState } from "react";
+import PostVote from "./postVote";
+import { AuthContext } from "../components/providers/AuthProvider";
 
 const LikeHeart = ({ exp_id, likes }) => {
   const [isClick, setClick] = useState(false);
   const [votesData, setVotesData] = useState([]);
   const [like, setLike] = useState(likes);
+  const [user] = useContext(AuthContext);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const data = await Votes(exp_id);
+        const data = await Votes(exp_id, user);
 
         if (data.length > 0) {
           setClick(true);
@@ -25,13 +27,13 @@ const LikeHeart = ({ exp_id, likes }) => {
     };
 
     fetchData();
-  }, [exp_id]);
+  }, [exp_id, user]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      const updatedVotes = await postVote(exp_id);
+      const updatedVotes = await PostVote(exp_id, user);
       setVotesData(updatedVotes);
       setLike((prevLike) => (isClick ? prevLike - 1 : prevLike + 1));
       setClick(!isClick);

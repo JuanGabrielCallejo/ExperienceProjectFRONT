@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import postReplyComment from "../../services/postReplyComment";
 import Swal from "sweetalert2";
 import getAnswers from "../../services/getAnswers";
+import { AuthContext } from "../providers/AuthProvider";
 
 const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
   const [commentText, setCommentText] = useState("");
   const [length, setLength] = useState("");
+  const[user] = useContext(AuthContext);
 
   const postComment = async () => {
     if (commentText.length < 10) {
@@ -14,7 +16,7 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
       throw new Error("El texto debe tener mínimo 10 carácteres");
     }
 
-    const replyData = await postReplyComment(comment.comment_id, commentText);
+    const replyData = await postReplyComment(comment.comment_id, commentText, user);
     Swal.fire({
       title: "Respuesta Enviada!",
       icon: "success",

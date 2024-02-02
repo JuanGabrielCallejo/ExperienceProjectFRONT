@@ -1,8 +1,9 @@
-const postExpComment = async (exp_id, text) => {
+const PostExpComment = async (exp_id, text, user) => {
   try {
     const formData = new FormData();
 
     formData.append("text", text);
+
 
     const result = await fetch(
       `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}/comment/`,
@@ -10,7 +11,8 @@ const postExpComment = async (exp_id, text) => {
         method: "POST",
         body: formData,
         headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+          Authorization:
+          `Bearer ${user.token}`,
         },
       }
     );
@@ -27,4 +29,4 @@ const postExpComment = async (exp_id, text) => {
   }
 };
 
-export default postExpComment;
+export default PostExpComment;
