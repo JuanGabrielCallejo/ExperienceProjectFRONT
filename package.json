@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.11.3",
+    "@emotion/styled": "^11.11.0",
+    "@mui/base": "^5.0.0-beta.34",
+    "@mui/system": "^5.15.7",
     "dotenv": "^16.3.1",
     "jwt-decode": "^4.0.0",
     "localforage": "^1.10.0",

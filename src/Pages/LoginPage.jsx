@@ -1,11 +1,14 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../components/providers/AuthProvider";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const LoginPage = () => {
   const [message, setMessage] = useState("");
   const [, setUser] = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate();
 
   const loginUser = async (e) => {
     e.preventDefault();
@@ -20,7 +23,7 @@ const LoginPage = () => {
         body: formData,
       });
       const responseData = response.status !== 204 ? await response.json() : {};
-      console.log("Respuesta del servidor:", responseData);
+      // console.log("Respuesta del servidor:", responseData);
       const user = {
         id: responseData.id,
         name: responseData.name,
@@ -34,7 +37,16 @@ const LoginPage = () => {
         //Mensaje de inicio de sesión exitoso
         setMessage(`Inicio de sesión con éxito: ${responseData.message}`);
         setUser(user);
-        console.log(user);
+        Swal.fire({
+          title: "Sesión iniciada!",
+          // text: "Se ha eliminado este usuario",
+          icon: "success",
+        });
+        setTimeout(() => {
+          navigate("/");
+        }, 1000);
+
+        // console.log(user);
       } else {
         //Mensaje de error en el inicio de sesión
         setMessage(

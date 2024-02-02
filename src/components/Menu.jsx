@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import { SiGooglehome } from "react-icons/si";
 
-export const Menu = () => {
+export const MenuNav = () => {
   return (
     <div className="bg-gray-300 text-black w-max p-6 flex flex-col gap-10 ">
       <NavLink to="/" className="mx-2 hover:font-bold">
@@ -10,9 +10,6 @@ export const Menu = () => {
       </NavLink>
       <NavLink to="/experiences" className="mx-2 hover:font-bold">
         BUSCAR EXPERIENCIAS
-      </NavLink>
-      <NavLink to="/settings/profile" className="mx-2 hover:font-bold">
-        Modificar Perfil
       </NavLink>
       <NavLink to="/compose/experience" className="mx-2 hover:font-bold">
         CREAR EXPERIENCIA
