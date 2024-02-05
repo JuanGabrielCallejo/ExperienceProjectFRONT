@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import CommentsList from "../commentsAndAnswers/CommentsList";
 import ExpComment from "./ExpComment";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import LikeHeart from "../../services/likeHeart";
 
 const Experience = ({ exp }) => {
@@ -85,6 +85,9 @@ const Experience = ({ exp }) => {
                     {exp.self ? (
                       <>
                         <div className="p-2"></div>
+                        <NavLink to="/settings/experience" className="rounded-full bg-gren-500 text-white   p-2 text-sm hover:cursor-pointer">
+                          Modificar Experiencia
+                        </NavLink>
                         <div
                           className="rounded-full bg-red-500 text-white p-2 text-sm hover:cursor-pointer"
                           onClick={(evento) => {
