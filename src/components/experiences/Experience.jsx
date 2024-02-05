@@ -35,7 +35,7 @@ const Experience = ({ exp }) => {
       const respuesta = await fetch(url, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+          Authorization: `Bearer ${user.token}`,
         },
       });
       datos = await respuesta.json();
