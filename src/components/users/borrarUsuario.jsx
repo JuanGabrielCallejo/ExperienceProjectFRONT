@@ -6,11 +6,11 @@ import { AuthContext } from "../providers/AuthProvider";
 const BorrarUsuario = () => {
   const [, setMessage] = useState("");
   const navigate = useNavigate();
-  const [user] = useContext(AuthContext)
+  const [user] = useContext(AuthContext);
   const borrarUsuario = async (event) => {
     try {
       event.stopPropagation();
-      
+
       // AÑADIR UNA VENTANA DE CONFIRMACIÓN DE ELIMINACIÓN DE
       // USUARIO PARA ASEGURAR QUE QUIERES BORRAR
 
@@ -37,16 +37,20 @@ const BorrarUsuario = () => {
         );
 
         if (res.ok) {
-          const data = await res.json();
-          console.log(user.token);
+          localStorage.removeItem("user");
+          await res.json();
+
+          // console.log(user.token);
 
           Swal.fire({
             title: "Usuario borrado!",
             text: "Se ha eliminado este usuario",
             icon: "success",
           });
+
           navigate("/");
-          console.log(data);
+          window.location.reload();
+          // console.log(data);
           setMessage("Usuario borrado correctamente.");
         } else {
           setMessage("No se puede eliminar el usuario.");
