@@ -6,11 +6,11 @@ import { AuthContext } from "../providers/AuthProvider";
 const BorrarUsuario = () => {
   const [, setMessage] = useState("");
   const navigate = useNavigate();
-  const [user] = useContext(AuthContext)
+  const [user] = useContext(AuthContext);
   const borrarUsuario = async (event) => {
     try {
       event.stopPropagation();
-      
+
       // AÑADIR UNA VENTANA DE CONFIRMACIÓN DE ELIMINACIÓN DE
       // USUARIO PARA ASEGURAR QUE QUIERES BORRAR
 
@@ -25,8 +25,7 @@ const BorrarUsuario = () => {
       });
 
       if (result.isConfirmed) {
-        const user_Id = 9;
-        
+        const user_Id = user.id;
 
         const res = await fetch(
           `${import.meta.env.VITE_REACT_HOST}/user/${user_Id}`,

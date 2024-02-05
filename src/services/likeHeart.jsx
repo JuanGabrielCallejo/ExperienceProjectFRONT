@@ -43,6 +43,7 @@ const LikeHeart = ({ exp_id, setLike }) => {
   };
 
   useEffect(() => {
+    console.log("VotesData", votesData);
     if (votesData.length > 0) {
       setClick(false);
     } else {

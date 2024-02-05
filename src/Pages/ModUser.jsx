@@ -13,7 +13,6 @@ const ModUser = () => {
     photo: undefined,
   });
   const [valoresCamposActuales, setValoresCamposActuales] = useState();
-  console.log(user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -239,13 +238,7 @@ const ModUser = () => {
               </button>
             </div>
             <div className="flex justify-center mt-4">
-              <button
-                className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
-                type="button"
-                onClick={BorrarUsuario}
-              >
-                Eliminar Usuario
-              </button>
+              <BorrarUsuario />
             </div>
           </form>
         </div>
