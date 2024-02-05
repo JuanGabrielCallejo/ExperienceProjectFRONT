@@ -13,7 +13,7 @@ const ModUser = () => {
     photo: undefined,
   });
   const [valoresCamposActuales, setValoresCamposActuales] = useState();
-
+  console.log(user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -23,10 +23,10 @@ const ModUser = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/1`,
+        `${import.meta.env.VITE_REACT_HOST}/user/${user.id}`,
         {
           headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );
@@ -87,7 +87,7 @@ const ModUser = () => {
         formData.append("password", userData.password);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/1`,
+        `${import.meta.env.VITE_REACT_HOST}/user/${user.id}`,
         {
           method: "PUT",
           headers: {

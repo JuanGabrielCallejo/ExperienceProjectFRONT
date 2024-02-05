@@ -1,12 +1,18 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../components/providers/AuthProvider";
+import { SearchContext } from "../components/providers/SearchProvider";
 
 const CreateExperience = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [exitoExperiencia, setExitoExperiencia] = useState(false);
   const [categorias, setCategorias] = useState([]);
   const [user] = useContext(AuthContext);
+  const [, , , setViewBar] = useContext(SearchContext);
+
+  useEffect(() => {
+    setViewBar(true);
+  }, [setViewBar]);
 
   useEffect(() => {
     async function obtenerCategorias() {

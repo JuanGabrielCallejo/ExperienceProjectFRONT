@@ -39,7 +39,7 @@ const Comments = ({ com }) => {
       <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
         <footer className="flex justify-between items-center mb-2">
           <div className="flex items-center">
-            <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white">
+            <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white S700">
               <img
                 className="mr-2 w-6 h-6 rounded-full"
                 src={com.comment_user_photo}
@@ -52,7 +52,7 @@ const Comments = ({ com }) => {
             </p>
           </div>
         </footer>
-        <p className="dark:text-white">{com.comment_text}</p>
+        <p className="dark:text-white S400">{com.comment_text}</p>
         <div className="flex items-center mt-4 space-x-4">
           <button
             type="button"

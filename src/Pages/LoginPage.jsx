@@ -15,9 +15,9 @@ const LoginPage = () => {
     const formData = new FormData();
     formData.append("email", email);
     formData.append("password", password);
-    // Realizamos la solicitud POST al servidor
+
     try {
-      console.log("datos del formulario", { email, password });
+      // console.log("datos del formulario", { email, password });
       const response = await fetch(`${import.meta.env.VITE_REACT_HOST}/login`, {
         method: "POST",
         body: formData,
@@ -34,7 +34,6 @@ const LoginPage = () => {
         return;
       }
       if (response.status === 200) {
-        //Mensaje de inicio de sesión exitoso
         setMessage(`Inicio de sesión con éxito: ${responseData.message}`);
         setUser(user);
         Swal.fire({
@@ -58,12 +57,12 @@ const LoginPage = () => {
     }
   };
   return (
-    <>
+    <div className="flex flex-col">
       <div className="text-center mb-4">
         <h1 className="text-2xl font-bold text-gray-800">LOGIN</h1>
       </div>
       <form
-        className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md"
+        className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md flex flex-col "
         onSubmit={loginUser}
       >
         {/*Mensaje de éxito o error*/}
@@ -101,12 +100,12 @@ const LoginPage = () => {
 
         <button
           type="submit"
-          className="bg-blue-500 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md hover:bg-blue-600"
         >
           Login
         </button>
       </form>
-    </>
+    </div>
   );
 };
 export default LoginPage;

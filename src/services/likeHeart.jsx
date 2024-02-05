@@ -5,10 +5,10 @@ import { useContext, useEffect, useState } from "react";
 import PostVote from "./postVote";
 import { AuthContext } from "../components/providers/AuthProvider";
 
-const LikeHeart = ({ exp_id, likes }) => {
+const LikeHeart = ({ exp_id, setLike }) => {
   const [isClick, setClick] = useState(false);
   const [votesData, setVotesData] = useState([]);
-  const [like, setLike] = useState(likes);
+
   const [user] = useContext(AuthContext);
 
   useEffect(() => {
@@ -53,14 +53,14 @@ const LikeHeart = ({ exp_id, likes }) => {
   return (
     <div>
       <Heart isClick={isClick} onClick={handleSubmit} />
-      <p>{like}</p>
     </div>
   );
 };
 
 LikeHeart.propTypes = {
   exp_id: PropTypes.any,
-  likes: PropTypes.any,
+  like: PropTypes.any,
+  setLike: PropTypes.any,
   isClick: PropTypes.any,
   setClick: PropTypes.any,
 };
