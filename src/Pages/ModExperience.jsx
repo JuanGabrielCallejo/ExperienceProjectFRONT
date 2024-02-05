@@ -23,7 +23,7 @@ const ModExp = () => {
         `${import.meta.env.VITE_REACT_HOST}/experience/2`,
         {
           headers: {
-            Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+            Authorization: `Bearer ${user.token}`,
           },
         }
       );

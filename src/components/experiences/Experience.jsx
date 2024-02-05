@@ -35,7 +35,7 @@ const Experience = ({ exp }) => {
       const respuesta = await fetch(url, {
         method: "DELETE",
         headers: {
-          Authorization: `Bearer ${import.meta.env.VITE_TOKEN}`,
+          Authorization: `Bearer ${user.token}`,
         },
       });
       datos = await respuesta.json();
@@ -54,7 +54,7 @@ const Experience = ({ exp }) => {
   }
 
   function eliminarExperiencia(id) {
-    // console.log("id: " + id);
+    console.log("id: " + id);
     peticionServidor(id);
   }
 
@@ -90,7 +90,7 @@ const Experience = ({ exp }) => {
                     {exp.self ? (
                       <>
                         <div className="p-2"></div>
-                        <NavLink to="/settings/experience" className="rounded-full bg-gren-500 text-white   p-2 text-sm hover:cursor-pointer">
+                        <NavLink to={`/settings/experience/${exp.id}`} className="rounded-full bg-gren-500 text-white   p-2 text-sm hover:cursor-pointer">
                           Modificar Experiencia
                         </NavLink>
                         <div

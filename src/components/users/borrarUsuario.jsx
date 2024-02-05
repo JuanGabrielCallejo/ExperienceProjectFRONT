@@ -25,11 +25,8 @@ const BorrarUsuario = () => {
       });
 
       if (result.isConfirmed) {
-        const user_Id = 9;
-        
-
         const res = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/user/${user_Id}`,
+          `${import.meta.env.VITE_REACT_HOST}/user/${user.id}`,
           {
             method: "DELETE",
             headers: {
