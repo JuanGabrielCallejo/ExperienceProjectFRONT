@@ -5,10 +5,10 @@ import { useContext, useEffect, useState } from "react";
 import PostVote from "./postVote";
 import { AuthContext } from "../components/providers/AuthProvider";
 
-
-const LikeHeart = ({ exp_id }) => {
+const LikeHeart = ({ exp_id, setLike }) => {
   const [isClick, setClick] = useState(false);
   const [votesData, setVotesData] = useState([]);
+
   const [user] = useContext(AuthContext);
 
   useEffect(() => {
@@ -35,7 +35,7 @@ const LikeHeart = ({ exp_id }) => {
     try {
       const updatedVotes = await PostVote(exp_id, user);
       setVotesData(updatedVotes);
-
+      setLike((prevLike) => (isClick ? prevLike - 1 : prevLike + 1));
       setClick(!isClick);
     } catch (error) {
       console.error(error);
@@ -59,6 +59,8 @@ const LikeHeart = ({ exp_id }) => {
 
 LikeHeart.propTypes = {
   exp_id: PropTypes.any,
+  like: PropTypes.any,
+  setLike: PropTypes.any,
   isClick: PropTypes.any,
   setClick: PropTypes.any,
 };

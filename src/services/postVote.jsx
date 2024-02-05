@@ -1,6 +1,5 @@
-const PostVote = async (exp_id, user) => {
-  console.log(user.token);
-  console.log(exp_id);
+const postVote = async (exp_id, user) => {
+  // console.log(user.token);
   const url = `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}/vote`;
   const res = await fetch(url, {
     method: "POST",
@@ -10,10 +9,9 @@ const PostVote = async (exp_id, user) => {
   });
 
   const data = await res.json();
-  console.log(data);
-
+  // console.log(data.data);
 
   return data.data;
 };
 
-export default PostVote;
+export default postVote;

@@ -1,27 +1,20 @@
 import { NavLink } from "react-router-dom";
+import { SiGooglehome } from "react-icons/si";
 
-export const Menu = () => {
+export const MenuNav = () => {
   return (
-    <div className="bg-blue-500 text-white p-3 font-bold flex justify-between ancho_total">
-      <NavLink to="/" className="mx-2 hover:bg-blue-600">
-        Home
+    <div className="bg-gray-300 text-black w-max p-6 flex flex-col gap-10 ">
+      <NavLink to="/" className="mx-2 hover:font-bold">
+        <SiGooglehome />
+        HOME
       </NavLink>
-      <NavLink to="/login" className="mx-2 hover:bg-blue-600">
-        Login
+      <NavLink to="/experiences" className="mx-2 hover:font-bold">
+        BUSCAR EXPERIENCIAS
       </NavLink>
-      <NavLink to="/register" className="mx-2 hover:bg-blue-600">
-        Registro
+      <NavLink to="/compose/experience" className="mx-2 hover:font-bold">
+        CREAR EXPERIENCIA
       </NavLink>
-      <NavLink to="/experiences" className="mx-2 hover:bg-blue-600">
-        Buscar Experiencias
-      </NavLink>
-      <NavLink to="/settings/profile" className="mx-2 hover:bg-blue-600">
-        Modificar Perfil
-      </NavLink>
-      <NavLink to="/compose/experience" className="mx-2 hover:bg-blue-600">
-        Crear Experiencia
-      </NavLink>
-      <NavLink to="/settings/experience" className="mx-2 hover:bg-blue-600">
+      <NavLink to="/settings/experience" className="mx-2 hover:font-bold">
         Modificar experiencia
       </NavLink>
     </div>

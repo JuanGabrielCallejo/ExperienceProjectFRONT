@@ -1,95 +1,29 @@
-import { useState } from "react";
-import ExpList from "./ExpList";
+import { useContext, useEffect } from "react";
+import PrimarySearchAppBar from "../../services/searchBar";
+import { SearchContext } from "../providers/SearchProvider";
 
 const ExperienceFilterForm = () => {
   const initialEmptyValue = "";
-  const [result, setResult] = useState("");
-  const [selectedOption, setSelectedOption] = useState("");
-  const [inputText, setInputText] = useState("");
-  const [orderText, setOrderText] = useState("");
 
-  const handleSelectChange = (e) => {
-    setSelectedOption(e.target.value);
-  };
+  const [, , , setViewBar, handleSubmit, orderText, setOrderText] =
+    useContext(SearchContext);
 
-  const handleInputChange = (e) => {
-    setInputText(e.target.value);
-  };
+  useEffect(() => {
+    setViewBar(false);
+  }, [setViewBar]);
 
   const handleOrderChange = (e) => {
     setOrderText(e.target.value);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      if (!inputText) {
-        const res = await fetch(
-          `${
-            import.meta.env.VITE_REACT_HOST
-          }/getexperiences?orderBy=${selectedOption}&orderDirection=${orderText}`
-        );
-
-        if (res.ok) {
-          const data = await res.json();
-          setResult(data.data);
-          return data;
-        } else {
-          const data = await res.json();
-          console.log(data);
-        }
-      } else {
-        const res = await fetch(
-          `${
-            import.meta.env.VITE_REACT_HOST
-          }/getexperiences?orderBy=${selectedOption}&orderDirection=${orderText}&search=${inputText}`
-        );
-
-        if (res.ok) {
-          const data = await res.json();
-          setResult(data.data);
-          return data;
-        } else {
-          const data = await res.json();
-          console.log(data.data);
-        }
-      }
-
-      // console.log("Opción seleccionada:", selectedOption);
-      // console.log("Texto ingresado:", inputText);
-      // console.log("Orden", orderText);
-    } catch (error) {
-      console.error(error.message);
-    }
+    // console.log(e.target.value);
   };
 
   return (
     <div className="flex flex-col">
-      <form onSubmit={handleSubmit} className="flex flex-col">
+      <form onSubmit={handleSubmit} className="flex flex-row">
         <label htmlFor="inputText">
-          Filtrar por texto:
-          <input
-            type="text"
-            id="inputText"
-            value={inputText}
-            onChange={handleInputChange}
-          />
+          <PrimarySearchAppBar />
         </label>
-        <label>
-          Buscar por:
-          <select value={selectedOption} onChange={handleSelectChange} required>
-            <option value={initialEmptyValue}>Selecciona una opción</option>
-            <option value="user_name">Usuario</option>
-            <option value="title">Título</option>
-            <option value="subTitle">Subtítulo</option>
-            <option value="place">Lugar</option>
-            <option value="category">Categoría</option>
-            <option value="text">Texto</option>
-            <option value="votes">Votos</option>
-          </select>
-        </label>
-        <label>
-          Ordenar por:
+        <label className="self-center border border-solid border-black rounded-lg">
           <select
             name="order"
             id="orderSelect"
@@ -98,13 +32,11 @@ const ExperienceFilterForm = () => {
             required
           >
             <option value={initialEmptyValue}>Selecciona un orden</option>
-            <option value="DESC">Más recientes</option>
-            <option value="ASC">Más antiguos</option>
+            <option value="DESC">Más votados</option>
+            <option value="ASC">Menos votados</option>
           </select>
         </label>
-        <button type="submit">Buscar</button>
       </form>
-      <ul>{result ? <ExpList experience={result} /> : <></>}</ul>
     </div>
   );
 };

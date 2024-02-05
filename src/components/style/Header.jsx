@@ -1,8 +1,43 @@
+import { useNavigate } from "react-router-dom";
+import { MenuNav } from "../Menu";
+import { useContext } from "react";
+import { AuthContext } from "../providers/AuthProvider";
+
+import PrimarySearchAppBar from "../../services/searchBar";
+import { LoginMenu } from "../users/LoginMenu";
+import LoginDropDown from "../../services/LoginDropDown";
+import { SearchContext } from "../providers/SearchProvider";
 
 export const Header = () => {
+  const navigate = useNavigate();
+  const [user] = useContext(AuthContext);
+  const [, setSearch, viewBar, , handleSubmit, , , ,] =
+    useContext(SearchContext);
+  // console.log(user);
   return (
-    <div className="p-2 flex justify-between ancho_total">
-      <img className="object-fit" src="/img/prototipo1.png" /><img className="object-fit m-2" src="/img/My experiences.png" ></img>
+    <div className="p-2 fixed h-screen flex flex-col justify-end ">
+      <button
+        onClick={() => {
+          navigate("/");
+        }}
+      >
+        <img className="object-fit drop-shadow-2xl" src="/img/prototipo1.png" />
+      </button>
+      <form
+        onSubmit={(e) => {
+          e.preventDefault();
+          navigate("/experiences");
+          handleSubmit(e);
+          setSearch("");
+        }}
+      >
+        {viewBar && <PrimarySearchAppBar />}
+      </form>
+
+      {/* <img className="object-fit m-2" src="/img/My experiences.png"></img> */}
+
+      <MenuNav />
+      {user ? <LoginDropDown user={user} /> : <LoginMenu />}
     </div>
   );
 };

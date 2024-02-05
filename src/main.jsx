@@ -11,6 +11,7 @@ import FilterExperience from "./Pages/FilterExperience";
 import { ModExp } from "./Pages/ModExperience";
 import { Layout } from "./components/style/Layout";
 import { AuthProvider } from "./components/providers/AuthProvider";
+import { SearchProvider } from "./components/providers/SearchProvider";
 
 const router = createBrowserRouter([
   {
@@ -52,7 +53,9 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
-      <RouterProvider router={router} />
+      <SearchProvider>
+        <RouterProvider router={router} />
+      </SearchProvider>
     </AuthProvider>
   </React.StrictMode>
 );

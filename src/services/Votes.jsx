@@ -1,7 +1,6 @@
-const Votes = async (exp_id,user) => {
+const Votes = async (exp_id, user) => {
   //console.log(user.token);
   const url = `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}/vote`;
-
 
   const res = await fetch(url, {
     headers: {
