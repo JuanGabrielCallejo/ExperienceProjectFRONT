@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from 'prop-types';
 
 const Formulary = ({ setMensaje, setExito }) => {
   const [nombre, setNombre] = useState();
@@ -9,25 +10,19 @@ const Formulary = ({ setMensaje, setExito }) => {
   useEffect(() => { setMensaje("") }, [setMensaje]);
 
   async function peticionServidor(formData) {
-    // console.log(JSON.stringify(usuario));
+
     let datos;
     try {
-      const respuesta = await fetch(
-        `${import.meta.env.VITE_REACT_HOST
-        }/register`, {
+      const respuesta = await fetch(`${import.meta.env.VITE_REACT_HOST}/register`, {
         method: "POST",
         body: formData,
       });
       datos = await respuesta.json();
       setMensaje(datos.message);
       if (!respuesta.ok) {
-        // console.log(datos.message);
         console.log("Error en la petición");
         return datos;
-        // throw Error("Error en la petición");
       }
-      // setMensaje('Inserción correcta con id: ' + datos.data.entry.id);
-      // setMensaje('Inserción correcta ');
       setExito(true);
       return datos;
     } catch (error) {
@@ -46,21 +41,26 @@ const Formulary = ({ setMensaje, setExito }) => {
       setMensaje("El apellido no puede estar vacío");
       return;
     }
-    const photo = evento.target.elements.file.files[0];
 
     let formData = new FormData();
     formData.append('name', nombre);
     formData.append('lastName', apellido);
     formData.append('email', email);
     formData.append('password', contrasinal);
-
+    const photo = evento.target.elements.file.files[0];
     if (photo) {
       formData.append('photo', photo);
     }
 
-    // console.log(formData);
+    console.log(formData);
     peticionServidor(formData);
   }
+
+  Formulary.propTypes = {
+    setMensaje: PropTypes.func.isRequired,
+    setExito: PropTypes.func.isRequired,
+  };
+
   return (
     <>
 
@@ -99,7 +99,7 @@ const Formulary = ({ setMensaje, setExito }) => {
 
         <div className="mb-3">
           <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="email">
-        
+
             *Correo:
           </label>
           <input
