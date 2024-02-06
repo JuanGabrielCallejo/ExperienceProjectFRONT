@@ -9,6 +9,7 @@ import { SearchContext } from "../components/providers/SearchProvider";
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
   borderRadius: "10px",
+  boxShadow: "0 0 10px rgb(0,0,0,0.2)",
   backgroundColor: alpha(theme.palette.common.white, 0.15),
   "&:hover": {
     backgroundColor: alpha(theme.palette.common.white, 0.25),

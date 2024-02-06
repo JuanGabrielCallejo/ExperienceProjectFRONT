@@ -27,6 +27,8 @@ const LoginPage = () => {
       const user = {
         id: responseData.id,
         name: responseData.name,
+        lastName: responseData.lastName,
+        photo: responseData.photoPath,
         token: responseData.token,
       };
       if (!email || !password) {
@@ -97,13 +99,14 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-
-        <button
-          type="submit"
-          className="bg-blue-400  text-white py-2 px-4 rounded-md hover:bg-blue-600"
-        >
-          Login
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >
+            Login
+          </button>
+        </div>
       </form>
     </div>
   );

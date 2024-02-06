@@ -23,7 +23,7 @@ const ExperienceFilterForm = () => {
         <label htmlFor="inputText">
           <PrimarySearchAppBar />
         </label>
-        <label className="self-center border border-solid border-black rounded-lg">
+        <label className="self-center border border-solid rounded-lg">
           <select
             name="order"
             id="orderSelect"
@@ -36,6 +36,9 @@ const ExperienceFilterForm = () => {
             <option value="ASC">Menos votados</option>
           </select>
         </label>
+        <button className="mx-2 hover:bg-gray-100 self-center bg-gray-200 p-2 rounded-xl shadow-lg">
+          Buscar
+        </button>
       </form>
     </div>
   );

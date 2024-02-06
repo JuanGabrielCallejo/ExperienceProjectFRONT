@@ -8,7 +8,7 @@ import { AuthContext } from "../providers/AuthProvider";
 const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
   const [commentText, setCommentText] = useState("");
   const [length, setLength] = useState("");
-  const[user] = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
 
   const postComment = async () => {
     if (commentText.length < 10) {
@@ -16,7 +16,11 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
       throw new Error("El texto debe tener mínimo 10 carácteres");
     }
 
-    const replyData = await postReplyComment(comment.comment_id, commentText, user);
+    const replyData = await postReplyComment(
+      comment.comment_id,
+      commentText,
+      user
+    );
     Swal.fire({
       title: "Respuesta Enviada!",
       icon: "success",
@@ -41,13 +45,13 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
   };
 
   return (
-    <>
+    <div className="mt-4">
       <div className="flex justify-between items-center mb-6">
         <h3 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
           Comentario
         </h3>
       </div>
-      <form className="mb-6" onSubmit={handleSubmit}>
+      <form className="mb-6 w-96" onSubmit={handleSubmit}>
         <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 dark:border-gray-700">
           <label htmlFor="comment" className="sr-only">
             Your comment
@@ -65,12 +69,12 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
         <div>{length}</div>
         <button
           type="submit"
-          className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center text-white bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+          className="mx-2 hover:bg-gray-100 flex items-center justify-center bg-gray-200 p-4 rounded-2xl shadow-2xl h-4 text-black"
         >
-          Enviar comentario
+          Enviar
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

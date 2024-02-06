@@ -39,16 +39,20 @@ const BorrarUsuario = () => {
         );
 
         if (res.ok) {
-          const data = await res.json();
-          console.log(user.token);
+          localStorage.removeItem("user");
+          await res.json();
+
+          // console.log(user.token);
 
           Swal.fire({
             title: "Usuario borrado!",
             text: "Se ha eliminado este usuario",
             icon: "success",
           });
+
           navigate("/");
-          console.log(data);
+          window.location.reload();
+          // console.log(data);
           setMessage("Usuario borrado correctamente.");
         } else {
           setMessage("No se puede eliminar el usuario.");

@@ -12,13 +12,13 @@ const HomePage = () => {
   }, [setViewBar, setSearch]);
 
   const { exp } = useExperiences();
-
+  console.log(exp);
   return (
-    <>
+    <div className="w-3/4">
       <ul>
         <ExpList experience={exp} />
       </ul>
-    </>
+    </div>
   );
 };
 

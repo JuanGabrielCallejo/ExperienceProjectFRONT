@@ -34,7 +34,7 @@ const ModUser = () => {
         const data = await response.json();
         setUserData(data);
         setLoading(false);
-        console.log(data);
+        // console.log(data);
         setValoresCamposActuales(data);
       } else {
         const data = await response.json();
@@ -133,7 +133,7 @@ const ModUser = () => {
                 <img
                   src={valoresCamposActuales.data.photo}
                   alt="Foto de perfil actual"
-                  className="w-24 h-24 rounded-full mb-2"
+                  className="w-24 h-24 rounded-full mb-2 object-cover"
                 />
               </div>
             )}

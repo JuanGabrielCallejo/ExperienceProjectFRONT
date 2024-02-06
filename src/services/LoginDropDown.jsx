@@ -141,8 +141,27 @@ const LoginDropDown = ({ user }) => {
   return (
     <div className="flex flex-col grow justify-end pb-6 mx-2 ">
       <Dropdown>
-        <MenuButton>Hola, {user.name} !</MenuButton>
+        <MenuButton>
+          {" "}
+          <div className="flex justify-center">
+            <img
+              src={user.photo}
+              className="w-6 h-6 mr-2 w-16 h-16 rounded-full object-cover"
+            />
+            <p>Hola, {user.name} !</p>
+          </div>
+        </MenuButton>
         <Menu slots={{ listbox: Listbox }}>
+          <div className="flex flex-col w-full gap-2 p-6 ">
+            <p className="flex self-center drop-shadow-lg">
+              {user.name} {user.lastName}
+            </p>
+            <img
+              src={user.photo}
+              className="drop-shadow-lg w-16 h-16 rounded-full self-center object-cover"
+            />
+          </div>
+
           <MenuItem
             onClick={() => {
               navigate("/settings/profile");
