@@ -3,7 +3,7 @@ import BorrarUsuario from "../components/users/borrarUsuario";
 import { AuthContext } from "../components/providers/AuthProvider";
 
 const ModUser = () => {
-  const [user] = useContext(AuthContext);
+  const [user, setUser] = useContext(AuthContext);
   const [exitoModUser, setExitoModUser] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
@@ -13,6 +13,7 @@ const ModUser = () => {
     photo: undefined,
   });
   const [valoresCamposActuales, setValoresCamposActuales] = useState();
+  // console.log(user);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -102,6 +103,10 @@ const ModUser = () => {
         setExitoModUser(true);
 
         fetchData();
+        const updatedUser = { ...user, ...userData };
+        setUser(updatedUser);
+        localStorage.setItem("user", JSON.stringify(updatedUser));
+        console.log(updatedUser);
       } else {
         const data = await response.json();
         console.error(data);
