@@ -23,10 +23,12 @@ const LoginPage = () => {
         body: formData,
       });
       const responseData = response.status !== 204 ? await response.json() : {};
-      // console.log("Respuesta del servidor:", responseData);
+      console.log("Respuesta del servidor:", responseData);
       const user = {
         id: responseData.id,
         name: responseData.name,
+        lastName: responseData.lastName,
+        photo: responseData.photoPath,
         token: responseData.token,
       };
       if (!email || !password) {

@@ -11,8 +11,8 @@ const FilterExperience = () => {
   }, [setResult]);
 
   return (
-    <div className="flex flex-col self-start mt-4 w-full">
-      <div className="flex flex-col self-center">
+    <div className="flex flex-col self-start mt-4 w-3/4">
+      <div className="flex flex-col  p-10">
         <h1>Buscar Experiencias</h1>
         <ExperienceFilterForm />
       </div>

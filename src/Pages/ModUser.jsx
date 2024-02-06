@@ -33,7 +33,7 @@ const ModUser = () => {
         const data = await response.json();
         setUserData(data);
         setLoading(false);
-        console.log(data);
+        // console.log(data);
         setValoresCamposActuales(data);
       } else {
         const data = await response.json();

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../components/providers/AuthProvider";
 import { SearchContext } from "../components/providers/SearchProvider";
+import resizeImage from "../services/resizeImg";
 
 const CreateExperience = () => {
   const [statusMessage, setStatusMessage] = useState("");
@@ -48,12 +49,17 @@ const CreateExperience = () => {
     const photo = e.target.elements.photo.files[0];
     const category = e.target.elements.category.value;
 
+    const imgMaxWidth = 1200;
+    const imgMaxHeight = 800;
+
+    const resizedPhoto = await resizeImage(photo, imgMaxWidth, imgMaxHeight);
+
     let experienceBody = new FormData();
     experienceBody.append("title", title);
     experienceBody.append("subTitle", subTitle);
     experienceBody.append("place", place);
     experienceBody.append("text", text);
-    experienceBody.append("photo", photo);
+    experienceBody.append("photo", resizedPhoto);
     experienceBody.append("category", category);
 
     // console.log("evento", e, { title, subTitle, place, text, photo });
