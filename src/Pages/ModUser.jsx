@@ -116,13 +116,102 @@ const ModUser = () => {
   }
 
   return (
-    <div className="min-h-screen bg-white flex flex-col items-center">
-      <div className="mt-8 p-8 bg-gray-100 rounded-lg shadow-md max-w-3xl w-full flex">
-        <div className="w-1/2 pr-8">
+    <div className="flex flex-col items-center w-full">
+      <div className="p-8 bg-white rounded-lg shadow-2xl w-3/4 flex justify-between">
+        <div className="w-2/4">
+          <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
+            Editar perfil
+          </h1>
+          <form onSubmit={modificarDatos} className="space-y-6">
+            <div className="flex flex-col">
+              <label htmlFor="photo" className="text-gray-700">
+                Foto
+              </label>
+              <input
+                id="photo"
+                name="photo"
+                type="file"
+                accept="image/*"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                placeholder="photo"
+                onChange={handleFileChange}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="name" className="text-gray-700">
+                Nombre
+              </label>
+              <input
+                id="name"
+                name="name"
+                type="text"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                placeholder="Nombre"
+                onChange={cambiarValorCampo}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="lastName" className="text-gray-700">
+                Apellido
+              </label>
+              <input
+                id="lastName"
+                name="lastName"
+                type="text"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                placeholder="Apellido"
+                onChange={cambiarValorCampo}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="email" className="text-gray-700">
+                Correo electrónico
+              </label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                placeholder="Correo electrónico"
+                onChange={cambiarValorCampo}
+              />
+            </div>
+            <div className="flex flex-col">
+              <label htmlFor="password" className="text-gray-700">
+                Contraseña
+              </label>
+              <input
+                id="password"
+                name="password"
+                type="password"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                placeholder="Contraseña"
+                onChange={cambiarValorCampo}
+              />
+              {exitoModUser && (
+                <p className="text-green-500 text-center mt-4">
+                  ¡Usuario modificado con éxito!
+                </p>
+              )}
+            </div>
+            <div className="flex justify-center">
+              <button
+                className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md "
+                type="submit"
+              >
+                Guardar Cambios
+              </button>
+            </div>
+            <div className="flex justify-center mt-4">
+              <BorrarUsuario />
+            </div>
+          </form>
+        </div>
+        <div className="w-2/4 flex flex-col justify-center items-center ">
           <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
             Datos Actuales
           </h1>
-          <div className="bg-white rounded-lg shadow-md p-4">
+          <div className=" w-1/2 bg-white rounded-lg shadow-2xl p-4">
             {valoresCamposActuales.data.photo && (
               <div className="mb-4 flex justify-center">
                 <img
@@ -152,95 +241,6 @@ const ModUser = () => {
               </p>
             </div>
           </div>
-        </div>
-        <div className="w-1/2">
-          <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
-            Editar perfil
-          </h1>
-          <form onSubmit={modificarDatos} className="space-y-6">
-            <div className="flex flex-col">
-              <label htmlFor="photo" className="text-gray-600 mb-1">
-                Subir Foto
-              </label>
-              <input
-                id="photo"
-                name="photo"
-                type="file"
-                accept="image/*"
-                className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
-                placeholder="photo"
-                onChange={handleFileChange}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="name" className="text-gray-600 mb-1">
-                Nombre:
-              </label>
-              <input
-                id="name"
-                name="name"
-                type="text"
-                className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
-                placeholder="Nombre"
-                onChange={cambiarValorCampo}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="lastName" className="text-gray-600 mb-1">
-                Apellido:
-              </label>
-              <input
-                id="lastName"
-                name="lastName"
-                type="text"
-                className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
-                placeholder="Apellido"
-                onChange={cambiarValorCampo}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="email" className="text-gray-600 mb-1">
-                Correo electrónico:
-              </label>
-              <input
-                id="email"
-                name="email"
-                type="email"
-                className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
-                placeholder="Correo electrónico"
-                onChange={cambiarValorCampo}
-              />
-            </div>
-            <div className="flex flex-col">
-              <label htmlFor="password" className="text-gray-600 mb-1">
-                Contraseña
-              </label>
-              <input
-                id="password"
-                name="password"
-                type="password"
-                className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
-                placeholder="Contraseña"
-                onChange={cambiarValorCampo}
-              />
-              {exitoModUser && (
-                <p className="text-green-500 text-center mt-4">
-                  ¡Usuario modificado con éxito!
-                </p>
-              )}
-            </div>
-            <div className="flex justify-center">
-              <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
-                type="submit"
-              >
-                Guardar Cambios
-              </button>
-            </div>
-            <div className="flex justify-center mt-4">
-              <BorrarUsuario />
-            </div>
-          </form>
         </div>
       </div>
     </div>
