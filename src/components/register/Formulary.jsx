@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
+import resizeImage from "../../services/resizeImg";
 
 const Formulary = ({ setMensaje, setExito }) => {
   const [nombre, setNombre] = useState();
@@ -40,7 +41,7 @@ const Formulary = ({ setMensaje, setExito }) => {
     }
   }
 
-  function registrarUsuario(evento) {
+  async function registrarUsuario(evento) {
     evento.preventDefault();
 
     if (!nombre || nombre === "" || nombre === null) {
@@ -60,7 +61,12 @@ const Formulary = ({ setMensaje, setExito }) => {
 
     const photo = evento.target.elements.file.files[0];
     if (photo) {
-      formData.append("photo", photo);
+      const imgMaxWidth = 400;
+      const imgMaxHeight = 200;
+
+      const resizedPhoto = await resizeImage(photo, imgMaxWidth, imgMaxHeight);
+
+      formData.append("photo", resizedPhoto);
     }
 
     // console.log(formData);
@@ -73,91 +79,68 @@ const Formulary = ({ setMensaje, setExito }) => {
   };
 
   return (
-    <>
-      <form
-        onSubmit={registrarUsuario}
-        className="max-w-sm mx-auto mt-8 p-4 bg-white rounded shadow-md text-xs"
-      >
-        <div className="mb-3">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="name"
-          >
-            *Nombre:
-          </label>
-          <input
-            type="text"
-            name="name"
-            onChange={(e) => setNombre(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500"
-          />
-        </div>
+    <form
+      onSubmit={registrarUsuario}
+      className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md flex flex-col "
+    >
+      <label className="text-gray-700" htmlFor="name">
+        *Nombre
+      </label>
+      <input
+        type="text"
+        name="name"
+        onChange={(e) => setNombre(e.target.value)}
+        className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
+      />
 
-        <div className="mb-3">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="lastName"
-          >
-            *Apellido:
-          </label>
-          <input
-            type="text"
-            name="lastName"
-            onChange={(e) => setApellido(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500"
-          />
-        </div>
+      <label className="text-gray-700" htmlFor="lastName">
+        *Apellido
+      </label>
+      <input
+        type="text"
+        name="lastName"
+        onChange={(e) => setApellido(e.target.value)}
+        className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
+      />
 
-        <div className="mb-3">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="email"
-          >
-            *Correo:
-          </label>
-          <input
-            type="email"
-            name="email"
-            onChange={(e) => setEmail(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500"
-          />
-        </div>
+      <label className="text-gray-700" htmlFor="email">
+        *Correo
+      </label>
+      <input
+        type="email"
+        name="email"
+        onChange={(e) => setEmail(e.target.value)}
+        className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
+      />
 
-        <div className="mb-3">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="password"
-          >
-            *Contraseña:
-          </label>
-          <input
-            type="password"
-            name="password"
-            onChange={(e) => setContrasinal(e.target.value)}
-            className="w-full px-3 py-2 border rounded focus:outline-none focus:border-blue-500"
-          />
-        </div>
+      <label className="text-gray-700" htmlFor="password">
+        *Contraseña
+      </label>
+      <input
+        type="password"
+        name="password"
+        onChange={(e) => setContrasinal(e.target.value)}
+        className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
+      />
 
-        <div className="mb-3">
-          <label
-            className="block text-gray-700 text-sm font-bold mb-2"
-            htmlFor="file"
-          >
-            Foto:
-          </label>
-          <input type="file" name="file" className="w-full px-3 py-2" />
-        </div>
+      <label className="text-gray-700" htmlFor="file">
+        Foto
+      </label>
+      <input
+        type="file"
+        name="file"
+        className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
+      />
 
-        <div className="flex justify-center">
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded focus:outline-none hover:bg-blue-700"
-          >
-            Enviar
-          </button>
-        </div>
-      </form>
-    </>
+      <div className="flex justify-center">
+        <button
+          type="submit"
+          className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md "
+        >
+          Enviar
+        </button>
+      </div>
+    </form>
   );
 };
 

@@ -41,7 +41,7 @@ const Comments = ({ com }) => {
           <div className="flex items-center">
             <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white S700">
               <img
-                className="mr-2 w-6 h-6 rounded-full"
+                className="mr-2 w-6 h-6 rounded-full object-cover"
                 src={com.comment_user_photo}
                 alt=""
               />

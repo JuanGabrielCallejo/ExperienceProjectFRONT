@@ -23,7 +23,7 @@ const LoginPage = () => {
         body: formData,
       });
       const responseData = response.status !== 204 ? await response.json() : {};
-      console.log("Respuesta del servidor:", responseData);
+      // console.log("Respuesta del servidor:", responseData);
       const user = {
         id: responseData.id,
         name: responseData.name,
@@ -99,13 +99,14 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-
-        <button
-          type="submit"
-          className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md hover:bg-blue-600"
-        >
-          Login
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md hover:bg-blue-600"
+          >
+            Login
+          </button>
+        </div>
       </form>
     </div>
   );

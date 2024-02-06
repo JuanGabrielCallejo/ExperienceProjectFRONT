@@ -126,7 +126,7 @@ const LoginDropDown = ({ user }) => {
           <div className="flex justify-center">
             <img
               src={user.photo}
-              className="w-6 h-6 mr-2 w-16 h-16 rounded-full"
+              className="w-6 h-6 mr-2 w-16 h-16 rounded-full object-cover"
             />
             <p>Hola, {user.name} !</p>
           </div>
@@ -138,7 +138,7 @@ const LoginDropDown = ({ user }) => {
             </p>
             <img
               src={user.photo}
-              className="drop-shadow-lg w-16 h-16 rounded-full self-center"
+              className="drop-shadow-lg w-16 h-16 rounded-full self-center object-cover"
             />
           </div>
 

@@ -62,13 +62,13 @@ const Experience = ({ exp }) => {
     <>
       <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased bg-gray-300 ">
         <div className="flex justify-center items-center">
-          <div className="shadow-2xl w-full">
+          <div className="shadow-2xl w-3/4">
             <article className="mx-auto w-full h-full dark:bg-gray-700 p-6 lg:p-8 rounded-2xl ">
               <header className="mb-8">
                 <address className="flex items-center mb-6">
                   <div className="inline-flex w-full items-center mr-3 text-sm text-gray-900 ">
                     <img
-                      className="mr-4 w-16 h-16 rounded-full"
+                      className="mr-4 w-16 h-16 rounded-full object-cover"
                       src={exp.user_photo}
                       alt=""
                     />

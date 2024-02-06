@@ -128,7 +128,7 @@ const ModUser = () => {
                 <img
                   src={valoresCamposActuales.data.photo}
                   alt="Foto de perfil actual"
-                  className="w-24 h-24 rounded-full mb-2"
+                  className="w-24 h-24 rounded-full mb-2 object-cover"
                 />
               </div>
             )}
