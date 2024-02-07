@@ -17,11 +17,15 @@ export const Header = () => {
   return (
     <div className="p-2 fixed h-screen flex flex-col justify-end ">
       <button
+        className="flex justify-content"
         onClick={() => {
           navigate("/");
         }}
       >
-        <img className="object-fit drop-shadow-2xl" src="/img/prototipo1.png" />
+        <img
+          className="object-fit drop-shadow-2xl h-64"
+          src="/img/prototipo1.png"
+        />
       </button>
       <form
         onSubmit={(e) => {
