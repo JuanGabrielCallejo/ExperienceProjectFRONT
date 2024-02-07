@@ -27,7 +27,7 @@ const HomePage = () => {
       {loading ? (
         <img className="h-32 w-32 " src={loadIcon}></img>
       ) : (
-        <div className="w-3/4">
+        <div className="w-full">
           {exp.length === 0 ? (
             <div className="flex flex-col items-center gap-4 ">
               <p>Todavía no hay experiencias.</p>

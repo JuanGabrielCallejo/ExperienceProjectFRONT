@@ -121,8 +121,8 @@ const MenuButton = styled(BaseMenuButton)(
 const LoginDropDown = ({ user }) => {
   const navigate = useNavigate();
   const { reload, valoresCamposActuales } = useContext(ReloadContext);
-  console.log(user);
-  console.log(valoresCamposActuales);
+  // console.log(user);
+  // console.log(valoresCamposActuales);
 
   useEffect(() => {
     console.log("Se ha actualizado el estado");
