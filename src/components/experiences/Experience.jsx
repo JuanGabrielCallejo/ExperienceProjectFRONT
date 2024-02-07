@@ -2,7 +2,7 @@ import PropTypes from "prop-types";
 import CommentsList from "../commentsAndAnswers/CommentsList";
 import ExpComment from "./ExpComment";
 import { useContext, useState } from "react";
-import { NavLink, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import LikeHeart from "../../services/likeHeart";
 import { AuthContext } from "../providers/AuthProvider";
 
@@ -89,10 +89,6 @@ const Experience = ({ exp }) => {
                     </div>
                     {exp.self ? (
                       <>
-                        <div className="p-2"></div>
-                        <NavLink to={`/settings/experience/${exp.id}`} className="rounded-full bg-gren-500 text-white   p-2 text-sm hover:cursor-pointer">
-                          Modificar Experiencia
-                        </NavLink>
                         <div
                           className="rounded-full bg-red-500 text-white p-2 text-sm hover:cursor-pointer"
                           onClick={(evento) => {
@@ -101,6 +97,15 @@ const Experience = ({ exp }) => {
                           }}
                         >
                           Eliminar
+                        </div>
+                        <div
+                          className="rounded-full bg-green-500 text-white p-2 text-sm hover:cursor-pointer"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            navigate(`/settings/experience/${exp.id}`)
+                          }}
+                        >
+                          Modificar
                         </div>
                       </>
                     ) : null}

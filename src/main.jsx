@@ -44,7 +44,7 @@ const router = createBrowserRouter([
         element: <ModUser />,
       },
       {
-        path: "/settings/experience",
+        path: "/settings/experience/:exp_id",
         element: <ModExp />,
       },
     ],
