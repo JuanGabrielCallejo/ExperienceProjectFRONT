@@ -88,8 +88,16 @@ const Experience = ({ exp }) => {
                       </p>
                     </div>
                     {exp.self ? (
-                      <>
-                        <div className="p-2"></div>
+                      <div className="flex flex-row gap-4 ml-6">
+                        <div
+                          className="rounded-full bg-blue-500 text-white p-2 text-sm hover:cursor-pointer"
+                          onClick={(evento) => {
+                            evento.preventDefault();
+                            navigate(`/settings/experience/${exp.id}`);
+                          }}
+                        >
+                          Modificar
+                        </div>
                         <div
                           className="rounded-full bg-red-500 text-white p-2 text-sm hover:cursor-pointer"
                           onClick={(evento) => {
@@ -99,7 +107,7 @@ const Experience = ({ exp }) => {
                         >
                           Eliminar
                         </div>
-                      </>
+                      </div>
                     ) : null}
 
                     {user && user.token != undefined ? (

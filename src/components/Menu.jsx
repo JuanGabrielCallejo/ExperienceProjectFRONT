@@ -29,11 +29,6 @@ export const MenuNav = () => {
           </div>
         </NavLink>
       )}
-      {user && (
-        <NavLink to="/settings/experience" className="mx-2 hover:font-bold">
-          Modificar experiencia
-        </NavLink>
-      )}
     </div>
   );
 };

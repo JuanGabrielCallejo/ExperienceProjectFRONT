@@ -1,5 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/providers/AuthProvider";
+import { useParams } from "react-router-dom";
 
 const ModExp = () => {
   const [exitoModExp, setExitoModExp] = useState(false);
@@ -16,11 +17,14 @@ const ModExp = () => {
   const [loading, setLoading] = useState(true);
   const [successMessage, setSuccessMessage] = useState("");
   const [user] = useContext(AuthContext);
+  const { exp_id } = useParams();
+  // console.log(exp_id);
 
   const fetchData = async () => {
     try {
+      // console.log(exp_id);
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/experience/20`,
+        `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -87,8 +91,10 @@ const ModExp = () => {
       if (expData.text) {
         formData.append("text", expData.text);
       }
+      // console.log(expData);
+      // console.log(exp_id);
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/modExperience/20`,
+        `${import.meta.env.VITE_REACT_HOST}/modExperience/${exp_id}`,
         {
           method: "PUT",
           headers: {
