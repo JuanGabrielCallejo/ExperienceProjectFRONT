@@ -27,13 +27,9 @@ const Formulary = ({ setMensaje, setExito }) => {
       datos = await respuesta.json();
       setMensaje(datos.message);
       if (!respuesta.ok) {
-        // console.log(datos.message);
         console.log("Error en la petición");
         return datos;
-        // throw Error("Error en la petición");
       }
-      // setMensaje('Inserción correcta con id: ' + datos.data.entry.id);
-      // setMensaje('Inserción correcta ');
       setExito(true);
       return datos;
     } catch (error) {
