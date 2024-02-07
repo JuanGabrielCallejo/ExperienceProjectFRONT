@@ -1,11 +1,9 @@
 import Swal from "sweetalert2";
 import Formulary from "./Formulary";
-import Message from "./Message";
 import { useState } from "react";
 // import { NavLink } from "react-router-dom";
 
 const Register = () => {
-  const [mensaje, setMensaje] = useState("");
   const [exito, setExito] = useState(false);
 
   const success = () => {
@@ -21,9 +19,8 @@ const Register = () => {
       {exito ? (
         success()
       ) : (
-        <Formulary setMensaje={setMensaje} setExito={setExito} />
+        <Formulary setExito={setExito} />
       )}{" "}
-      <Message mensaje={mensaje} />
     </div>
   );
 };

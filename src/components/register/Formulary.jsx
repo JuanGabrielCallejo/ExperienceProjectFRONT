@@ -1,16 +1,21 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import resizeImage from "../../services/resizeImg";
+import { validateName, validateLastName, validateEmail, validatePassword } from "../../services/validateFields";
 
-const Formulary = ({ setMensaje, setExito }) => {
+const Formulary = ({ setExito }) => {
   const [nombre, setNombre] = useState();
   const [apellido, setApellido] = useState();
   const [email, setEmail] = useState("");
-  const [contrasinal, setContrasinal] = useState();
+  const [password, setPassword] = useState("");
+  const [mensaje, setMensaje] = useState();
+
+  // const validateEmail2 = validateEmail;
+  // console.log(validateEmail);
 
   useEffect(() => {
     setMensaje("");
-  }, [setMensaje]);
+  }, []);
 
   async function peticionServidor(formData) {
     // console.log(JSON.stringify(usuario));
@@ -23,37 +28,56 @@ const Formulary = ({ setMensaje, setExito }) => {
           body: formData,
         }
       );
-
+      console.log(respuesta);
       datos = await respuesta.json();
       setMensaje(datos.message);
       if (!respuesta.ok) {
-        console.log("Error en la petición");
+        setMensaje(mensaje + " - Error al intentar registrar");
+        console.log(`Error en la petición: ${respuesta.status} - ${respuesta.statusText} - ${datos.data}`);
         return datos;
       }
       setExito(true);
       return datos;
     } catch (error) {
+      setMensaje("Error indefinido");
       console.log("Error: " + error.message);
     }
   }
 
+  const validarNombre = (nombre) => {
+    console.log(nombre);
+    const { isValid, message } = validateName(nombre);
+    setMensaje(message);
+    return isValid;
+  };
+  const validarApellido = (apellido) => {
+    const { isValid, message } = validateLastName(apellido);
+    setMensaje(message);
+    return isValid;
+  };
+  const validarEmail = (email) => {
+    const { isValid, message } = validateEmail(email);
+    setMensaje(message);
+    return isValid;
+  };
+  const validarPassword = (password) => {
+    const { isValid, message } = validatePassword(password);
+    setMensaje(message);
+    return isValid;
+  };
+
   async function registrarUsuario(evento) {
     evento.preventDefault();
 
-    if (!nombre || nombre === "" || nombre === null) {
-      setMensaje("El nombre no puede estar vacío");
-      return;
-    }
-    if (!apellido || apellido === "" || apellido === null) {
-      setMensaje("El apellido no puede estar vacío");
-      return;
-    }
+    setMensaje("");
+    if (!validarNombre(nombre) || !validarApellido(apellido) || !validarEmail(email) || !validarPassword(password)) { return; }
 
+    console.log("pasa")
     let formData = new FormData();
     formData.append("name", nombre);
     formData.append("lastName", apellido);
     formData.append("email", email);
-    formData.append("password", contrasinal);
+    formData.append("password", password);
 
     const photo = evento.target.elements.file.files[0];
     if (photo) {
@@ -65,7 +89,6 @@ const Formulary = ({ setMensaje, setExito }) => {
       formData.append("photo", resizedPhoto);
     }
 
-    // console.log(formData);
     peticionServidor(formData);
   }
 
@@ -80,7 +103,7 @@ const Formulary = ({ setMensaje, setExito }) => {
       className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md flex flex-col "
     >
       <label className="text-gray-700" htmlFor="name">
-        *Nombre
+        Nombre *
       </label>
       <input
         type="text"
@@ -90,7 +113,7 @@ const Formulary = ({ setMensaje, setExito }) => {
       />
 
       <label className="text-gray-700" htmlFor="lastName">
-        *Apellido
+        Apellido *
       </label>
       <input
         type="text"
@@ -100,22 +123,22 @@ const Formulary = ({ setMensaje, setExito }) => {
       />
 
       <label className="text-gray-700" htmlFor="email">
-        *Correo
+        Correo *
       </label>
       <input
-        type="email"
+        type="text"
         name="email"
         onChange={(e) => setEmail(e.target.value)}
         className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
       />
 
       <label className="text-gray-700" htmlFor="password">
-        *Contraseña
+        Contraseña *
       </label>
       <input
         type="password"
         name="password"
-        onChange={(e) => setContrasinal(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
         className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
       />
 
@@ -127,6 +150,8 @@ const Formulary = ({ setMensaje, setExito }) => {
         name="file"
         className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
       />
+      <div className="flex justify-center mb-3">
+        {mensaje}</div>
 
       <div className="flex justify-center">
         <button

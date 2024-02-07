@@ -5,9 +5,7 @@ import Swal from "sweetalert2";
 
 const LoginPage = () => {
 
-  const [message, setMessage] = useState("");
   const [mensaje, setMensaje] = useState("");
-
   const [, setUser] = useContext(AuthContext);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -29,7 +27,6 @@ const LoginPage = () => {
         body: formData,
       });
       const responseData = response.status !== 204 ? await response.json() : {};
-      // setMensaje(responseData.message);
       const user = {
         id: responseData.id,
         name: responseData.name,
@@ -38,7 +35,6 @@ const LoginPage = () => {
         token: responseData.token,
       };
       if (response.status === 200) {
-        setMessage(`Inicio de sesión con éxito: ${responseData.message}`);
         setUser(user);
         Swal.fire({
           title: "Sesión iniciada!",
@@ -69,7 +65,7 @@ const LoginPage = () => {
       if (!emailRegex.test(email)) {
         setMensaje("El email no tiene el formato correcto (usuario@dominio.com)");
         return false;
-      };
+      }
     }
     return true;
   };
@@ -79,7 +75,8 @@ const LoginPage = () => {
       setMensaje("El password no puede estar vacío");
       return false;
     } else {
-      // const passwordRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      // descomentar si queremos verificar el formato de contraseña
+      // const passwordRegex = ;
       // if (!passwordRegex.test(password)) {
       //   setMensaje("El password no tiene el formato correcto ");
       // };
@@ -143,9 +140,8 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="flex justify-center">
-          {mensaje}
-        </div>
+        <div className="flex justify-center mb-3">
+          {mensaje}</div>
         <div className="flex justify-center">
           <button
             type="submit"
