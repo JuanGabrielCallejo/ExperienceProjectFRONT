@@ -25,6 +25,7 @@ const ModExp = () => {
       // console.log(exp_id);
       const response = await fetch(
         `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}`,
+        `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -94,6 +95,7 @@ const ModExp = () => {
       // console.log(expData);
       // console.log(exp_id);
       const response = await fetch(
+        `${import.meta.env.VITE_REACT_HOST}/modExperience/${exp_id}`,
         `${import.meta.env.VITE_REACT_HOST}/modExperience/${exp_id}`,
         {
           method: "PUT",

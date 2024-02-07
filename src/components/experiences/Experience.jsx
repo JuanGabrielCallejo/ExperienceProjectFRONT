@@ -54,7 +54,7 @@ const Experience = ({ exp }) => {
   }
 
   function eliminarExperiencia(id) {
-    // console.log("id: " + id);
+    console.log("id: " + id);
     peticionServidor(id);
   }
 
