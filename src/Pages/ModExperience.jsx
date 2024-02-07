@@ -1,9 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/providers/AuthProvider";
+import { useParams } from "react-router-dom";
+import { ReloadContext } from "../components/providers/ReloadProvider";
 
 const ModExp = () => {
   const [exitoModExp, setExitoModExp] = useState(false);
-  const [valoresCamposActuales, setValoresCamposActuales] = useState();
+  const [valoresCamposExpActuales, setValoresCamposExpActuales] = useState();
   const [expData, setExpData] = useState({
     id: "",
     title: "",
@@ -16,11 +18,16 @@ const ModExp = () => {
   const [loading, setLoading] = useState(true);
   const [successMessage, setSuccessMessage] = useState("");
   const [user] = useContext(AuthContext);
+  const { valoresCamposActuales } = useContext(ReloadContext);
+
+  const { exp_id } = useParams();
+  // console.log(exp_id);
 
   const fetchData = async () => {
     try {
+      // console.log(exp_id);
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/experience/20`,
+        `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -32,7 +39,7 @@ const ModExp = () => {
         setExpData(data);
         setLoading(false);
         // console.log(data);
-        setValoresCamposActuales(data);
+        setValoresCamposExpActuales(data);
       } else {
         const data = await response.json();
         console.error(data);
@@ -87,8 +94,10 @@ const ModExp = () => {
       if (expData.text) {
         formData.append("text", expData.text);
       }
+      // console.log(expData);
+      // console.log(exp_id);
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/modExperience/20`,
+        `${import.meta.env.VITE_REACT_HOST}/modExperience/${exp_id}`,
         {
           method: "PUT",
           headers: {
@@ -225,7 +234,11 @@ const ModExp = () => {
               <div className="inline-flex items-center mr-3 text-sm text-gray-900 ">
                 <img
                   className="mr-4 w-16 h-16 rounded-full object-cover"
-                  src={user.photo}
+                  src={
+                    valoresCamposActuales
+                      ? valoresCamposActuales.data.photo
+                      : user.photo
+                  }
                   alt=""
                 />
                 <div>
@@ -237,7 +250,7 @@ const ModExp = () => {
                     {user.name} {user.lastName}
                   </a>
                   <p className="text-base text-gray-500 dark:text-gray-400 S700">
-                    {valoresCamposActuales.data.place}
+                    {valoresCamposExpActuales.data.place}
                   </p>
                   <p className="text-base text-gray-500 dark:text-gray-400">
                     <time>1/1/2024, 00:00:00</time>
@@ -246,22 +259,22 @@ const ModExp = () => {
               </div>
             </address>
             <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">
-              {valoresCamposActuales.data.title}
+              {valoresCamposExpActuales.data.title}
             </h1>
             <h2 className="mb-6 text-3xl font-extrabold leading-tight text-blue-700 dark:text-gray-300 S700">
-              {valoresCamposActuales.data.subTitle}
+              {valoresCamposExpActuales.data.subTitle}
             </h2>
           </header>
           <figure className="mb-6 text-center">
             <img
-              src={valoresCamposActuales.data.photo}
+              src={valoresCamposExpActuales.data.photo}
               alt="Experience Photo"
               className=" mx-auto rounded-lg shadow-md"
             />
           </figure>
           <p className="lead dark:text-white mb-4">4 me gusta</p>
           <p className="lead dark:text-white S400">
-            {valoresCamposActuales.data.text}
+            {valoresCamposExpActuales.data.text}
           </p>
           <div className="flex items-center mt-8">
             <div className="rounded-full bg-blue-500 text-white p-2 text-sm">

@@ -1,9 +1,12 @@
 import { useContext, useEffect, useState } from "react";
 import BorrarUsuario from "../components/users/borrarUsuario";
 import { AuthContext } from "../components/providers/AuthProvider";
+import { ReloadContext } from "../components/providers/ReloadProvider";
 
 const ModUser = () => {
   const [user, setUser] = useContext(AuthContext);
+  const { valoresCamposActuales, setValoresCamposActuales } =
+    useContext(ReloadContext);
   const [exitoModUser, setExitoModUser] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
@@ -12,7 +15,7 @@ const ModUser = () => {
     password: "",
     photo: undefined,
   });
-  const [valoresCamposActuales, setValoresCamposActuales] = useState();
+
   // console.log(user);
   const [loading, setLoading] = useState(true);
 
