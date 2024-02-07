@@ -43,7 +43,7 @@ const LikeHeart = ({ exp_id, setLike }) => {
   };
 
   useEffect(() => {
-    console.log("VotesData", votesData);
+    // console.log("VotesData", votesData);
     if (votesData.length > 0) {
       setClick(false);
     } else {
@@ -52,7 +52,7 @@ const LikeHeart = ({ exp_id, setLike }) => {
   }, [votesData, setClick]);
 
   return (
-    <div>
+    <div className="">
       <Heart isClick={isClick} onClick={handleSubmit} />
     </div>
   );

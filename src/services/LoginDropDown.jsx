@@ -1,3 +1,4 @@
+import { useContext, useEffect } from "react";
 import Swal from "sweetalert2";
 import { Dropdown } from "@mui/base/Dropdown";
 import { Menu } from "@mui/base/Menu";
@@ -6,6 +7,7 @@ import { MenuItem as BaseMenuItem, menuItemClasses } from "@mui/base/MenuItem";
 import { styled } from "@mui/system";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import { ReloadContext } from "../components/providers/ReloadProvider";
 
 const Listbox = styled("ul")(
   ({ theme }) => `
@@ -118,11 +120,48 @@ const MenuButton = styled(BaseMenuButton)(
 
 const LoginDropDown = ({ user }) => {
   const navigate = useNavigate();
+  const { reload } = useContext(ReloadContext);
+
+  useEffect(() => {
+    console.log("Se ha actualizado el estado");
+  }, [reload]);
+
+  const handleLogout = () => {
+    localStorage.removeItem("user");
+    Swal.fire({
+      title: "Sesión cerrada!",
+      icon: "success",
+    });
+    navigate("/");
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
+  };
+
   return (
     <div className="flex flex-col grow justify-end pb-6 mx-2 ">
       <Dropdown>
-        <MenuButton>Hola, {user.name} !</MenuButton>
+        <MenuButton>
+          {" "}
+          <div className="flex justify-center">
+            <img
+              src={user.photo}
+              className="w-6 h-6 mr-2 w-16 h-16 rounded-full object-cover"
+            />
+            <p>Hola, {user.name} !</p>
+          </div>
+        </MenuButton>
         <Menu slots={{ listbox: Listbox }}>
+          <div className="flex flex-col w-full gap-2 p-6 ">
+            <p className="flex self-center drop-shadow-lg">
+              {user.name} {user.lastName}
+            </p>
+            <img
+              src={user.photo}
+              className="drop-shadow-lg w-16 h-16 rounded-full self-center object-cover"
+            />
+          </div>
+
           <MenuItem
             onClick={() => {
               navigate("/settings/profile");
@@ -139,18 +178,7 @@ const LoginDropDown = ({ user }) => {
         </MenuItem> */}
           <MenuItem
             className="rounded-full bg-red-500 text-white"
-            onClick={() => {
-              localStorage.removeItem("user");
-              Swal.fire({
-                title: "Sesión cerrada!",
-                // text: "Se ha eliminado este usuario",
-                icon: "success",
-              });
-              navigate("/");
-              setTimeout(() => {
-                window.location.reload();
-              }, 1000);
-            }}
+            onClick={handleLogout}
           >
             Cerrar Sesión
           </MenuItem>

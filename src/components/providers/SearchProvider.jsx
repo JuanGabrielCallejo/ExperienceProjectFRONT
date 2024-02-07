@@ -42,10 +42,6 @@ const SearchProvider = ({ children }) => {
           console.log(data.data);
         }
       }
-
-      // console.log("Opción seleccionada:", selectedOption);
-      // console.log("Texto ingresado:", inputText);
-      // console.log("Orden", orderText);
     } catch (error) {
       console.error(error.message);
     }

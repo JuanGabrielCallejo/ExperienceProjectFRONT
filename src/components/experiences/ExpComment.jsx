@@ -7,7 +7,7 @@ import { AuthContext } from "../providers/AuthProvider";
 const ExpComment = ({ exp, newComment, setNewComment }) => {
   const [commentText, setCommentText] = useState("");
   const [length, setLength] = useState("");
-  const[user] = useContext(AuthContext);
+  const [user] = useContext(AuthContext);
   const postComment = async () => {
     if (commentText.length < 10) {
       setLength("El texto debe tener mínimo 10 carácteres");
@@ -49,7 +49,7 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
       const newCommentList = [comment, ...(parseComments || [])];
       // console.log(newCommentList);
       setNewComment(JSON.stringify(newCommentList));
-
+      setLength("");
       setCommentText("");
     } catch (error) {
       console.error("Error insertando mensaje:", error);
@@ -57,7 +57,7 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
   };
 
   return (
-    <>
+    <div className="mt-6">
       <div className="flex justify-between items-center mb-6">
         <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-black">
           Comentario
@@ -72,7 +72,7 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
             id="comment"
             rows="6"
             className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
-            placeholder="Escribe tu respuesta..."
+            placeholder="Escribe tu comentario..."
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
             required
@@ -81,12 +81,12 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
         <div>{length}</div>
         <button
           type="submit"
-          className="inline-flex items-center py-2.5 px-4 text-xs font-medium text-center bg-primary-700 rounded-lg focus:ring-4 focus:ring-primary-200 dark:focus:ring-primary-900 hover:bg-primary-800"
+          className="mx-2 hover:bg-gray-100 flex items-center justify-center bg-gray-200 p-4 rounded-2xl shadow-2xl h-4"
         >
-          Enviar comentario
+          Enviar
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

@@ -12,6 +12,7 @@ import { ModExp } from "./Pages/ModExperience";
 import { Layout } from "./components/style/Layout";
 import { AuthProvider } from "./components/providers/AuthProvider";
 import { SearchProvider } from "./components/providers/SearchProvider";
+import { ReloadProvider } from "./components/providers/ReloadProvider";
 
 const router = createBrowserRouter([
   {
@@ -54,7 +55,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <AuthProvider>
       <SearchProvider>
-        <RouterProvider router={router} />
+        <ReloadProvider>
+          <RouterProvider router={router} />
+        </ReloadProvider>
       </SearchProvider>
     </AuthProvider>
   </React.StrictMode>

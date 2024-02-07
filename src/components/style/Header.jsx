@@ -34,8 +34,6 @@ export const Header = () => {
         {viewBar && <PrimarySearchAppBar />}
       </form>
 
-      {/* <img className="object-fit m-2" src="/img/My experiences.png"></img> */}
-
       <MenuNav />
       {user ? <LoginDropDown user={user} /> : <LoginMenu />}
     </div>

@@ -62,13 +62,13 @@ const Experience = ({ exp }) => {
     <>
       <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased bg-gray-300 ">
         <div className="flex justify-center items-center">
-          <div className="shadow-2xl">
-            <article className="mx-auto w-full max-w-3xl bg-blue-100 dark:bg-blue-900 p-6 lg:p-8 rounded-lg ">
+          <div className="shadow-2xl w-3/4">
+            <article className="mx-auto w-full h-full bg-gray-700 p-6 lg:p-8 rounded-2xl ">
               <header className="mb-8">
                 <address className="flex items-center mb-6">
-                  <div className="inline-flex items-center mr-3 text-sm text-gray-900 dark:text-white">
+                  <div className="inline-flex w-full items-center mr-3 text-sm text-gray-900 ">
                     <img
-                      className="mr-4 w-16 h-16 rounded-full"
+                      className="mr-4 w-16 h-16 rounded-full object-cover"
                       src={exp.user_photo}
                       alt=""
                     />
@@ -78,7 +78,7 @@ const Experience = ({ exp }) => {
                         rel="author"
                         className="text-xl font-bold text-gray-900 dark:text-white S700"
                       >
-                        {exp.user_name}
+                        {exp.user_name} {exp.user_lastName}
                       </a>
                       <p className="text-base text-gray-500 dark:text-gray-400 S700">
                         {exp.place}
@@ -104,6 +104,7 @@ const Experience = ({ exp }) => {
                         </div>
                       </>
                     ) : null}
+
                     {user && user.token != undefined ? (
                       <LikeHeart
                         exp_id={exp.id}
@@ -124,12 +125,12 @@ const Experience = ({ exp }) => {
                 <img
                   src={exp.photo}
                   alt="Experience Photo"
-                  className="mx-auto rounded-lg shadow-md"
+                  className=" mx-auto rounded-lg shadow-md"
                 />
               </figure>
-              <p className="lead dark:text-white">{like} me gusta</p>
+              <p className="lead dark:text-white mb-4">{like} me gusta</p>
               <p className="lead dark:text-white S400">{exp.text}</p>
-              <div className="flex items-center mt-4">
+              <div className="flex items-center mt-8">
                 <div className="rounded-full bg-blue-500 text-white p-2 text-sm">
                   {exp.category_name}
                 </div>

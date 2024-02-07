@@ -18,7 +18,7 @@ const CommentsList = ({ newComment }) => {
   }
   // console.log(newComment);
   return parseComments.map((comment) => (
-    <div key={comment.comment_id}>
+    <div key={comment.comment_id} className="mt-4">
       <Comments com={comment} />
     </div>
   ));

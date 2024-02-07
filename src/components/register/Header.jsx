@@ -1,9 +1,5 @@
 const Header = () => {
-
-    return (
-        <h1 className="text-3xl text-center font-bold mb-6">Página de Registro</h1>
-
-    );
+  return <h1 className="text-2xl text-center font-bold">REGISTRO</h1>;
 };
 
 export default Header;

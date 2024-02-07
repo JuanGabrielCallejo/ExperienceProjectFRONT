@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../components/providers/AuthProvider";
 import { SearchContext } from "../components/providers/SearchProvider";
+import resizeImage from "../services/resizeImg";
 
 const CreateExperience = () => {
   const [statusMessage, setStatusMessage] = useState("");
@@ -48,12 +49,17 @@ const CreateExperience = () => {
     const photo = e.target.elements.photo.files[0];
     const category = e.target.elements.category.value;
 
+    const imgMaxWidth = 1200;
+    const imgMaxHeight = 800;
+
+    const resizedPhoto = await resizeImage(photo, imgMaxWidth, imgMaxHeight);
+
     let experienceBody = new FormData();
     experienceBody.append("title", title);
     experienceBody.append("subTitle", subTitle);
     experienceBody.append("place", place);
     experienceBody.append("text", text);
-    experienceBody.append("photo", photo);
+    experienceBody.append("photo", resizedPhoto);
     experienceBody.append("category", category);
 
     // console.log("evento", e, { title, subTitle, place, text, photo });
@@ -101,24 +107,21 @@ const CreateExperience = () => {
       <div className="flex flex-col">
         <div className="text-center mb-4">
           <h1 className="text-2xl font-bold text-gray-800">
-            Crea tu experiencia
+            NUEVA EXPERIENCIA
           </h1>
         </div>
         <form
           onSubmit={nuevaExperiencia}
-          className="max-w-md mx-auto p-6 bg-gray-100 shadow-md rounded-md"
+          className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md flex flex-col "
         >
           <div className="mb-4">
-            <label
-              htmlFor="category"
-              className="block text-sm font-semibold text-gray-700"
-            >
+            <label htmlFor="category" className="text-gray-700">
               Categoría
             </label>
             <select
               id="category"
               name="category"
-              className="mt-1 block w-full p-2 bg-white border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
             >
               {categorias.map((categoria) => (
                 <option key={categoria.id} value={categoria.id}>
@@ -128,78 +131,65 @@ const CreateExperience = () => {
             </select>
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="title"
-              className="block text-sm font-semibold text-gray-700"
-            >
+            <label htmlFor="title" className="text-gray-700">
               Título
             </label>
             <input
               type="text"
               name="title"
               id="title"
-              className="mt-1 block w-full p-2 bg-white-100 border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="subTitle"
-              className="block text-sm font-semibold text-gray-700"
-            >
+            <label htmlFor="subTitle" className="text-gray-700">
               Subtítulo
             </label>
             <input
               type="text"
               id="subTitle"
               name="subTitle"
-              className="mt-1 block w-full p-2 bg-white-100 border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="place"
-              className="block text-sm font-semibold text-gray-700"
-            >
+            <label htmlFor="place" className="text-gray-700">
               Lugar
             </label>
             <input
               type="text"
               id="place"
               name="place"
-              className="mt-1 block w-full p-2 bg-white-100 border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="text"
-              className="block text-sm font-semibold text-gray-700"
-            >
+            <label htmlFor="text" className="text-gray-700">
               Descripción
             </label>
             <textarea
               id="text"
               name="text"
               rows="3"
-              className="mt-1 block w-full p-2 bg-white-100 border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
             />
           </div>
           <div className="mb-4">
-            <label
-              htmlFor="photo"
-              className="block text-sm font-semibold text-gray-700"
-            >
-              Fotos
+            <label htmlFor="photo" className="text-gray-700">
+              Foto
             </label>
             <input
               type="file"
               id="photo"
               name="photo"
-              className="mt-1 block w-full p-2 bg-white-100 border border-gray-200 rounded-md focus:outline-none focus:ring-blue-500 focus:border-blue-500"
+              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
             />
           </div>
-          <button className="bg-blue-500 hover:bg-blue-600 text-white py-2 px-4 rounded-md">
-            Enviar
-          </button>
+          <div className="flex justify-center">
+            <button className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md ">
+              Enviar
+            </button>
+          </div>
         </form>
       </div>
     );

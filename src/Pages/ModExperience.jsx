@@ -20,7 +20,7 @@ const ModExp = () => {
   const fetchData = async () => {
     try {
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/experience/2`,
+        `${import.meta.env.VITE_REACT_HOST}/experience/20`,
         {
           headers: {
             Authorization: `Bearer ${user.token}`,
@@ -31,7 +31,7 @@ const ModExp = () => {
         const data = await response.json();
         setExpData(data);
         setLoading(false);
-        console.log(data);
+        // console.log(data);
         setValoresCamposActuales(data);
       } else {
         const data = await response.json();
@@ -88,7 +88,7 @@ const ModExp = () => {
         formData.append("text", expData.text);
       }
       const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/modExperience/${expData.id}`,
+        `${import.meta.env.VITE_REACT_HOST}/modExperience/20`,
         {
           method: "PUT",
           headers: {
@@ -126,118 +126,80 @@ const ModExp = () => {
   return (
     <form
       onSubmit={modificarDatos}
-      className="min-h-screen bg-white flex flex-col items-center"
+      className="w-2/3 flex flex-col items-center"
     >
-      <div className="mt-8 p-8 bg-gray-100 rounded-lg shadow-md max-w-3xl w-full flex">
-        <div className="w-1/2 pr-8">
-          <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
-            Datos Actuales
-          </h1>
-          {valoresCamposActuales.data.photo && (
-            <div className="mb-4 flex justify-center">
-              <img
-                src={valoresCamposActuales.data.photo}
-                alt="Foto de experiencia actual"
-                className="w-100 h-100"
-              />
-            </div>
-          )}
-          <div className="bg-white rounded-lg shadow-md p-4">
-            <div className="border border-gray-300 rounded-md p-2 mb-4 shadow-md">
-              <p className="text-gray-700 font-semibold">Título:</p>
-              <p className="text-gray-900">
-                {valoresCamposActuales.data.title}
-              </p>
-            </div>
-            <div className="border border-gray-300 rounded-md p-2 mb-4 shadow-md">
-              <p className="text-gray-700 font-semibold">Subtítulo:</p>
-              <p className="text-gray-900">
-                {valoresCamposActuales.data.subTitle}
-              </p>
-            </div>
-            <div className="border border-gray-300 rounded-md p-2 mb-4 shadow-md">
-              <p className="text-gray-700 font-semibold">Lugar:</p>
-              <p className="text-gray-900">
-                {valoresCamposActuales.data.place}
-              </p>
-            </div>
-            <div className="border border-gray-300 rounded-md p-2 mb-4 shadow-md">
-              <p className="text-gray-700 font-semibold">Descripción:</p>
-              <p className="text-gray-900">{valoresCamposActuales.data.text}</p>
-            </div>
-          </div>
-        </div>
-        <div className="w-1/2">
+      <div className="p-8 bg-white rounded-lg shadow-2xl flex gap-6">
+        <div className="w-2/4">
           <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
             Edita tu experiencia
           </h1>
           <div className="space-y-6">
             <div className="flex flex-col">
-              <label htmlFor="photo" className="text-gray-600 mb-1">
-                Subir Foto
+              <label htmlFor="photo" className="text-gray-700">
+                Foto
               </label>
               <input
                 id="photo"
                 name="photo"
                 type="file"
                 accept="image/*"
-                className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
                 placeholder="photo"
                 onChange={handleFileChange}
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="title" className="text-gray-600 mb-1">
-                Título:
+              <label htmlFor="title" className="text-gray-700">
+                Título
               </label>
               <input
                 id="title"
                 name="title"
                 type="text"
                 value={expData.title}
-                className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
                 placeholder="Título"
                 onChange={cambiarValorCampo}
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="subTitle" className="text-gray-600 mb-1">
-                Subtítulo:
+              <label htmlFor="subTitle" className="text-gray-700">
+                Subtítulo
               </label>
               <input
                 id="subTitle"
                 name="subTitle"
                 type="text"
                 value={expData.subTitle}
-                className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
                 placeholder="Subtítulo"
                 onChange={cambiarValorCampo}
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="place" className="text-gray-600 mb-1">
-                Lugar:
+              <label htmlFor="place" className="text-gray-700">
+                Lugar
               </label>
               <input
                 id="place"
                 name="place"
                 type="text"
                 value={expData.place}
-                className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
                 placeholder="Lugar"
                 onChange={cambiarValorCampo}
               />
             </div>
             <div className="flex flex-col">
-              <label htmlFor="text" className="text-gray-600 mb-1">
-                Descripción:
+              <label htmlFor="text" className="text-gray-700">
+                Descripción
               </label>
               <input
                 id="text"
                 name="text"
                 type="text"
                 value={expData.text}
-                className="py-2 px-3 border border-gray-300 focus:outline-none focus:ring-blue-500 focus:border-blue-500 rounded-md"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
                 placeholder="Descripción"
                 onChange={cambiarValorCampo}
               />
@@ -249,7 +211,7 @@ const ModExp = () => {
             )}
             <div className="flex justify-center">
               <button
-                className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline transition duration-300"
+                className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md "
                 type="submit"
               >
                 Modificar
@@ -257,6 +219,56 @@ const ModExp = () => {
             </div>
           </div>
         </div>
+        <article className=" w-2/4 dark:bg-gray-700 p-6 lg:p-8 rounded-2xl ">
+          <header className="mb-8">
+            <address className="flex items-center mb-6">
+              <div className="inline-flex items-center mr-3 text-sm text-gray-900 ">
+                <img
+                  className="mr-4 w-16 h-16 rounded-full object-cover"
+                  src={user.photo}
+                  alt=""
+                />
+                <div>
+                  <a
+                    href="#"
+                    rel="author"
+                    className="text-xl font-bold text-gray-900 dark:text-white S700"
+                  >
+                    {user.name} {user.lastName}
+                  </a>
+                  <p className="text-base text-gray-500 dark:text-gray-400 S700">
+                    {valoresCamposActuales.data.place}
+                  </p>
+                  <p className="text-base text-gray-500 dark:text-gray-400">
+                    <time>1/1/2024, 00:00:00</time>
+                  </p>
+                </div>
+              </div>
+            </address>
+            <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">
+              {valoresCamposActuales.data.title}
+            </h1>
+            <h2 className="mb-6 text-3xl font-extrabold leading-tight text-blue-700 dark:text-gray-300 S700">
+              {valoresCamposActuales.data.subTitle}
+            </h2>
+          </header>
+          <figure className="mb-6 text-center">
+            <img
+              src={valoresCamposActuales.data.photo}
+              alt="Experience Photo"
+              className=" mx-auto rounded-lg shadow-md"
+            />
+          </figure>
+          <p className="lead dark:text-white mb-4">4 me gusta</p>
+          <p className="lead dark:text-white S400">
+            {valoresCamposActuales.data.text}
+          </p>
+          <div className="flex items-center mt-8">
+            <div className="rounded-full bg-blue-500 text-white p-2 text-sm">
+              Category
+            </div>
+          </div>
+        </article>
       </div>
     </form>
   );
