@@ -87,11 +87,9 @@ const LoginPage = () => {
 
   async function loginUser(evento) {
     evento.preventDefault();
-    console.log("Email: " + email);
-    console.log("Password: " + password);
 
     setMensaje("");
-    if (!validateEmail() || !validatePassword()) { return; };
+    if (!validateEmail() || !validatePassword()) { return; }
 
     let formData = new FormData();
     formData.append("email", email);
