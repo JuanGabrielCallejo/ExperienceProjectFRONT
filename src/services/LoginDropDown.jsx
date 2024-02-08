@@ -110,9 +110,6 @@ const MenuButton = styled(BaseMenuButton)(
       };
     }
 
-    &:active {
-      background: ${theme.palette.mode === "dark" ? grey[700] : grey[100]};
-    }
 
     &:focus-visible {
       box-shadow: 0 0 0 4px ${
