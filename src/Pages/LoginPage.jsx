@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 
 const LoginPage = () => {
-
   const [mensaje, setMensaje] = useState("");
   const [, setUser] = useContext(AuthContext);
   const [email, setEmail] = useState("");
@@ -55,7 +54,6 @@ const LoginPage = () => {
     }
   }
 
-
   const validateEmail = () => {
     if (!email || email === "" || email === null) {
       setMensaje("El email no puede estar vacío");
@@ -63,7 +61,9 @@ const LoginPage = () => {
     } else {
       const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
       if (!emailRegex.test(email)) {
-        setMensaje("El email no tiene el formato correcto (usuario@dominio.com)");
+        setMensaje(
+          "El email no tiene el formato correcto (usuario@dominio.com)"
+        );
         return false;
       }
     }
@@ -84,14 +84,15 @@ const LoginPage = () => {
     return true;
   };
 
-
   async function loginUser(evento) {
     evento.preventDefault();
     console.log("Email: " + email);
     console.log("Password: " + password);
 
     setMensaje("");
-    if (!validateEmail() || !validatePassword()) { return; };
+    if (!validateEmail() || !validatePassword()) {
+      return;
+    }
 
     let formData = new FormData();
     formData.append("email", email);
@@ -109,7 +110,6 @@ const LoginPage = () => {
         className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md flex flex-col "
         onSubmit={loginUser}
       >
-
         {/*campo EMAIL*/}
         <div className="mb-4">
           <label htmlFor="email" className="text-gray-700">
@@ -120,7 +120,6 @@ const LoginPage = () => {
             id="email"
             className="w-full mt-2 p-2 border border-gray-300 rounded-md"
             autoComplete="email"
-
             value={email}
             onChange={(e) => setEmail(e.target.value)}
           />
@@ -140,8 +139,7 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="flex justify-center mb-3">
-          {mensaje}</div>
+        <div className="flex justify-center mb-3">{mensaje}</div>
         <div className="flex justify-center">
           <button
             type="submit"

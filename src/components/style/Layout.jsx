@@ -4,8 +4,8 @@ import { Footer } from "./Footer";
 
 const Layout = () => {
   return (
-    <main className="grid grid-cols-[300px_1px_1fr] h-screen">
-      <header className="bg-gray-300 flex  ">
+    <main className="grid grid-cols-[320px_1px_1fr] h-screen">
+      <header className="bg-white flex  ">
         {" "}
         <Header />
       </header>
