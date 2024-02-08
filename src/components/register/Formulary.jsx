@@ -1,7 +1,12 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import resizeImage from "../../services/resizeImg";
-import { validateName, validateLastName, validateEmail, validatePassword } from "../../services/validateFields";
+import {
+  validateName,
+  validateLastName,
+  validateEmail,
+  validatePassword,
+} from "../../services/validateFields";
 
 const Formulary = ({ setExito }) => {
   const [nombre, setNombre] = useState();
@@ -33,7 +38,9 @@ const Formulary = ({ setExito }) => {
       setMensaje(datos.message);
       if (!respuesta.ok) {
         setMensaje(mensaje + " - Error al intentar registrar");
-        console.log(`Error en la petición: ${respuesta.status} - ${respuesta.statusText} - ${datos.data}`);
+        console.log(
+          `Error en la petición: ${respuesta.status} - ${respuesta.statusText} - ${datos.data}`
+        );
         return datos;
       }
       setExito(true);
@@ -70,9 +77,16 @@ const Formulary = ({ setExito }) => {
     evento.preventDefault();
 
     setMensaje("");
-    if (!validarNombre(nombre) || !validarApellido(apellido) || !validarEmail(email) || !validarPassword(password)) { return; }
+    if (
+      !validarNombre(nombre) ||
+      !validarApellido(apellido) ||
+      !validarEmail(email) ||
+      !validarPassword(password)
+    ) {
+      return;
+    }
 
-    console.log("pasa")
+    console.log("pasa");
     let formData = new FormData();
     formData.append("name", nombre);
     formData.append("lastName", apellido);
@@ -150,8 +164,7 @@ const Formulary = ({ setExito }) => {
         name="file"
         className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
       />
-      <div className="flex justify-center mb-3">
-        {mensaje}</div>
+      <div className="flex justify-center mb-3">{mensaje}</div>
 
       <div className="flex justify-center">
         <button
