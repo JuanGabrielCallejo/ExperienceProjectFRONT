@@ -20,7 +20,7 @@ const Header = (props) => {
           </button>
         </div>
       ) : (
-        <h1 className="text-2xl text-center font-bold">REGISTRO</h1>
+        <h1 className="text-2xl text-white text-center font-bold">REGISTRO</h1>
       )}
     </div>
   );

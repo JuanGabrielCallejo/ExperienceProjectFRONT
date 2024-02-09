@@ -29,7 +29,7 @@ const HomePage = () => {
           <img className="h-32 w-32" src={loadIcon} alt="Loading Icon"></img>
         </div>
       ) : (
-        <div className="flex flex-col justify-center h-full">
+        <div className="flex flex-col justify-center h-full w-full">
           {exp.length === 0 ? (
             <div className="flex flex-col p-6 rounded-xl items-center gap-4 bg-white w-fit">
               <p>Todavía no hay experiencias.</p>
@@ -44,7 +44,7 @@ const HomePage = () => {
                 ) : (
                   <NavLink
                     to="/login"
-                    className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md "
+                    className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md "
                   >
                     loggeate !
                   </NavLink>

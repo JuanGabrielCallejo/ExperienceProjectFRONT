@@ -179,7 +179,7 @@ const CreateExperience = () => {
     });
   } else {
     return (
-      <div className="flex flex-col justify-center h-full w-full bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
+      <div className="flex flex-col justify-center h-screen w-full ">
         <div className="text-center mb-4">
           <h1 className="text-2xl text-white font-bold text-gray-800">
             NUEVA EXPERIENCIA

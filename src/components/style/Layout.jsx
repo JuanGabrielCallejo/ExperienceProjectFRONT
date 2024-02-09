@@ -12,6 +12,7 @@ const Layout = () => {
 
       <div className="flex flex-col">
         <article className=" text-rgb(53, 53, 53)  flex justify-center items-center grow">
+        <article className=" text-rgb(53, 53, 53)  flex justify-center items-center grow">
           {" "}
           <Outlet />
         </article>

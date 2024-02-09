@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import resizeImage from "../../services/resizeImg";
-import { validateText, validateEmail, validatePassword } from "../../services/validateFields";
+import {
+  validateText,
+  validateEmail,
+  validatePassword,
+} from "../../services/validateFields";
 
 const Formulary = ({ setExito }) => {
   const [nombre, setNombre] = useState();
@@ -17,6 +21,14 @@ const Formulary = ({ setExito }) => {
     setMensaje("");
   }, []);
 
+  useEffect(() => {
+    if (mensaje) {
+      setTimeout(() => {
+        setMensaje("");
+      }, 2000);
+    }
+  }, [mensaje]);
+
   async function peticionServidor(formData) {
     // console.log(JSON.stringify(usuario));
     let datos;
@@ -30,10 +42,15 @@ const Formulary = ({ setExito }) => {
       );
       console.log(respuesta);
       datos = await respuesta.json();
+      // console.log(datos);
       setMensaje(datos.message);
+      // console.log(mensaje);
       if (!respuesta.ok) {
-        setMensaje("Error al intentar registrar: " + datos.message);
-        console.log(`Error en la petición: ${respuesta.status} - ${respuesta.statusText} - ${datos.message}`);
+        setMensaje("El email ya está en uso");
+        // setMensaje(mensaje + " - Error al intentar registrar");
+        console.log(
+          `Error en la petición: ${respuesta.status} - ${respuesta.statusText} - ${datos.data}`
+        );
         return datos;
       }
       setExito(true);
@@ -104,69 +121,77 @@ const Formulary = ({ setExito }) => {
   };
 
   return (
-    <form
-      onSubmit={registrarUsuario}
-      className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md flex flex-col "
-    >
-      <label className="text-gray-700" htmlFor="name">
-        Nombre *
-      </label>
-      <input
-        type="text"
-        name="name"
-        onChange={(e) => setNombre(e.target.value)}
-        className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
-      />
+    <div>
+      <form
+        onSubmit={registrarUsuario}
+        className="max-w-md mx-auto p-4 bg-white shadow-2xl rounded-md flex flex-col mb-4"
+      >
+        <label className="text-gray-700" htmlFor="name">
+          Nombre *
+        </label>
+        <input
+          type="text"
+          name="name"
+          onChange={(e) => setNombre(e.target.value)}
+          className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
+        />
 
-      <label className="text-gray-700" htmlFor="lastName">
-        Apellido *
-      </label>
-      <input
-        type="text"
-        name="lastName"
-        onChange={(e) => setApellido(e.target.value)}
-        className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
-      />
+        <label className="text-gray-700" htmlFor="lastName">
+          Apellido *
+        </label>
+        <input
+          type="text"
+          name="lastName"
+          onChange={(e) => setApellido(e.target.value)}
+          className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
+        />
 
-      <label className="text-gray-700" htmlFor="email">
-        Correo *
-      </label>
-      <input
-        type="text"
-        name="email"
-        onChange={(e) => setEmail(e.target.value)}
-        className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
-      />
+        <label className="text-gray-700" htmlFor="email">
+          Correo *
+        </label>
+        <input
+          type="text"
+          name="email"
+          onChange={(e) => setEmail(e.target.value)}
+          className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
+        />
 
-      <label className="text-gray-700" htmlFor="password">
-        Contraseña *
-      </label>
-      <input
-        type="password"
-        name="password"
-        onChange={(e) => setPassword(e.target.value)}
-        className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
-      />
+        <label className="text-gray-700" htmlFor="password">
+          Contraseña *
+        </label>
+        <input
+          type="password"
+          name="password"
+          onChange={(e) => setPassword(e.target.value)}
+          className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
+        />
 
-      <label className="text-gray-700" htmlFor="file">
-        Foto
-      </label>
-      <input
-        type="file"
-        name="file"
-        className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
-      />
-      <div className="flex justify-center mb-3">{mensaje}</div>
+        <label className="text-gray-700" htmlFor="file">
+          Foto
+        </label>
+        <input
+          type="file"
+          name="file"
+          className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
+        />
 
-      <div className="flex justify-center">
-        <button
-          type="submit"
-          className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md "
-        >
-          Enviar
-        </button>
+        <div className="flex justify-center">
+          <button
+            type="submit"
+            className="bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 text-white py-2 px-4 rounded-md "
+          >
+            Enviar
+          </button>
+        </div>
+      </form>
+      <div className="flex justify-center h-4 w-full items-center">
+        {mensaje && (
+          <div className={`w-fit mt-6 p-2 bg-white rounded text-center`}>
+            {mensaje}
+          </div>
+        )}
       </div>
-    </form>
+    </div>
   );
 };
 
