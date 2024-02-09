@@ -1,6 +1,6 @@
 export const Footer = () => {
   return (
-    <div className="p-4 flex justify-between">
+    <div className="p-4 flex justify-center items-center">
       <div>
         Creado por{" "}
         <a

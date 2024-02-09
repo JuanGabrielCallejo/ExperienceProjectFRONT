@@ -23,7 +23,7 @@ const HomePage = () => {
   const { exp } = useExperiences();
   // console.log(exp);
   return (
-    <div className=" flex flex-col justify-center items-center ">
+    <div className=" flex flex-col justify-center items-center h-full">
       {loading ? (
         <div className="flex flex-col items-center justify-center">
           <img className="h-32 w-32" src={loadIcon} alt="Loading Icon"></img>
