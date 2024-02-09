@@ -23,19 +23,21 @@ const HomePage = () => {
   const { exp } = useExperiences();
   // console.log(exp);
   return (
-    <div className="w-full flex flex-col items-center bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
+    <div className="h-full w-full flex flex-col items-center bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
       {loading ? (
-        <img className="h-32 w-32 " src={loadIcon}></img>
+        <div className="flex flex-col items-center justify-center">
+          <img className="h-32 w-32" src={loadIcon} alt="Loading Icon"></img>
+        </div>
       ) : (
-        <div className="w-3/4">
+        <div className="flex flex-col justify-center h-full">
           {exp.length === 0 ? (
-            <div className="flex flex-col items-center gap-4 ">
+            <div className="flex flex-col p-6 rounded-xl items-center gap-4 bg-white w-fit">
               <p>Todavía no hay experiencias.</p>
               <div>
                 {user ? (
                   <NavLink
                     to="/compose/experience"
-                    className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md "
+                    className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md "
                   >
                     se el primero !
                   </NavLink>

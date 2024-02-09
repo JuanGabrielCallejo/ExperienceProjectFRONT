@@ -17,14 +17,16 @@ const FilterExperience = () => {
   }, [setResult]);
 
   return (
-    <div className="flex flex-col self-start mt-4 w-full">
-      <div className="flex flex-col p-10">
+    <div className="flex flex-col self-start h-full w-full bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
+      <div className="flex flex-col p-10 m-4 rounded-xl shadow-2xl bg-white w-fit ">
         <h1>Buscar Experiencias</h1>
         <ExperienceFilterForm />
       </div>
-      <div className="flex flex-col items-center ">
+      <div className="flex flex-col items-center">
         {loading ? (
-          <img className="h-32 w-32 " src={loadIcon}></img>
+          <div className="h-full flex flex-col items-center ">
+            <img className="h-32 w-32" src={loadIcon} alt="Loading Icon"></img>
+          </div>
         ) : (
           <ul className="w-3/4">
             {result ? (
