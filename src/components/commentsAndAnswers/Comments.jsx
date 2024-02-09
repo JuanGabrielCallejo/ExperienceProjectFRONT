@@ -36,10 +36,10 @@ const Comments = ({ com }) => {
 
   return (
     <>
-      <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
+      <article className="p-6 mb-6 text-base rounded-lg bg-gray-800">
         <footer className="flex justify-between items-center mb-2">
           <div className="flex items-center">
-            <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white S700">
+            <p className="inline-flex items-center mr-3 font-semibold text-sm text-white S700">
               <img
                 className="mr-2 w-6 h-6 rounded-full object-cover"
                 src={com.comment_user_photo}
@@ -47,12 +47,12 @@ const Comments = ({ com }) => {
               />
               {com.comment_user} {com.comment_userLast}
             </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-gray-400">
               <time title="February 8th, 2022">{formatedDate}</time>
             </p>
           </div>
         </footer>
-        <p className="dark:text-white S400">{com.comment_text}</p>
+        <p className="text-white S400">{com.comment_text}</p>
         <div className="flex flex-col items-start mt-4 space-x-4">
           <div className="flex gap-2">
             <button
@@ -60,7 +60,7 @@ const Comments = ({ com }) => {
               onClick={() => {
                 setShowTextArea(!showTextArea);
               }}
-              className="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400"
+              className="flex items-center font-medium text-sm hover:underline text-gray-400"
             >
               <svg
                 className="mr-1.5 w-3 h-3"

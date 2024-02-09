@@ -16,7 +16,7 @@ const OwnExperience = ({ exp }) => {
 
   return (
     <>
-      <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased bg-gray-300 ">
+      <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased">
         <div className="flex justify-center items-center">
           <div className="shadow-2xl w-3/4">
             <article className="mx-auto w-full h-full bg-gray-700 p-6 lg:p-8 rounded-2xl ">

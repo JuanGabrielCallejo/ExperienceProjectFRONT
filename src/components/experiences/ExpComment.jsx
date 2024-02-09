@@ -64,7 +64,7 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
         </h2>
       </div>
       <form className="mb-6" onSubmit={handleSubmit}>
-        <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg bg-gray-800 border-gray-700">
+        <div className="py-2 px-4 mb-4 rounded-lg rounded-t-lg bg-gray-800 border-gray-700">
           <label htmlFor="comment" className="sr-only">
             Your comment
           </label>
