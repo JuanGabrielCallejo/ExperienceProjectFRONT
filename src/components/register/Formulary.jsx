@@ -28,7 +28,7 @@ const Formulary = ({ setExito }) => {
           body: formData,
         }
       );
-      console.log(respuesta);
+      // console.log(respuesta);
       datos = await respuesta.json();
       setMensaje(datos.message);
       if (!respuesta.ok) {

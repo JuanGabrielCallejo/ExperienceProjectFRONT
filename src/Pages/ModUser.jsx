@@ -2,12 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import BorrarUsuario from "../components/users/borrarUsuario";
 import { AuthContext } from "../components/providers/AuthProvider";
 import { ReloadContext } from "../components/providers/ReloadProvider";
+import Swal from "sweetalert2";
+import { validateEmail, validatePassword, validateText } from "../services/validateFields";
+import resizeImage from "../services/resizeImg";
 
 const ModUser = () => {
-  const [user, setUser] = useContext(AuthContext);
-  const { valoresCamposActuales, setValoresCamposActuales } =
-    useContext(ReloadContext);
-  const [exitoModUser, setExitoModUser] = useState(false);
   const [userData, setUserData] = useState({
     name: "",
     lastName: "",
@@ -15,12 +14,18 @@ const ModUser = () => {
     password: "",
     photo: undefined,
   });
+  const [currentUserData, setCurrentUserData] = useState()
 
-  // console.log(user);
+
+  const [user, setUser] = useContext(AuthContext);
+  const [exito, setExito] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [mensaje, setMensaje] = useState("");
+
 
   useEffect(() => {
     fetchData();
+    setMensaje("");
   }, []);
 
   const fetchData = async () => {
@@ -35,10 +40,9 @@ const ModUser = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setUserData(data);
+        setUserData(data.data);
+        setCurrentUserData(data.data);
         setLoading(false);
-        // console.log(data);
-        setValoresCamposActuales(data);
       } else {
         const data = await response.json();
         console.error(data);
@@ -58,65 +62,113 @@ const ModUser = () => {
     setUserData({ ...userData, photo: file });
   };
 
+  const vacioONull = (texto) => {
+    if (!texto || texto.trim() === "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   const modificarDatos = async (e) => {
     e.preventDefault();
+    let mensaje = "";
+    setMensaje(mensaje);
+    setExito(false);
 
-    try {
-      if (!userData) {
-        console.error("No hay datos de usuario");
-        return;
-      }
+    if (!userData) {
+      setMensaje("No hay datos de usuario");
+      console.error("No hay datos de usuario");
+      return;
+    } else {
+      try {
+        setMensaje("");
+        let CamposValidos = true;
+        let CampoValido = true;
+        let mensajeCampo = "";
 
-      const formData = new FormData();
+        const formData = new FormData();
 
-      if (
-        userData.photo &&
-        userData.photo !== null &&
-        userData.photo !== undefined
-      ) {
-        formData.append("photo", userData.photo);
-      }
-
-      if (userData.name) {
-        formData.append("name", userData.name);
-      }
-      if (userData.lastName) {
-        formData.append("lastName", userData.lastName);
-      }
-      if (userData.email) {
-        formData.append("email", userData.email);
-      }
-      if (userData.password) {
-        formData.append("password", userData.password);
-      }
-      const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/user/${user.id}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-          body: formData,
+        const photo = e.target.elements.photo.files[0];
+        if (photo) {
+          const imgMaxWidth = 400;
+          const imgMaxHeight = 200;
+          const resizedPhoto = await resizeImage(photo, imgMaxWidth, imgMaxHeight);
+          formData.append("photo", resizedPhoto);
         }
-      );
 
-      if (response.ok) {
-        console.log("Usuario actualizado con éxito");
+        if (!vacioONull(userData.name)) {
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(userData.name, 2, 30, "nombre"));
+          CamposValidos = CamposValidos && CampoValido;
+          if (CampoValido) {
+            formData.append("name", userData.name);
+          } else {
+            mensaje = mensaje + " -  " + mensajeCampo;
+          }
+        }
 
-        setExitoModUser(true);
+        if (!vacioONull(userData.lastName)) {
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(userData.lastName, 2, 30, "apellido"));
+          CamposValidos = CamposValidos && CampoValido;
+          if (CampoValido) {
+            formData.append("lastName", userData.lastName);
+          } else {
+            mensaje = mensaje + " -  " + mensajeCampo;
+          }
+        }
 
-        fetchData();
-        const updatedUser = { ...user, ...userData };
-        setUser(updatedUser);
-        localStorage.setItem("user", JSON.stringify(updatedUser));
-        console.log(updatedUser);
-      } else {
-        const data = await response.json();
-        console.error(data);
+        if (!vacioONull(userData.email)) {
+          ({ isValid: CampoValido, message: mensajeCampo } = validateEmail(userData.email));
+          CamposValidos = CamposValidos && CampoValido;
+          if (CampoValido) {
+            formData.append("email", userData.email);
+          } else {
+            mensaje = mensaje + " -  " + mensajeCampo;
+          }
+        }
+
+        if (!vacioONull(userData.password)) {
+          ({ isValid: CampoValido, message: mensajeCampo } = validatePassword(userData.password));
+          CamposValidos = CamposValidos && CampoValido;
+          if (CampoValido) {
+            formData.append("password", userData.password);
+          } else {
+            mensaje = mensaje + " -  " + mensajeCampo;
+          }
+        }
+
+        if (!formData.entries().next().done && CamposValidos) {
+          const response = await fetch(
+            `${import.meta.env.VITE_REACT_HOST}/user/${user.id}`,
+            {
+              method: "PUT",
+              headers: {
+                Authorization: `Bearer ${user.token}`,
+              },
+              body: formData,
+            }
+          );
+
+          if (response.ok) {
+            console.log("Usuario actualizado con éxito");
+            setExito(true);
+            fetchData();
+            const updatedUser = { ...user, ...userData };
+            setUser(updatedUser);
+            localStorage.setItem("user", JSON.stringify(updatedUser));
+            console.log(updatedUser);
+          } else {
+            const data = await response.json();
+            mensaje = "Error intentando guardar cambios, revise el formato de los datos";
+            console.error(data);
+          }
+        }
+      } catch (error) {
+        console.error("Error al enviar los datos", error);
       }
-    } catch (error) {
-      console.error("Error al enviar los datos", error);
     }
+
+    setMensaje(mensaje);
   };
 
   if (loading) {
@@ -153,6 +205,7 @@ const ModUser = () => {
                 id="name"
                 name="name"
                 type="text"
+                value={userData.name}
                 className="w-full mt-2 p-2 border border-gray-300 rounded-md"
                 placeholder="Nombre"
                 onChange={cambiarValorCampo}
@@ -166,6 +219,7 @@ const ModUser = () => {
                 id="lastName"
                 name="lastName"
                 type="text"
+                value={userData.lastName}
                 className="w-full mt-2 p-2 border border-gray-300 rounded-md"
                 placeholder="Apellido"
                 onChange={cambiarValorCampo}
@@ -179,6 +233,7 @@ const ModUser = () => {
                 id="email"
                 name="email"
                 type="email"
+                value={userData.email}
                 className="w-full mt-2 p-2 border border-gray-300 rounded-md"
                 placeholder="Correo electrónico"
                 onChange={cambiarValorCampo}
@@ -196,12 +251,14 @@ const ModUser = () => {
                 placeholder="Contraseña"
                 onChange={cambiarValorCampo}
               />
-              {exitoModUser && (
+              {exito && (
                 <p className="text-green-500 text-center mt-4">
                   ¡Usuario modificado con éxito!
                 </p>
               )}
             </div>
+            <div className="flex justify-center mb-3">
+              {mensaje}</div>
             <div className="flex justify-center">
               <button
                 className="mx-2 text-white self-center bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 py-2 px-4 rounded-xl shadow-lg"
@@ -220,10 +277,10 @@ const ModUser = () => {
             Datos Actuales
           </h1>
           <div className=" w-1/2 bg-white rounded-lg shadow-2xl p-4">
-            {valoresCamposActuales.data.photo && (
+            {currentUserData.photo && (
               <div className="mb-4 flex justify-center">
                 <img
-                  src={valoresCamposActuales.data.photo}
+                  src={currentUserData.photo}
                   alt="Foto de perfil actual"
                   className="w-24 h-24 rounded-full mb-2 object-cover"
                 />
@@ -231,12 +288,12 @@ const ModUser = () => {
             )}
             <div className="border border-gray-300 rounded-md p-2 mb-4 shadow-md">
               <p className="text-gray-700 font-semibold">Nombre:</p>
-              <p className="text-gray-900">{valoresCamposActuales.data.name}</p>
+              <p className="text-gray-900">{currentUserData.name}</p>
             </div>
             <div className="border border-gray-300 rounded-md p-2 mb-4 shadow-md">
               <p className="text-gray-700 font-semibold">Apellido:</p>
               <p className="text-gray-900">
-                {valoresCamposActuales.data.lastName}
+                {currentUserData.lastName}
               </p>
             </div>
             <div
@@ -245,7 +302,7 @@ const ModUser = () => {
             >
               <p className="text-gray-700 font-semibold">Correo electrónico:</p>
               <p className="text-gray-900">
-                {valoresCamposActuales.data.email}
+                {currentUserData.email}
               </p>
             </div>
           </div>
