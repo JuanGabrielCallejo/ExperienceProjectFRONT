@@ -13,10 +13,7 @@ const SearchProvider = ({ children }) => {
     try {
       if (!search) {
         const res = await fetch(
-          `${
-            import.meta.env.VITE_REACT_HOST
-          }/getexperiences?orderBy=votes&orderDirection=${orderText}`
-        );
+          `${import.meta.env.VITE_REACT_HOST}/getexperiences?orderBy=votes&orderDirection=${orderText}`);
 
         if (res.ok) {
           const data = await res.json();
@@ -28,9 +25,7 @@ const SearchProvider = ({ children }) => {
         }
       } else {
         const res = await fetch(
-          `${
-            import.meta.env.VITE_REACT_HOST
-          }/getexperiences?orderBy=votes&orderDirection=${orderText}&search=${search}`
+          `${import.meta.env.VITE_REACT_HOST}/getexperiences?orderBy=votes&orderDirection=${orderText}&search=${search}`
         );
 
         if (res.ok) {

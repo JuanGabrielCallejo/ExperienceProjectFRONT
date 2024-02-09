@@ -76,7 +76,7 @@ const Comments = ({ com }) => {
             <button
               type="button"
               onClick={() => setShowAnswers(!showAnswers)}
-              className="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400"
+              className="flex items-center font-medium text-sm hover:underline text-gray-400"
             >
               <svg
                 className="mr-1.5 w-3 h-3"
@@ -91,10 +91,10 @@ const Comments = ({ com }) => {
             </button>
           </div>
 
-          <div className="dark:text-white">
+          <div className="text-white">
             {showAnswers && <AnswersList answers={answers} />}
           </div>
-          <div className="dark:text-white">
+          <div className="text-white">
             {showTextArea && (
               <ReplyComment
                 comment={com}

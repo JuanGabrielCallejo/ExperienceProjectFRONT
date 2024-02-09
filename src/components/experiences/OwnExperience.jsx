@@ -32,23 +32,23 @@ const OwnExperience = ({ exp }) => {
                       <a
                         href="#"
                         rel="author"
-                        className="text-xl font-bold text-gray-900 dark:text-white S700"
+                        className="text-xl font-bold text-white S700"
                       >
                         {exp.user_name} {exp.user_lastName}
                       </a>
-                      <p className="text-base text-gray-500 dark:text-gray-400 S700">
+                      <p className="text-base text-gray-400 S700">
                         {exp.place}
                       </p>
-                      <p className="text-base text-gray-500 dark:text-gray-400">
+                      <p className="text-base text-gray-500 ">
                         <time>{formatedDate}</time>
                       </p>
                     </div>
                   </div>
                 </address>
-                <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">
+                <h1 className="mb-4 text-4xl font-extrabold leading-tight text-white">
                   {exp.title}
                 </h1>
-                <h2 className="mb-6 text-3xl font-extrabold leading-tight text-blue-700 dark:text-gray-300 S700">
+                <h2 className="mb-6 text-3xl font-extrabold leading-tight text-gray-300 S700">
                   {exp.subTitle}
                 </h2>
               </header>
@@ -59,10 +59,10 @@ const OwnExperience = ({ exp }) => {
                   className=" mx-auto rounded-lg shadow-md"
                 />
               </figure>
-              <p className="lead dark:text-white mb-4">{exp.likes} me gusta</p>
-              <p className="lead dark:text-white S400">{exp.text}</p>
+              <p className="lead text-white mb-4">{exp.likes} me gusta</p>
+              <p className="lead text-white S400">{exp.text}</p>
               <div className="flex items-center mt-8">
-                <div className="rounded-full bg-blue-500 text-white p-2 text-sm">
+                <div className="rounded-full bg-[url('/img/fondoWeb.svg')] bg-cover text-white p-2 text-sm">
                   {exp.category_name}
                 </div>
               </div>

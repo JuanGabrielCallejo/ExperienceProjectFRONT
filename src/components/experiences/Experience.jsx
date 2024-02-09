@@ -88,7 +88,7 @@ const Experience = ({ exp }) => {
                       <p className="text-base text-gray-400 S700">
                         {exp.place}
                       </p>
-                      <p className="text-base text-gray-500 dark:text-gray-400">
+                      <p className="text-base text-gray-400">
                         <time>{formatedDate}</time>
                       </p>
                     </div>

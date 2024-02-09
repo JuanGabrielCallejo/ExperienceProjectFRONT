@@ -67,20 +67,20 @@ const OwnExpList = ({ experience }) => {
             <address className="flex items-center">
               <div className="inline-flex w-full justify-between items-center mr-3 text-sm text-gray-900 ">
                 <div>
-                  <p className="text-base text-gray-500 dark:text-gray-400">
+                  <p className="text-base text-gray-400">
                     <time>{formatedDate}</time>
                   </p>
-                  <p className="text-base text-gray-500 dark:text-gray-400 S700">
+                  <p className="text-base text-gray-400 S700">
                     {exp.place}
                   </p>
                 </div>
                 <img
-                  className="mr-4 w-20 h-20 rounded-2xl object-cover"
+                  className="mr-3 m-2 w-20 h-20 rounded-2xl object-cover"
                   src={exp.photo}
                 />
               </div>
             </address>
-            <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">
+            <h1 className="mb-4 text-4xl font-extrabold leading-tight text-white">
               {exp.title}
             </h1>
 
