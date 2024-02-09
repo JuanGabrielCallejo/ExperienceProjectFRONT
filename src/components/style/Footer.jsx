@@ -1,13 +1,13 @@
 export const Footer = () => {
   return (
-    <div className="p-4 flex justify-between ">
+    <div className="p-4 flex justify-between">
       <div>
         Creado por{" "}
         <a
           href="https://www.linkedin.com/in/carlos-nieves-lameiro/"
           className="hover:text-gray-500"
         >
-          Carlos nieves
+          Carlos Nieves
         </a>
         ,{" "}
         <a
