@@ -155,7 +155,7 @@ const Experience = ({ exp }) => {
             setNewComment={setNewComment}
           />
         )}
-        <h3>Lista de Comentarios</h3>
+        <h3 className="mt-4">Lista de Comentarios</h3>
         <CommentsList newComment={newComment} />
       </main>
     </>

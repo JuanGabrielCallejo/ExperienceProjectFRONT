@@ -19,6 +19,14 @@ const LoginPage = () => {
     // }
   }, []);
 
+  useEffect(() => {
+    if (mensaje) {
+      setTimeout(() => {
+        setMensaje("");
+      }, 2000);
+    }
+  }, [mensaje]);
+
   async function peticionServidor(formData) {
     try {
       const response = await fetch(`${import.meta.env.VITE_REACT_HOST}/login`, {
@@ -102,12 +110,12 @@ const LoginPage = () => {
   }
 
   return (
-    <div className="flex flex-col">
+    <div className="flex flex-col h-screen w-full justify-center">
       <div className="text-center mb-4">
-        <h1 className="text-2xl font-bold text-gray-800">LOGIN</h1>
+        <h1 className="text-2xl text-white text-gray-800">LOGIN</h1>
       </div>
       <form
-        className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md flex flex-col "
+        className="max-w-md mx-auto p-4 mb-4 bg-white shadow-md rounded-md flex flex-col "
         onSubmit={loginUser}
       >
         {/*campo EMAIL*/}
@@ -139,16 +147,23 @@ const LoginPage = () => {
             onChange={(e) => setPassword(e.target.value)}
           />
         </div>
-        <div className="flex justify-center mb-3">{mensaje}</div>
+
         <div className="flex justify-center">
           <button
             type="submit"
-            className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md"
+            className="mx-2 hover:bg-gray-100 self-end bg-[url('/img/fondoWeb.svg')] bg-cover text-white py-2 px-4 rounded-xl shadow-2xl hover:scale-95"
           >
             Login
           </button>
         </div>
       </form>
+      <div className="flex justify-center h-4 w-full items-center">
+        {mensaje && (
+          <div className={`w-fit mt-6 p-2 bg-white rounded text-center`}>
+            {mensaje}
+          </div>
+        )}
+      </div>
     </div>
   );
 };
