@@ -1,48 +1,79 @@
 import { useContext, useEffect, useState } from "react";
 import Swal from "sweetalert2";
 import { AuthContext } from "../components/providers/AuthProvider";
-import { SearchContext } from "../components/providers/SearchProvider";
+// import { SearchContext } from "../components/providers/SearchProvider";
 import resizeImage from "../services/resizeImg";
 import { useNavigate } from "react-router-dom";
+import { validateText } from "../services/validateFields";
+
 
 const CreateExperience = () => {
   const [statusMessage, setStatusMessage] = useState("");
+  const [mensaje, setMensaje] = useState("");
+
   const [exitoExperiencia, setExitoExperiencia] = useState(false);
   const [categorias, setCategorias] = useState([]);
   const [user] = useContext(AuthContext);
-  const [, , , setViewBar] = useContext(SearchContext);
+  // const [, , , setViewBar] = useContext(SearchContext);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    setViewBar(true);
-  }, [setViewBar]);
+  // useEffect(() => {
+  //   setViewBar(true);
+  // }, [setViewBar]);
+
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${user.token}`,
+  //         },
+  //       }
+  //     );
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setExpData(data.data);
+  //       setCurrentExpData(data.data);
+  //       setLoading(false);
+  //     } else {
+  //       const data = await response.json();
+  //       console.error(data);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
 
   useEffect(() => {
-    async function obtenerCategorias() {
-      try {
-        const response = await fetch(
-          `${import.meta.env.VITE_REACT_HOST}/categories`
-        );
-        if (response.ok) {
-          const datosCategorias = await response.json();
-
-          // console.log(datosCategorias.data[0]);
-          const nombresCategorias = datosCategorias.data[0];
-          setCategorias(nombresCategorias);
-        } else {
-          const datosCategorias = await response.json();
-          console.log(datosCategorias);
-          // setErrorMessage(body.message);
-        }
-      } catch (error) {
-        console.log(error);
-      }
-    }
     obtenerCategorias();
+    // fetchData();
+    setMensaje("")
   }, []);
+
+  async function obtenerCategorias() {
+    try {
+      const response = await fetch(
+        `${import.meta.env.VITE_REACT_HOST}/categories`
+      );
+      if (response.ok) {
+        const datosCategorias = await response.json();
+        const nombresCategorias = datosCategorias.data[0];
+        setCategorias(nombresCategorias);
+      } else {
+        const datosCategorias = await response.json();
+        console.log(datosCategorias);
+        // setErrorMessage(body.message);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   const nuevaExperiencia = async (e) => {
     e.preventDefault();
+    let mensaje = "";
+    setMensaje(mensaje);
 
     const title = e.target.elements.title.value;
     const subTitle = e.target.elements.subTitle.value;
@@ -50,51 +81,93 @@ const CreateExperience = () => {
     const text = e.target.elements.text.value;
     const photo = e.target.elements.photo.files[0];
     const category = e.target.elements.category.value;
+    let CamposValidos = true;
+    let CampoValido = true;
+    let mensajeCampo = "";
 
     const imgMaxWidth = 1200;
     const imgMaxHeight = 800;
 
-    const resizedPhoto = await resizeImage(photo, imgMaxWidth, imgMaxHeight);
+    let resizedPhoto;
 
     let experienceBody = new FormData();
-    experienceBody.append("title", title);
-    experienceBody.append("subTitle", subTitle);
-    experienceBody.append("place", place);
-    experienceBody.append("text", text);
+
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(title, 10, 100, "título"));
+    CamposValidos = CamposValidos && CampoValido;
+    if (CampoValido) {
+      experienceBody.append("title", title);
+    } else {
+      mensaje = mensajeCampo;
+    }
+
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(subTitle, 10, 100, "subtítulo"));
+    CamposValidos = CamposValidos && CampoValido;
+    if (CampoValido) {
+      experienceBody.append("subTitle", subTitle);
+    } else {
+      mensaje = mensaje + " -  " + mensajeCampo;
+    }
+
+
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(place, 10, 100, "lugar"));
+    CamposValidos = CamposValidos && CampoValido;
+    if (CampoValido) {
+      experienceBody.append("place", place);
+    } else {
+      mensaje = mensaje + " -  " + mensajeCampo;
+    }
+
+
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(text, 10, 100, "texto"));
+    CamposValidos = CamposValidos && CampoValido;
+    if (CampoValido) {
+      experienceBody.append("text", text);
+    } else {
+      mensaje = mensaje + " -  " + mensajeCampo;
+    }
+
+    if (photo) {
+      resizedPhoto = await resizeImage(photo, imgMaxWidth, imgMaxHeight);
+    } else {
+      mensaje = mensaje + " -  " + "Debes incluír una imagen";
+    }
+
     experienceBody.append("photo", resizedPhoto);
     experienceBody.append("category", category);
 
-    // console.log("evento", e, { title, subTitle, place, text, photo });
+    if (!experienceBody.entries().next().done && CamposValidos) {
 
-    try {
-      const res = await fetch(`${import.meta.env.VITE_REACT_HOST}/experience`, {
-        method: "POST",
-        body: experienceBody,
-        headers: {
-          Authorization: `Bearer ${user.token}`,
-        },
-      });
+      try {
+        const res = await fetch(`${import.meta.env.VITE_REACT_HOST}/experience`, {
+          method: "POST",
+          body: experienceBody,
+          headers: {
+            Authorization: `Bearer ${user.token}`,
+          },
+        });
 
-      if (res.ok) {
-        const body = await res.json();
-        setStatusMessage("Tu experiencia ha sido creada con exito", body);
-        setExitoExperiencia(true);
-        console.log(user.token);
-      } else {
-        const body = await res.json();
-        // console.log("Error de datos", body);
-        setStatusMessage(body.message);
+        if (res.ok) {
+          const body = await res.json();
+          setStatusMessage("Tu experiencia ha sido creada con exito", body);
+          setExitoExperiencia(true);
+          console.log(user.token);
+        } else {
+          const body = await res.json();
+          setStatusMessage(body.message);
+        }
+      } catch (error) {
+        console.error(error);
       }
-    } catch (error) {
-      console.error(error);
     }
+    setMensaje(mensaje);
+
   };
 
-  const mensajeParaElUsuario = `${statusMessage}`;
+  // const mensajeParaElUsuario = `${statusMessage}`;
 
   if (exitoExperiencia) {
     Swal.fire({
-      title: mensajeParaElUsuario,
+      title: statusMessage,
       icon: "success",
       showCancelButton: false,
       confirmButtonColor: "#3085d6",
@@ -118,7 +191,7 @@ const CreateExperience = () => {
         >
           <div className="mb-4">
             <label htmlFor="category" className="text-gray-700">
-              Categoría
+              Categoría *
             </label>
             <select
               id="category"
@@ -134,7 +207,7 @@ const CreateExperience = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="title" className="text-gray-700">
-              Título
+              Título *
             </label>
             <input
               type="text"
@@ -145,7 +218,7 @@ const CreateExperience = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="subTitle" className="text-gray-700">
-              Subtítulo
+              Subtítulo *
             </label>
             <input
               type="text"
@@ -156,7 +229,7 @@ const CreateExperience = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="place" className="text-gray-700">
-              Lugar
+              Lugar *
             </label>
             <input
               type="text"
@@ -167,7 +240,7 @@ const CreateExperience = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="text" className="text-gray-700">
-              Descripción
+              Descripción *
             </label>
             <textarea
               id="text"
@@ -178,7 +251,7 @@ const CreateExperience = () => {
           </div>
           <div className="mb-4">
             <label htmlFor="photo" className="text-gray-700">
-              Foto
+              Foto *
             </label>
             <input
               type="file"
@@ -186,6 +259,9 @@ const CreateExperience = () => {
               name="photo"
               className="w-full mt-2 p-2 border border-gray-300 rounded-md "
             />
+          </div>
+          <div className="flex justify-center mb-3">
+            {mensaje}
           </div>
           <div className="flex justify-center">
             <button className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md ">

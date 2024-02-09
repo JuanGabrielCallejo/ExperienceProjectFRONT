@@ -36,47 +36,23 @@ const validatePassword = (password) => {
     return { isValid, message };
 };
 
-const validateName = (nombre) => {
+const validateText = (text, min, max, name, validEmptyOrNull = false) => {
     let isValid = true;
     let message = "";
 
-    if (!nombre || nombre.trim() === "") {
+    if ((!text || text.trim() === "") && !validEmptyOrNull) {
         isValid = false;
-        message = "El nombre no puede estar vacío";
+        message = `El ${name} no puede estar vacío`;
     } else {
-        // Adjust the regex for nombre (name) length between 2 and 30 characters
-        const nombreRegex = /^.{2,30}$/;
+        // Adjust the regex for texto (name) length between min and max characters
+        const textoRegex = new RegExp(`^.{${min},${max}}$`);
 
-        if (!nombreRegex.test(nombre)) {
+        if (!textoRegex.test(text)) {
             isValid = false;
-            message = "El nombre debe tener entre 2 y 30 caracteres";
+            message = `El ${name} debe tener entre ${min} y ${max} caracteres`;
         }
     }
-
     return { isValid, message };
 };
 
-
-const validateLastName = (apellido) => {
-    let isValid = true;
-    let message = "";
-
-    if (!apellido || apellido.trim() === "") {
-        isValid = false;
-        message = "El apellido no puede estar vacío";
-    } else {
-        // Adjust the regex for apellido (last name) length between 2 and 30 characters
-        const apellidoRegex = /^.{2,30}$/;
-
-        if (!apellidoRegex.test(apellido)) {
-            isValid = false;
-            message = "El apellido debe tener entre 2 y 30 caracteres";
-        }
-    }
-
-    return { isValid, message };
-};
-
-
-
-export { validateName, validateLastName, validateEmail, validatePassword };
+export { validateText, validateEmail, validatePassword };

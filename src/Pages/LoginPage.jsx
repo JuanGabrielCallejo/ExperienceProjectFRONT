@@ -94,8 +94,6 @@ const LoginPage = () => {
 
   async function loginUser(evento) {
     evento.preventDefault();
-    console.log("Email: " + email);
-    console.log("Password: " + password);
 
     setMensaje("");
     if (!validateEmail() || !validatePassword()) {

@@ -2,8 +2,7 @@ import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import resizeImage from "../../services/resizeImg";
 import {
-  validateName,
-  validateLastName,
+  validateText,
   validateEmail,
   validatePassword,
 } from "../../services/validateFields";
@@ -63,13 +62,12 @@ const Formulary = ({ setExito }) => {
   }
 
   const validarNombre = (nombre) => {
-    console.log(nombre);
-    const { isValid, message } = validateName(nombre);
+    const { isValid, message } = validateText(nombre, 2, 30, "nombre");
     setMensaje(message);
     return isValid;
   };
   const validarApellido = (apellido) => {
-    const { isValid, message } = validateLastName(apellido);
+    const { isValid, message } = validateText(apellido, 2, 30, "apellido");
     setMensaje(message);
     return isValid;
   };

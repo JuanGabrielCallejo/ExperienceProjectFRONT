@@ -2,10 +2,11 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../components/providers/AuthProvider";
 import { useParams } from "react-router-dom";
 import { ReloadContext } from "../components/providers/ReloadProvider";
+import Swal from "sweetalert2";
+import { validateText } from "../services/validateFields";
+
 
 const ModExp = () => {
-  const [exitoModExp, setExitoModExp] = useState(false);
-  const [valoresCamposExpActuales, setValoresCamposExpActuales] = useState();
   const [expData, setExpData] = useState({
     id: "",
     title: "",
@@ -14,18 +15,15 @@ const ModExp = () => {
     text: "",
     photo: undefined,
   });
-
+  const [currentExpData, setCurrentExpData] = useState();
   const [loading, setLoading] = useState(true);
-  const [successMessage, setSuccessMessage] = useState("");
   const [user] = useContext(AuthContext);
   const { valoresCamposActuales } = useContext(ReloadContext);
-
+  const [mensaje, setMensaje] = useState("");
   const { exp_id } = useParams();
-  // console.log(exp_id);
 
   const fetchData = async () => {
     try {
-      // console.log(exp_id);
       const response = await fetch(
         `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}`,
         {
@@ -36,10 +34,9 @@ const ModExp = () => {
       );
       if (response.ok) {
         const data = await response.json();
-        setExpData(data);
+        setExpData(data.data);
+        setCurrentExpData(data.data);
         setLoading(false);
-        // console.log(data);
-        setValoresCamposExpActuales(data);
       } else {
         const data = await response.json();
         console.error(data);
@@ -51,6 +48,7 @@ const ModExp = () => {
 
   useEffect(() => {
     fetchData();
+    setMensaje("");
   }, [user.id, user.token]);
 
   const cambiarValorCampo = (e) => {
@@ -63,69 +61,116 @@ const ModExp = () => {
     setExpData({ ...expData, photo: file });
   };
 
+  const vacioONull = (texto) => {
+    if (!texto || texto.trim() === "") {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
   const modificarDatos = async (e) => {
     e.preventDefault();
+    let mensaje = "";
+    if (!expData) {
+      setMensaje("No hay datos de experiencia");
+      console.error("No hay datos de experiencia");
+      return;
+    } else {
+      try {
+        setMensaje("");
+        let CamposValidos = true;
+        let CampoValido = true;
+        let mensajeCampo = "";
 
-    try {
-      if (!expData) {
-        console.error("No hay datos de experiencia");
-        return;
-      }
+        const formData = new FormData();
 
-      const formData = new FormData();
-
-      if (
-        expData.photo &&
-        expData.photo !== null &&
-        expData.photo !== undefined
-      ) {
-        formData.append("avatar", expData.photo);
-      }
-
-      if (expData.title) {
-        formData.append("title", expData.title);
-      }
-      if (expData.subTitle) {
-        formData.append("subTitle", expData.subTitle);
-      }
-      if (expData.place) {
-        formData.append("place", expData.place);
-      }
-      if (expData.text) {
-        formData.append("text", expData.text);
-      }
-      // console.log(expData);
-      // console.log(exp_id);
-      const response = await fetch(
-        `${import.meta.env.VITE_REACT_HOST}/modExperience/${exp_id}`,
-        {
-          method: "PUT",
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-          body: formData,
+        if (expData.photo) {
+          formData.append("avatar", expData.photo);
         }
-      );
 
-      if (response.ok) {
-        setSuccessMessage("¡Experiencia actualizada con éxito!");
-        setExpData({
-          title: "",
-          subTitle: "",
-          place: "",
-          text: "",
-          photo: undefined,
-        });
-        setExitoModExp(true);
-        console.log("Experiencia actualizada con éxito");
-        fetchData(); // Actualizar datos actuales después de modificar
-      } else {
-        const data = await response.json();
-        console.error(data);
+        if (!vacioONull(expData.title)) {
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(expData.title, 10, 100, "título"));
+          CamposValidos = CamposValidos && CampoValido;
+          if (CampoValido) {
+            formData.append("title", expData.title);
+          } else {
+            mensaje = mensaje + " -  " + mensajeCampo;
+          }
+        }
+
+        if (!vacioONull(expData.subTitle)) {
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(expData.subTitle, 10, 100, "subtítulo"));
+          CamposValidos = CamposValidos && CampoValido;
+          if (CampoValido) {
+            formData.append("subTitle", expData.subTitle);
+          } else {
+            mensaje = mensaje + " -  " + mensajeCampo;
+          }
+        }
+
+        if (!vacioONull(expData.place)) {
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(expData.place, 10, 100, "lugar"));
+          CamposValidos = CamposValidos && CampoValido;
+          if (CampoValido) {
+            formData.append("place", expData.place);
+          } else {
+            mensaje = mensaje + " -  " + mensajeCampo;
+          }
+        }
+
+        if (!vacioONull(expData.text)) {
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(expData.text, 10, 100, "texto"));
+          CamposValidos = CamposValidos && CampoValido;
+          if (CampoValido) {
+            formData.append("text", expData.text);
+          } else {
+            mensaje = mensaje + " -  " + mensajeCampo;
+          }
+        }
+
+        console.log(formData);
+        // console.log(exp_id);
+        console.log(CamposValidos);
+        if (!formData.entries().next().done && CamposValidos) {
+
+          const response = await fetch(
+            `${import.meta.env.VITE_REACT_HOST}/modExperience/${exp_id}`,
+            {
+              method: "PUT",
+              headers: {
+                Authorization: `Bearer ${user.token}`,
+              },
+              body: formData,
+            }
+          );
+
+          if (response.ok) {
+            setExpData({
+              title: "",
+              subTitle: "",
+              place: "",
+              text: "",
+              photo: undefined,
+            });
+            console.log("Experiencia actualizada con éxito");
+            mensaje = "Experiencia actualizada con éxito";
+            fetchData(); // Actualizar datos actuales después de modificar
+            Swal.fire({
+              title: "Experiencia actualizada con éxito",
+              icon: "success",
+              timer: 2000,
+            });
+          } else {
+            const data = await response.json();
+            console.error(data);
+          }
+        }
+      } catch (error) {
+        console.error("Error al enviar los datos", error);
       }
-    } catch (error) {
-      console.error("Error al enviar los datos", error);
     }
+    setMensaje(mensaje);
   };
 
   if (loading) {
@@ -213,11 +258,8 @@ const ModExp = () => {
                 onChange={cambiarValorCampo}
               />
             </div>
-            {exitoModExp && (
-              <p className="text-green-500 text-center mt-4">
-                {successMessage}
-              </p>
-            )}
+            <div className="flex justify-center mb-3">
+              {mensaje}</div>
             <div className="flex justify-center">
               <button
                 className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md "
@@ -250,7 +292,7 @@ const ModExp = () => {
                     {user.name} {user.lastName}
                   </a>
                   <p className="text-base text-gray-500 dark:text-gray-400 S700">
-                    {valoresCamposExpActuales.data.place}
+                    {currentExpData.place}
                   </p>
                   <p className="text-base text-gray-500 dark:text-gray-400">
                     <time>1/1/2024, 00:00:00</time>
@@ -259,22 +301,22 @@ const ModExp = () => {
               </div>
             </address>
             <h1 className="mb-4 text-4xl font-extrabold leading-tight text-blue-900 dark:text-white">
-              {valoresCamposExpActuales.data.title}
+              {new String(currentExpData.title)}
             </h1>
             <h2 className="mb-6 text-3xl font-extrabold leading-tight text-blue-700 dark:text-gray-300 S700">
-              {valoresCamposExpActuales.data.subTitle}
+              {currentExpData.subTitle}
             </h2>
           </header>
           <figure className="mb-6 text-center">
             <img
-              src={valoresCamposExpActuales.data.photo}
+              src={currentExpData.photo}
               alt="Experience Photo"
               className=" mx-auto rounded-lg shadow-md"
             />
           </figure>
           <p className="lead dark:text-white mb-4">4 me gusta</p>
           <p className="lead dark:text-white S400">
-            {valoresCamposExpActuales.data.text}
+            {currentExpData.text}
           </p>
           <div className="flex items-center mt-8">
             <div className="rounded-full bg-blue-500 text-white p-2 text-sm">
