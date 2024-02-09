@@ -179,9 +179,9 @@ const CreateExperience = () => {
     });
   } else {
     return (
-      <div className="flex flex-col">
+      <div className="flex flex-col justify-center h-full w-full bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
         <div className="text-center mb-4">
-          <h1 className="text-2xl font-bold text-gray-800">
+          <h1 className="text-2xl text-white font-bold text-gray-800">
             NUEVA EXPERIENCIA
           </h1>
         </div>
@@ -264,7 +264,7 @@ const CreateExperience = () => {
             {mensaje}
           </div>
           <div className="flex justify-center">
-            <button className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md ">
+            <button className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md ">
               Enviar
             </button>
           </div>
