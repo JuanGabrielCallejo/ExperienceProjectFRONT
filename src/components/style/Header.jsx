@@ -15,7 +15,7 @@ export const Header = () => {
     useContext(SearchContext);
   // console.log(user);
   return (
-    <div className="p-2 fixed h-screen flex flex-col justify-end ">
+    <div className=" shadow-2xl fixed bg-white rounded-2xl m-4 h-5/6 flex flex-col justify-end ">
       <button
         className="flex justify-content"
         onClick={() => {

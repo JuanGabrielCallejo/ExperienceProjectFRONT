@@ -23,7 +23,7 @@ const HomePage = () => {
   const { exp } = useExperiences();
   // console.log(exp);
   return (
-    <div className="h-full w-full flex flex-col items-center bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
+    <div className="h-full w-full flex flex-col items-center ">
       {loading ? (
         <div className="flex flex-col items-center justify-center">
           <img className="h-32 w-32" src={loadIcon} alt="Loading Icon"></img>
