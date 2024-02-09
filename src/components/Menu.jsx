@@ -9,7 +9,7 @@ export const MenuNav = () => {
   const [user] = useContext(AuthContext);
 
   return (
-    <div className="bg-gray-300 text-black w-max p-6 flex flex-col gap-8 ">
+    <div className=" text-black w-max p-6 flex flex-col gap-8 ">
       <NavLink to="/" className="mx-2 hover:font-bold">
         <div className="flex gap-2">
           <GrHomeRounded />

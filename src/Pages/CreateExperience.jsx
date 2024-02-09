@@ -3,6 +3,7 @@ import Swal from "sweetalert2";
 import { AuthContext } from "../components/providers/AuthProvider";
 import { SearchContext } from "../components/providers/SearchProvider";
 import resizeImage from "../services/resizeImg";
+import { useNavigate } from "react-router-dom";
 
 const CreateExperience = () => {
   const [statusMessage, setStatusMessage] = useState("");
@@ -10,6 +11,7 @@ const CreateExperience = () => {
   const [categorias, setCategorias] = useState([]);
   const [user] = useContext(AuthContext);
   const [, , , setViewBar] = useContext(SearchContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     setViewBar(true);
@@ -99,7 +101,7 @@ const CreateExperience = () => {
       confirmButtonText: "OK",
     }).then((result) => {
       if (result.isConfirmed) {
-        window.location.href = "/";
+        navigate("/");
       }
     });
   } else {

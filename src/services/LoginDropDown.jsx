@@ -94,20 +94,22 @@ const MenuButton = styled(BaseMenuButton)(
     color: white;
     transition: all 150ms ease;
     cursor: pointer;
-    background: ${theme.palette.mode === "dark" ? grey[900] : "#fff"};
-    border: 1px solid ${theme.palette.mode === "dark" ? grey[700] : grey[200]};
+        border: 1px solid ${
+          theme.palette.mode === "dark" ? grey[700] : grey[200]
+        };
     color: ${theme.palette.mode === "dark" ? grey[200] : grey[900]};
     box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
+    background-image: url('/img/fondoWeb.svg');
+    background-size: cover; 
+    background-position: center;
+    transition: background 150ms ease; 
 
     &:hover {
-      background: ${theme.palette.mode === "dark" ? grey[800] : grey[50]};
-      border-color: ${theme.palette.mode === "dark" ? grey[600] : grey[300]};
+      transform: scale(0.95);
+      };
     }
 
-    &:active {
-      background: ${theme.palette.mode === "dark" ? grey[700] : grey[100]};
-    }
 
     &:focus-visible {
       box-shadow: 0 0 0 4px ${
@@ -145,7 +147,7 @@ const LoginDropDown = ({ user }) => {
       <Dropdown>
         <MenuButton>
           {" "}
-          <div className="flex justify-center">
+          <div className="flex justify-center text-white">
             <img
               src={
                 valoresCamposActuales
@@ -174,18 +176,18 @@ const LoginDropDown = ({ user }) => {
 
           <MenuItem
             onClick={() => {
-              navigate("/settings/profile");
+              navigate("/user/settings");
             }}
           >
             Perfil
           </MenuItem>
-          {/* <MenuItem
-          onClick={() => {
-            navigate("/settings/profile");
-          }}
-        >
-          Language settings
-        </MenuItem> */}
+          <MenuItem
+            onClick={() => {
+              navigate("/user/experiences");
+            }}
+          >
+            Mis Experiencias
+          </MenuItem>
           <MenuItem
             className="rounded-full bg-red-500 text-white"
             onClick={handleLogout}

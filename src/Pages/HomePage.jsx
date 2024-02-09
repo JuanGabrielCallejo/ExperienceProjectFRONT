@@ -23,11 +23,11 @@ const HomePage = () => {
   const { exp } = useExperiences();
   // console.log(exp);
   return (
-    <div className="w-3/4 flex flex-col items-center">
+    <div className="w-full flex flex-col items-center bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
       {loading ? (
         <img className="h-32 w-32 " src={loadIcon}></img>
       ) : (
-        <div className="w-full">
+        <div className="w-3/4">
           {exp.length === 0 ? (
             <div className="flex flex-col items-center gap-4 ">
               <p>Todavía no hay experiencias.</p>

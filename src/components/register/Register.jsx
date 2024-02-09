@@ -3,10 +3,11 @@ import Formulary from "./Formulary";
 import { useState } from "react";
 // import { NavLink } from "react-router-dom";
 
-const Register = () => {
+const Register = ({ setSuccessMsg }) => {
   const [exito, setExito] = useState(false);
 
   const success = () => {
+    setSuccessMsg(true);
     Swal.fire({
       icon: "success",
       title: "Registrado!",
@@ -16,11 +17,7 @@ const Register = () => {
   };
   return (
     <div className="mt-4">
-      {exito ? (
-        success()
-      ) : (
-        <Formulary setExito={setExito} />
-      )}{" "}
+      {exito ? success() : <Formulary setExito={setExito} />}{" "}
     </div>
   );
 };

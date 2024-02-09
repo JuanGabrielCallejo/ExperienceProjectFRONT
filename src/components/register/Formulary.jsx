@@ -69,9 +69,16 @@ const Formulary = ({ setExito }) => {
     evento.preventDefault();
 
     setMensaje("");
-    if (!validarNombre(nombre) || !validarApellido(apellido) || !validarEmail(email) || !validarPassword(password)) { return; }
+    if (
+      !validarNombre(nombre) ||
+      !validarApellido(apellido) ||
+      !validarEmail(email) ||
+      !validarPassword(password)
+    ) {
+      return;
+    }
 
-    console.log("pasa")
+    console.log("pasa");
     let formData = new FormData();
     formData.append("name", nombre);
     formData.append("lastName", apellido);
@@ -149,8 +156,7 @@ const Formulary = ({ setExito }) => {
         name="file"
         className="w-full mt-2 p-2 border border-gray-300 rounded-md mb-4"
       />
-      <div className="flex justify-center mb-3">
-        {mensaje}</div>
+      <div className="flex justify-center mb-3">{mensaje}</div>
 
       <div className="flex justify-center">
         <button

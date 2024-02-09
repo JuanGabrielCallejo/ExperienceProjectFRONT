@@ -13,6 +13,9 @@ import { Layout } from "./components/style/Layout";
 import { AuthProvider } from "./components/providers/AuthProvider";
 import { SearchProvider } from "./components/providers/SearchProvider";
 import { ReloadProvider } from "./components/providers/ReloadProvider";
+import MyExperiences from "./Pages/MyExperiences";
+import SingleExperience from "./Pages/SingleExperience";
+import SearchUser from "./Pages/SearchUser";
 
 const router = createBrowserRouter([
   {
@@ -28,6 +31,10 @@ const router = createBrowserRouter([
         element: <FilterExperience />,
       },
       {
+        path: "/user/experiences/:exp_id",
+        element: <SingleExperience />,
+      },
+      {
         path: "/compose/experience",
         element: <CreateExperience />,
       },
@@ -40,12 +47,20 @@ const router = createBrowserRouter([
         element: <RegisterPage />,
       },
       {
-        path: "/settings/profile",
+        path: "/user/:id",
+        element: <SearchUser />,
+      },
+      {
+        path: "/user/settings",
         element: <ModUser />,
       },
       {
-        path: "/settings/experience/:exp_id",
+        path: "/user/experience/:exp_id/settings",
         element: <ModExp />,
+      },
+      {
+        path: "/user/experiences",
+        element: <MyExperiences />,
       },
     ],
   },
