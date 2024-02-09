@@ -36,7 +36,7 @@ const ExperienceFilterForm = () => {
             <option value="ASC">Menos votados</option>
           </select>
         </label>
-        <button className="mx-2 hover:bg-gray-100 self-center bg-gray-200 p-2 rounded-xl shadow-lg">
+        <button className="mx-2 text-white self-center bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 p-2 rounded-xl shadow-lg">
           Buscar
         </button>
       </form>

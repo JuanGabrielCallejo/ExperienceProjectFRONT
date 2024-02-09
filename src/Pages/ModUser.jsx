@@ -124,7 +124,7 @@ const ModUser = () => {
   }
 
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex flex-col justify-center items-center w-full h-full bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
       <div className="p-8 bg-white rounded-lg shadow-2xl w-3/4 flex justify-between">
         <div className="w-2/4">
           <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
@@ -204,7 +204,7 @@ const ModUser = () => {
             </div>
             <div className="flex justify-center">
               <button
-                className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md "
+                className="mx-2 text-white self-center bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 py-2 px-4 rounded-xl shadow-lg"
                 type="submit"
               >
                 Guardar Cambios

@@ -1,7 +1,7 @@
 import Swal from "sweetalert2";
 import Formulary from "./Formulary";
 import { useState } from "react";
-// import { NavLink } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const Register = ({ setSuccessMsg }) => {
   const [exito, setExito] = useState(false);
@@ -20,6 +20,10 @@ const Register = ({ setSuccessMsg }) => {
       {exito ? success() : <Formulary setExito={setExito} />}{" "}
     </div>
   );
+};
+
+Register.propTypes = {
+  setSuccessMsg: PropTypes.func,
 };
 
 export default Register;
