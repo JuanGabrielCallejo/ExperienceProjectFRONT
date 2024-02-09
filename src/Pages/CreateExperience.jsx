@@ -14,40 +14,10 @@ const CreateExperience = () => {
   const [exitoExperiencia, setExitoExperiencia] = useState(false);
   const [categorias, setCategorias] = useState([]);
   const [user] = useContext(AuthContext);
-  // const [, , , setViewBar] = useContext(SearchContext);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   setViewBar(true);
-  // }, [setViewBar]);
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${user.token}`,
-  //         },
-  //       }
-  //     );
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       setExpData(data.data);
-  //       setCurrentExpData(data.data);
-  //       setLoading(false);
-  //     } else {
-  //       const data = await response.json();
-  //       console.error(data);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   useEffect(() => {
     obtenerCategorias();
-    // fetchData();
     setMensaje("")
   }, []);
 
@@ -92,7 +62,7 @@ const CreateExperience = () => {
 
     let experienceBody = new FormData();
 
-    ({ isValid: CampoValido, message: mensajeCampo } = validateText(title, 10, 100, "título"));
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(title, 5, 100, "título"));
     CamposValidos = CamposValidos && CampoValido;
     if (CampoValido) {
       experienceBody.append("title", title);
@@ -100,7 +70,7 @@ const CreateExperience = () => {
       mensaje = mensajeCampo;
     }
 
-    ({ isValid: CampoValido, message: mensajeCampo } = validateText(subTitle, 10, 100, "subtítulo"));
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(subTitle, 5, 100, "subtítulo"));
     CamposValidos = CamposValidos && CampoValido;
     if (CampoValido) {
       experienceBody.append("subTitle", subTitle);
@@ -109,7 +79,7 @@ const CreateExperience = () => {
     }
 
 
-    ({ isValid: CampoValido, message: mensajeCampo } = validateText(place, 10, 100, "lugar"));
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(place, 2, 100, "lugar"));
     CamposValidos = CamposValidos && CampoValido;
     if (CampoValido) {
       experienceBody.append("place", place);
@@ -162,8 +132,6 @@ const CreateExperience = () => {
     setMensaje(mensaje);
 
   };
-
-  // const mensajeParaElUsuario = `${statusMessage}`;
 
   if (exitoExperiencia) {
     Swal.fire({
