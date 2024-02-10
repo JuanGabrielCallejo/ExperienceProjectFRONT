@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 
 const Answers = ({ ans }) => {
   const date = ans.answer_created_at;
+  console.log(ans.answer_created_at);
   const formatedDate = new Date(date).toLocaleString("es-ES", {
     year: "numeric",
     month: "numeric",
@@ -37,7 +38,13 @@ const Answers = ({ ans }) => {
 };
 
 Answers.propTypes = {
-  ans: PropTypes.any,
+  ans: PropTypes.shape({
+    answer_created_at: PropTypes.string,
+    user_photo: PropTypes.string,
+    user_name: PropTypes.string,
+    user_lastName: PropTypes.string,
+    answer_text: PropTypes.string,
+  })
 };
 
 export default Answers;

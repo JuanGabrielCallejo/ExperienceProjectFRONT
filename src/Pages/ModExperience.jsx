@@ -272,7 +272,7 @@ const ModExp = () => {
             </div>
           </div>
         </div>
-        <article className=" w-2/4 bg-gray-700 p-6 lg:p-8 rounded-2xl ">
+        <article className=" w-2/4p-6 lg:p-8 rounded-2xl ">
           <header className="mb-8">
             <address className="flex items-center mb-6">
               <div className="inline-flex items-center mr-3 text-sm text-gray-900 ">
