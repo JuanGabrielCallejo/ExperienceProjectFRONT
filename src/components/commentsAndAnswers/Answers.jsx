@@ -38,13 +38,7 @@ const Answers = ({ ans }) => {
 };
 
 Answers.propTypes = {
-  ans: PropTypes.shape({
-    answer_created_at: PropTypes.string,
-    user_photo: PropTypes.string,
-    user_name: PropTypes.string,
-    user_lastName: PropTypes.string,
-    answer_text: PropTypes.string,
-  })
+  ans: PropTypes.object.isRequired,
 };
 
 export default Answers;

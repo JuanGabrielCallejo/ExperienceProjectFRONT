@@ -22,6 +22,6 @@ const ExpList = ({ experience }) => {
 };
 
 ExpList.propTypes = {
-  experience: PropTypes.any,
+  experience: PropTypes.array.isRequired,
 };
 export default ExpList;

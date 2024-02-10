@@ -11,6 +11,7 @@ const SearchUser = () => {
   const { id } = useParams();
   const [data, setData] = useState(null);
   const [userData, setUserData] = useState(null);
+  const [height, setHeight] = useState("h-screen");
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -31,7 +32,6 @@ const SearchUser = () => {
     fetchData();
   }, [id, user]);
   const userOf = user?.id == id;
-  console.log(userOf);
   const date = userData ? userData.createdAt : "";
   const formatedDate = new Date(date).toLocaleString("es-ES", {
     year: "numeric",
@@ -42,9 +42,18 @@ const SearchUser = () => {
     second: "numeric",
     timeZone: "Europe/Madrid",
   });
+
+  useEffect(() => {
+    if (data) {
+      const expList = document.getElementById("OwnExpList");
+      if (expList.clientHeight > window.innerHeight) {
+        setHeight("h-full");
+      }
+    }
+  }, [data]);
   //   console.log(userData);
   return (
-    <div className="flex flex-col self-start m-12 h-screen">
+    <div className={`flex flex-col self-start m-12 ${height}`}>
       <div className="flex justify-between">
         <div>
           <h1 className="text-4xl mt-10 mb-2">
@@ -73,7 +82,10 @@ const SearchUser = () => {
       </div>
 
       <div className="bg-black h-1 mb-8 mt-8"></div>
-      <ul className="grid  grid-cols-1 grid-cols-[1fr_1fr_1fr] gap-4">
+      <ul
+        id="OwnExpList"
+        className="grid  grid-cols-1 grid-cols-[1fr_1fr_1fr] gap-4"
+      >
         {data ? (
           <OwnExpList experience={data} />
         ) : (

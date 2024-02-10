@@ -114,6 +114,6 @@ const OwnExpList = ({ experience }) => {
 };
 
 OwnExpList.propTypes = {
-  experience: PropTypes.any,
+  experience: PropTypes.array.isRequired,
 };
 export default OwnExpList;

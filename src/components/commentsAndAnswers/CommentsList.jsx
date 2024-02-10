@@ -25,8 +25,8 @@ const CommentsList = ({ newComment }) => {
 };
 
 CommentsList.propTypes = {
-  exp: PropTypes.any,
-  newComment: PropTypes.any,
+  exp: PropTypes.object,
+  newComment: PropTypes.string,
 };
 
 export default CommentsList;

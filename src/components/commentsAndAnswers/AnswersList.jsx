@@ -16,7 +16,7 @@ const AnswersList = ({ answers }) => {
 
 AnswersList.propTypes = {
   answers: PropTypes.shape({
-    map: PropTypes.any.isRequired,
+    map: PropTypes.object.isRequired,
   }),
 };
 

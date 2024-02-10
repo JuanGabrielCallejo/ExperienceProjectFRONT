@@ -79,7 +79,7 @@ const OwnExperience = ({ exp }) => {
 };
 
 OwnExperience.propTypes = {
-  exp: PropTypes.any,
+  exp: PropTypes.object.isRequired,
 };
 
 export default OwnExperience;
