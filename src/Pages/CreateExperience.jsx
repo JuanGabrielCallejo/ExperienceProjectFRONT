@@ -177,10 +177,8 @@ const CreateExperience = () => {
           const body = await res.json();
           setStatusMessage("Tu experiencia ha sido creada con exito", body);
           setExitoExperiencia(true);
-          console.log(user.token);
         } else {
           const body = await res.json();
-          console.log(body);
           setStatusMessage(body.message);
         }
       } catch (error) {

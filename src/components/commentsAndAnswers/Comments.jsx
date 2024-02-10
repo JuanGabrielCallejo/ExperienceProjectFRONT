@@ -6,6 +6,7 @@ import getAnswers from "../../services/getAnswers";
 import { AuthContext } from "../providers/AuthProvider";
 
 const Comments = ({ com }) => {
+  console.log(com);
   const [showAnswers, setShowAnswers] = useState(false);
   const [showTextArea, setShowTextArea] = useState(false);
   const [user] = useContext(AuthContext);

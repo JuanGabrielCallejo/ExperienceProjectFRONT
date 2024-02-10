@@ -22,22 +22,25 @@ const HomePage = () => {
 
   const { exp } = useExperiences();
   // console.log(exp);
+
   return (
-    <div className=" flex flex-col justify-center items-center h-full">
+    <div className="flex flex-col items-center">
       {loading ? (
         <div className="flex flex-col items-center justify-center h-screen">
           <img className="h-32 w-32" src={loadIcon} alt="Loading Icon"></img>
         </div>
       ) : (
-        <div className="flex flex-col justify-center h-full w-full">
-          {exp.length === 0 ? (
-            <div className="flex flex-col p-6 rounded-xl items-center gap-4 bg-white w-fit">
-              <p>Todavía no hay experiencias.</p>
-              <div>
+        <ul className="w-full">
+          {exp?.length > 0 ? (
+            <ExpList experience={exp} />
+          ) : (
+            <div className="flex flex-col items-center justify-center p-8  h-screen">
+              <div className="flex flex-col items-center rounded-xl shadow-2xl bg-white w-[300px] h-fit p-6 gap-4">
+                <p>Todavía no hay experiencias.</p>
                 {user ? (
                   <NavLink
                     to="/compose/experience"
-                    className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md "
+                    className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md shadow-2xl"
                   >
                     se el primero !
                   </NavLink>
@@ -51,12 +54,8 @@ const HomePage = () => {
                 )}
               </div>
             </div>
-          ) : (
-            <ul>
-              <ExpList experience={exp} />
-            </ul>
           )}
-        </div>
+        </ul>
       )}
     </div>
   );

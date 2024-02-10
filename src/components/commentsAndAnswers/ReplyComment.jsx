@@ -12,9 +12,9 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
   const textareaRef = useRef(null);
 
   const postComment = async () => {
-    if (commentText.length < 10) {
-      setLength("El texto debe tener mínimo 10 carácteres");
-      throw new Error("El texto debe tener mínimo 10 carácteres");
+    if (commentText.length < 1) {
+      setLength("El texto debe tener mínimo 1 caracter");
+      throw new Error("El texto debe tener mínimo 1 caracter");
     }
 
     const replyData = await postReplyComment(
@@ -85,8 +85,8 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
 };
 
 ReplyComment.propTypes = {
-  setShowTextArea: PropTypes.func.isRequired,
-  setAnswers: PropTypes.func.isRequired,
+  setShowTextArea: PropTypes.func,
+  setAnswers: PropTypes.func,
   comment: PropTypes.string,
   exp: PropTypes.object,
 };

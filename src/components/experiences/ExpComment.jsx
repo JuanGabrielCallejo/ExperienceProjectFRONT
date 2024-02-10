@@ -19,8 +19,8 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
 
   const postComment = async () => {
     if (commentText.length < 1) {
-      setLength("El texto debe tener mínimo 1 carácteres");
-      throw new Error("El texto debe tener mínimo 1 carácteres");
+      setLength("El texto debe tener mínimo 1 caracter");
+      throw new Error("El texto debe tener mínimo 1 caracter");
     }
 
     const createdComment = await PostExpComment(exp.id, commentText, user);
@@ -50,6 +50,7 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
         comment_id: createdComment.id,
         comment_text: createdComment.text,
         comment_user: createdComment.name,
+        comment_userLast: createdComment.lastName,
         comment_user_photo: createdComment.photo,
         comment_created_at: createdComment.createdAt,
       };
