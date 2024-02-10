@@ -4,13 +4,6 @@ export const Footer = () => {
       <div>
         Creado por{" "}
         <a
-          href="https://www.linkedin.com/in/carlos-nieves-lameiro/"
-          className="hover:text-gray-500"
-        >
-          Carlos Nieves
-        </a>
-        ,{" "}
-        <a
           href="https://www.linkedin.com/in/juan-gabriel-callejo-44375529b/"
           className="hover:text-gray-500"
         >
@@ -18,24 +11,31 @@ export const Footer = () => {
         </a>
         ,{" "}
         <a
-          href="https://www.linkedin.com/in/jaime-rodal/"
-          className="hover:text-gray-500"
-        >
-          Jaime Rodal
-        </a>
-        ,{" "}
-        <a
           href="https://www.linkedin.com/in/diego-lema-anhon/"
           className="hover:text-gray-500"
         >
           Diego Lema
-        </a>{" "}
-        y{" "}
+        </a>
+        ,{" "}
+        <a
+          href="https://www.linkedin.com/in/carlos-nieves-lameiro/"
+          className="hover:text-gray-500"
+        >
+          Carlos Nieves
+        </a>
+        ,{" "}
         <a
           href="https://www.linkedin.com/in/hugooteroiglesias/"
           className="hover:text-gray-500"
         >
           Hugo Otero
+        </a>{" "}
+        y{" "}
+        <a
+          href="https://www.linkedin.com/in/jaime-rodal/"
+          className="hover:text-gray-500"
+        >
+          Jaime Rodal
         </a>
       </div>
       <div>© 2024 XP </div>
