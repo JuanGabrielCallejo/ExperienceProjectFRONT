@@ -21,7 +21,9 @@ const AnswersList = ({ answers }) => {
 };
 
 AnswersList.propTypes = {
-  answers: PropTypes.array,
+  answers: PropTypes.shape({
+    map: PropTypes.object.isRequired,
+  }),
 };
 
 export default AnswersList;

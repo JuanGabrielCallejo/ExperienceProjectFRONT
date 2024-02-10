@@ -85,10 +85,10 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
 };
 
 ReplyComment.propTypes = {
-  setShowTextArea: PropTypes.any,
-  setAnswers: PropTypes.any,
-  comment: PropTypes.any,
-  exp: PropTypes.any,
+  setShowTextArea: PropTypes.func.isRequired,
+  setAnswers: PropTypes.func.isRequired,
+  comment: PropTypes.string,
+  exp: PropTypes.object,
 };
 
 export default ReplyComment;

@@ -168,7 +168,7 @@ const Experience = ({ exp }) => {
 };
 
 Experience.propTypes = {
-  exp: PropTypes.any,
+  exp: PropTypes.object.isRequired,
 };
 
 export default Experience;

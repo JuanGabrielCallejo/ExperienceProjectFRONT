@@ -89,11 +89,11 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
 };
 
 ExpComment.propTypes = {
-  setShowTextArea: PropTypes.any,
-  newComment: PropTypes.any,
-  setNewComment: PropTypes.any,
-  comment: PropTypes.any,
-  exp: PropTypes.any,
+  setShowTextArea: PropTypes.func,
+  newComment: PropTypes.string,
+  setNewComment: PropTypes.func,
+  comment: PropTypes.string,
+  exp: PropTypes.object.isRequired,
 };
 
 export default ExpComment;

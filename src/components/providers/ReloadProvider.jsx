@@ -26,7 +26,7 @@ const ReloadProvider = ({ children }) => {
 };
 
 ReloadProvider.propTypes = {
-  children: PropTypes.any,
+  children: PropTypes.node.isRequired,
 };
 
 export { ReloadContext, ReloadProvider };
