@@ -7,6 +7,7 @@ const SearchProvider = ({ children }) => {
   const [viewBar, setViewBar] = useState(true);
   const [result, setResult] = useState("");
   const [orderText, setOrderText] = useState("");
+  const [loading, setLoading] = useState(true);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -17,6 +18,7 @@ const SearchProvider = ({ children }) => {
 
         if (res.ok) {
           const data = await res.json();
+          setLoading(false);
           setResult(data.data);
           return data;
         } else {
@@ -30,6 +32,7 @@ const SearchProvider = ({ children }) => {
 
         if (res.ok) {
           const data = await res.json();
+          setLoading(false);
           setResult(data.data);
           return data;
         } else {
@@ -53,6 +56,8 @@ const SearchProvider = ({ children }) => {
         setOrderText,
         result,
         setResult,
+        loading,
+        setLoading,
       ]}
     >
       {children}

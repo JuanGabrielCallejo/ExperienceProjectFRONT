@@ -25,7 +25,7 @@ const HomePage = () => {
   return (
     <div className=" flex flex-col justify-center items-center h-full">
       {loading ? (
-        <div className="flex flex-col items-center justify-center">
+        <div className="flex flex-col items-center justify-center h-screen">
           <img className="h-32 w-32" src={loadIcon} alt="Loading Icon"></img>
         </div>
       ) : (

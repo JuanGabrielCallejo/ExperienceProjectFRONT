@@ -14,10 +14,10 @@ const Answers = ({ ans }) => {
   });
   return (
     <>
-      <article className="p-6 mb-6 ml-6 lg:ml-12 text-base rounded-lg bg-gray-900">
+      <article className="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg w-[548px] ">
         <footer className="flex justify-between items-center mb-2">
           <div className="flex items-center">
-            <p className="inline-flex items-center mr-3 font-semibold text-sm text-white S700">
+            <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 S700">
               <img
                 className="mr-2 w-6 h-6 rounded-full object-cover"
                 src={ans.user_photo}

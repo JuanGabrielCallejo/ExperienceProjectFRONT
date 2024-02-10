@@ -57,21 +57,19 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
   };
 
   return (
-    <div className="mt-6">
-      <div className="flex justify-between items-center mb-6">
-        <h2 className="text-lg lg:text-2xl font-bold text-black">
+    <div className="mt-6 w-[800px]">
+      <div className=" mb-6">
+        <h2 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-black">
           Comentario
         </h2>
       </div>
-      <form className="mb-6" onSubmit={handleSubmit}>
-        <div className="py-2 px-4 mb-4 rounded-lg rounded-t-lg bg-gray-800 border-gray-700">
-          <label htmlFor="comment" className="sr-only">
-            Your comment
-          </label>
+      <form className="mb-6 flex flex-col items-center" onSubmit={handleSubmit}>
+        <div className=" py-2 px-4 mb-4 rounded-lg rounded-t-lg w-[600px] border bg-gray-800 border-gray-700 ">
+          <label htmlFor="comment" className="sr-only"></label>
           <textarea
             id="comment"
             rows="6"
-            className="px-0 w-full text-sm  border-0 focus:ring-0 text-white placeholder-gray-400 bg-gray-800"
+            className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 bg-gray-800"
             placeholder="Escribe tu comentario..."
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
@@ -81,7 +79,7 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
         <div>{length}</div>
         <button
           type="submit"
-          className="mx-2 hover:bg-gray-100 flex items-center justify-center bg-gray-200 p-4 rounded-2xl shadow-2xl h-4"
+          className="mx-2 hover:bg-gray-100 flex items-center justify-center self-end mr-28 bg-gray-200 p-4 rounded-2xl shadow-2xl h-4"
         >
           Enviar
         </button>

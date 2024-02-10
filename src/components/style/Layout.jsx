@@ -10,7 +10,7 @@ const Layout = () => {
         <Header />
       </header>
 
-      <div className="flex flex-col">
+      <div className="flex flex-col w-full">
         <article className=" text-rgb(53, 53, 53)  flex justify-center items-center grow">
           {" "}
           <Outlet />

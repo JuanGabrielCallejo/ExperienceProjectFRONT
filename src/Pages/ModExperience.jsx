@@ -5,7 +5,6 @@ import { ReloadContext } from "../components/providers/ReloadProvider";
 import Swal from "sweetalert2";
 import { validateText } from "../services/validateFields";
 
-
 const ModExp = () => {
   const [expData, setExpData] = useState({
     id: "",
@@ -69,7 +68,7 @@ const ModExp = () => {
     } else {
       return false;
     }
-  }
+  };
 
   const modificarDatos = async (e) => {
     e.preventDefault();
@@ -92,7 +91,12 @@ const ModExp = () => {
         }
 
         if (!vacioONull(expData.title)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validateText(expData.title, 10, 100, "título"));
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(
+            expData.title,
+            10,
+            100,
+            "título"
+          ));
           CamposValidos = CamposValidos && CampoValido;
           if (CampoValido) {
             formData.append("title", expData.title);
@@ -102,7 +106,12 @@ const ModExp = () => {
         }
 
         if (!vacioONull(expData.subTitle)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validateText(expData.subTitle, 10, 100, "subtítulo"));
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(
+            expData.subTitle,
+            10,
+            100,
+            "subtítulo"
+          ));
           CamposValidos = CamposValidos && CampoValido;
           if (CampoValido) {
             formData.append("subTitle", expData.subTitle);
@@ -112,7 +121,12 @@ const ModExp = () => {
         }
 
         if (!vacioONull(expData.place)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validateText(expData.place, 10, 100, "lugar"));
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(
+            expData.place,
+            10,
+            100,
+            "lugar"
+          ));
           CamposValidos = CamposValidos && CampoValido;
           if (CampoValido) {
             formData.append("place", expData.place);
@@ -122,7 +136,12 @@ const ModExp = () => {
         }
 
         if (!vacioONull(expData.text)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validateText(expData.text, 10, 100, "texto"));
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(
+            expData.text,
+            10,
+            100,
+            "texto"
+          ));
           CamposValidos = CamposValidos && CampoValido;
           if (CampoValido) {
             formData.append("text", expData.text);
@@ -135,7 +154,6 @@ const ModExp = () => {
         // console.log(exp_id);
         console.log(CamposValidos);
         if (!formData.entries().next().done && CamposValidos) {
-
           const response = await fetch(
             `${import.meta.env.VITE_REACT_HOST}/modExperience/${exp_id}`,
             {
@@ -182,7 +200,7 @@ const ModExp = () => {
   return (
     <form
       onSubmit={modificarDatos}
-      className="w-2/3 flex flex-col items-center"
+      className=" h-screen w-2/3 flex flex-col justify-center items-center"
     >
       <div className="p-8 bg-white rounded-lg shadow-2xl flex gap-6">
         <div className="w-2/4">
@@ -250,21 +268,20 @@ const ModExp = () => {
               <label htmlFor="text" className="text-gray-700">
                 Descripción
               </label>
-              <input
+              <textarea
                 id="text"
                 name="text"
                 type="text"
                 value={expData.text}
-                className="w-full mt-2 p-2 border border-gray-300 rounded-md"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md h-[100px]"
                 placeholder="Descripción"
                 onChange={cambiarValorCampo}
               />
             </div>
-            <div className="flex justify-center mb-3">
-              {mensaje}</div>
+            <div className="flex justify-center mb-3">{mensaje}</div>
             <div className="flex justify-center">
               <button
-                className="bg-gray-400 hover:bg-gray-300 text-white py-2 px-4 rounded-md "
+                className="bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 text-white py-2 px-4 rounded-md "
                 type="submit"
               >
                 Modificar
@@ -272,7 +289,7 @@ const ModExp = () => {
             </div>
           </div>
         </div>
-        <article className=" w-2/4p-6 lg:p-8 rounded-2xl ">
+        <article className=" w-2/4 p-6 lg:p-8 rounded-2xl shadow-2xl border w-[750px] h-[850px] grid grid-cols-1 grid-rows-[220px_360px_30px_1fr_50px]">
           <header className="mb-8">
             <address className="flex items-center mb-6">
               <div className="inline-flex items-center mr-3 text-sm text-gray-900 ">
@@ -289,7 +306,7 @@ const ModExp = () => {
                   <a
                     href="#"
                     rel="author"
-                    className="text-xl font-bold text-white S700"
+                    className="text-xl font-bold text-gray-900 S700"
                   >
                     {user.name} {user.lastName}
                   </a>
@@ -302,26 +319,24 @@ const ModExp = () => {
                 </div>
               </div>
             </address>
-            <h1 className="mb-4 text-4xl font-extrabold leading-tight text-white">
+            <h1 className="mb-4 text-4xl font-extrabold leading-tight text-gray-800 ">
               {new String(currentExpData.title)}
             </h1>
-            <h2 className="mb-6 text-3xl font-extrabold leading-tight text-gray-300 S700">
+            <h2 className="mb-6 text-3xl font-extrabold leading-tight text-gray-400 S700">
               {currentExpData.subTitle}
             </h2>
           </header>
-          <figure className="mb-6 text-center">
+          <figure className="mb-6 flex text-center">
             <img
               src={currentExpData.photo}
               alt="Experience Photo"
-              className=" mx-auto rounded-lg shadow-md"
+              className="drop-shadow-2xl  mx-auto rounded-lg shadow-2xl"
             />
           </figure>
-          <p className="lead text-white mb-4">4 me gusta</p>
-          <p className="lead text-white S400">
-            {currentExpData.text}
-          </p>
+          <p className="lead text-gray-400 mb-4">4 me gusta</p>
+          <p className="lead text-gray-700 S400">{currentExpData.text}</p>
           <div className="flex items-center mt-8">
-            <div className="rounded-full bg-blue-500 text-white p-2 text-sm">
+            <div className="rounded-full bg-[url('/img/fondoWeb.svg')] bg-cover text-white p-2 text-sm">
               Category
             </div>
           </div>

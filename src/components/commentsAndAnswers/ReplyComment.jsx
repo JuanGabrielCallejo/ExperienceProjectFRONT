@@ -47,7 +47,7 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
   return (
     <div className="mt-4">
       <div className="flex justify-between items-center mb-6">
-        <h3 className="text-lg lg:text-2xl font-bold text-gray-900 dark:text-white">
+        <h3 className="text-lg lg:text-2xl font-bold text-gray-900 ">
           Comentario
         </h3>
       </div>

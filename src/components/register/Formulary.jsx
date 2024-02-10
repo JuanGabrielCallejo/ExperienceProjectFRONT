@@ -116,7 +116,7 @@ const Formulary = ({ setExito }) => {
   }
 
   Formulary.propTypes = {
-    setMensaje: PropTypes.func.isRequired,
+    setMensaje: PropTypes.func,
     setExito: PropTypes.func.isRequired,
   };
 

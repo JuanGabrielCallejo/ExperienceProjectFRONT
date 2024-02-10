@@ -176,7 +176,7 @@ const ModUser = () => {
   }
 
   return (
-    <div className="flex flex-col justify-center items-center w-full h-full bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
+    <div className="flex flex-col justify-center items-center w-full h-screen bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
       <div className="p-8 bg-white rounded-lg shadow-2xl w-3/4 flex justify-between">
         <div className="w-2/4">
           <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">

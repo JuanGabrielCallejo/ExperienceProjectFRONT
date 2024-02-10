@@ -6,7 +6,6 @@ import resizeImage from "../services/resizeImg";
 import { useNavigate } from "react-router-dom";
 import { validateText } from "../services/validateFields";
 
-
 const CreateExperience = () => {
   const [statusMessage, setStatusMessage] = useState("");
   const [mensaje, setMensaje] = useState("");
@@ -18,8 +17,16 @@ const CreateExperience = () => {
 
   useEffect(() => {
     obtenerCategorias();
-    setMensaje("")
+    setMensaje("");
   }, []);
+
+  useEffect(() => {
+    if (mensaje) {
+      setTimeout(() => {
+        setMensaje("");
+      }, 2000);
+    }
+  }, [mensaje]);
 
   async function obtenerCategorias() {
     try {
@@ -55,14 +62,19 @@ const CreateExperience = () => {
     let CampoValido = true;
     let mensajeCampo = "";
 
-    const imgMaxWidth = 1200;
-    const imgMaxHeight = 800;
+    const imgMaxWidth = 580;
+    const imgMaxHeight = 400;
 
     let resizedPhoto;
 
     let experienceBody = new FormData();
 
-    ({ isValid: CampoValido, message: mensajeCampo } = validateText(title, 5, 100, "título"));
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(
+      title,
+      2,
+      20,
+      "título"
+    ));
     CamposValidos = CamposValidos && CampoValido;
     if (CampoValido) {
       experienceBody.append("title", title);
@@ -70,7 +82,12 @@ const CreateExperience = () => {
       mensaje = mensajeCampo;
     }
 
-    ({ isValid: CampoValido, message: mensajeCampo } = validateText(subTitle, 5, 100, "subtítulo"));
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(
+      subTitle,
+      2,
+      20,
+      "subtítulo"
+    ));
     CamposValidos = CamposValidos && CampoValido;
     if (CampoValido) {
       experienceBody.append("subTitle", subTitle);
@@ -78,8 +95,12 @@ const CreateExperience = () => {
       mensaje = mensaje + " -  " + mensajeCampo;
     }
 
-
-    ({ isValid: CampoValido, message: mensajeCampo } = validateText(place, 2, 100, "lugar"));
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(
+      place,
+      2,
+      20,
+      "lugar"
+    ));
     CamposValidos = CamposValidos && CampoValido;
     if (CampoValido) {
       experienceBody.append("place", place);
@@ -87,8 +108,12 @@ const CreateExperience = () => {
       mensaje = mensaje + " -  " + mensajeCampo;
     }
 
-
-    ({ isValid: CampoValido, message: mensajeCampo } = validateText(text, 10, 100, "texto"));
+    ({ isValid: CampoValido, message: mensajeCampo } = validateText(
+      text,
+      10,
+      500,
+      "texto"
+    ));
     CamposValidos = CamposValidos && CampoValido;
     if (CampoValido) {
       experienceBody.append("text", text);
@@ -106,31 +131,31 @@ const CreateExperience = () => {
     experienceBody.append("category", category);
 
     if (!experienceBody.entries().next().done && CamposValidos) {
-
       try {
-        const res = await fetch(`${import.meta.env.VITE_REACT_HOST}/experience`, {
-          method: "POST",
-          body: experienceBody,
-          headers: {
-            Authorization: `Bearer ${user.token}`,
-          },
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_REACT_HOST}/experience`,
+          {
+            method: "POST",
+            body: experienceBody,
+            headers: {
+              Authorization: `Bearer ${user.token}`,
+            },
+          }
+        );
 
         if (res.ok) {
           const body = await res.json();
           setStatusMessage("Tu experiencia ha sido creada con exito", body);
           setExitoExperiencia(true);
-          console.log(user.token);
         } else {
           const body = await res.json();
           setStatusMessage(body.message);
         }
       } catch (error) {
-        console.error(error);
+        console.error(error.message);
       }
     }
     setMensaje(mensaje);
-
   };
 
   if (exitoExperiencia) {
@@ -147,96 +172,103 @@ const CreateExperience = () => {
     });
   } else {
     return (
-      <div className="flex flex-col justify-center h-screen w-full ">
-        <div className="text-center mb-4">
-          <h1 className="text-2xl text-white font-bold text-gray-800">
-            NUEVA EXPERIENCIA
-          </h1>
+      <div className="flex flex-row justify-center items-center h-screen w-full gap-4">
+        <div>
+          <div className="text-center mb-4">
+            <h1 className="text-2xl text-white font-bold text-gray-800">
+              NUEVA EXPERIENCIA
+            </h1>
+          </div>
+          <form
+            onSubmit={nuevaExperiencia}
+            className="max-w-md mx-auto p-4 mb-4 bg-white shadow-md rounded-md flex flex-col "
+          >
+            <div className="mb-4">
+              <label htmlFor="category" className="text-gray-700">
+                Categoría *
+              </label>
+              <select
+                id="category"
+                name="category"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md "
+              >
+                {categorias.map((categoria) => (
+                  <option key={categoria.id} value={categoria.id}>
+                    {categoria.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+            <div className="mb-4">
+              <label htmlFor="title" className="text-gray-700">
+                Título *
+              </label>
+              <input
+                type="text"
+                name="title"
+                id="title"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md "
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="subTitle" className="text-gray-700">
+                Subtítulo *
+              </label>
+              <input
+                type="text"
+                id="subTitle"
+                name="subTitle"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md "
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="place" className="text-gray-700">
+                Lugar *
+              </label>
+              <input
+                type="text"
+                id="place"
+                name="place"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md "
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="text" className="text-gray-700">
+                Descripción *
+              </label>
+              <textarea
+                id="text"
+                name="text"
+                rows="3"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md "
+              />
+            </div>
+            <div className="mb-4">
+              <label htmlFor="photo" className="text-gray-700">
+                Foto *
+              </label>
+              <input
+                type="file"
+                id="photo"
+                name="photo"
+                className="w-full mt-2 p-2 border border-gray-300 rounded-md "
+              />
+            </div>
+            <div className="flex justify-center">
+              <button className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md ">
+                Enviar
+              </button>
+            </div>
+          </form>
         </div>
-        <form
-          onSubmit={nuevaExperiencia}
-          className="max-w-md mx-auto p-4 bg-white shadow-md rounded-md flex flex-col "
-        >
-          <div className="mb-4">
-            <label htmlFor="category" className="text-gray-700">
-              Categoría *
-            </label>
-            <select
-              id="category"
-              name="category"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
-            >
-              {categorias.map((categoria) => (
-                <option key={categoria.id} value={categoria.id}>
-                  {categoria.name}
-                </option>
-              ))}
-            </select>
-          </div>
-          <div className="mb-4">
-            <label htmlFor="title" className="text-gray-700">
-              Título *
-            </label>
-            <input
-              type="text"
-              name="title"
-              id="title"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="subTitle" className="text-gray-700">
-              Subtítulo *
-            </label>
-            <input
-              type="text"
-              id="subTitle"
-              name="subTitle"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="place" className="text-gray-700">
-              Lugar *
-            </label>
-            <input
-              type="text"
-              id="place"
-              name="place"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="text" className="text-gray-700">
-              Descripción *
-            </label>
-            <textarea
-              id="text"
-              name="text"
-              rows="3"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="photo" className="text-gray-700">
-              Foto *
-            </label>
-            <input
-              type="file"
-              id="photo"
-              name="photo"
-              className="w-full mt-2 p-2 border border-gray-300 rounded-md "
-            />
-          </div>
-          <div className="flex justify-center mb-3">
-            {mensaje}
-          </div>
-          <div className="flex justify-center">
-            <button className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md ">
-              Enviar
-            </button>
-          </div>
-        </form>
+
+        <div className="flex justify-center h-4 w-[200px] items-center">
+          {mensaje && (
+            <div className={`w-fit mt-6 p-2 bg-white rounded text-center`}>
+              {mensaje}
+            </div>
+          )}
+        </div>
       </div>
     );
   }
