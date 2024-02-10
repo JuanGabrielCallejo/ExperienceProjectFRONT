@@ -36,10 +36,10 @@ const Comments = ({ com }) => {
 
   return (
     <>
-      <article className="p-6 mb-6 text-base bg-white rounded-lg dark:bg-gray-900">
-        <footer className="flex justify-between items-center mb-2">
+      <article className="p-6 mb-6 text-base rounded-lg bg-white w-[600px] m-6">
+        <footer className="flex justify-between items-center mb-2 ">
           <div className="flex items-center">
-            <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 dark:text-white S700">
+            <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 S700">
               <img
                 className="mr-2 w-6 h-6 rounded-full object-cover"
                 src={com.comment_user_photo}
@@ -52,7 +52,7 @@ const Comments = ({ com }) => {
             </p>
           </div>
         </footer>
-        <p className="dark:text-white S400">{com.comment_text}</p>
+        <p className=" S400">{com.comment_text}</p>
         <div className="flex flex-col items-start mt-4 space-x-4">
           <div className="flex gap-2">
             <button
@@ -90,21 +90,20 @@ const Comments = ({ com }) => {
               {showAnswers ? <p>Ocultar Respuestas</p> : <p>Ver Respuestas</p>}
             </button>
           </div>
-
-          <div className="dark:text-white">
-            {showAnswers && <AnswersList answers={answers} />}
-          </div>
-          <div className="dark:text-white">
-            {showTextArea && (
-              <ReplyComment
-                comment={com}
-                setShowTextArea={setShowTextArea}
-                setAnswers={setAnswers}
-              />
-            )}
-          </div>
         </div>
       </article>
+      <div className="flex flex-col items-center">
+        {showAnswers && <AnswersList answers={answers} />}
+      </div>
+      <div className="text-white m-8">
+        {showTextArea && (
+          <ReplyComment
+            comment={com}
+            setShowTextArea={setShowTextArea}
+            setAnswers={setAnswers}
+          />
+        )}
+      </div>
     </>
   );
 };

@@ -30,14 +30,16 @@ const MyExperiences = () => {
   }, [user]);
 
   return (
-    <div className="flex flex-col self-start m-12">
+    <div className="flex flex-col self-start m-12 h-screen">
       <h1 className="text-4xl mt-10 mb-2">Mis Experiencias</h1>
       <div className="bg-black h-1 mb-8"></div>
-      <ul className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+      <ul className="grid grid-cols-1 grid-cols-[1fr_1fr_1fr] gap-4">
         {data ? (
           <OwnExpList experience={data} />
         ) : (
-          <img className="h-32 w-32" src={loadIcon} alt="Loading icon" />
+          <div className="flex flex-col items-center justify-center h-screen">
+            <img className="h-32 w-32" src={loadIcon} alt="Loading Icon"></img>
+          </div>
         )}
       </ul>
     </div>

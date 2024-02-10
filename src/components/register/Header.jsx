@@ -27,6 +27,6 @@ const Header = (props) => {
 };
 
 Header.propTypes = {
-  successMsg: PropTypes.func,
+  successMsg: PropTypes.bool,
 };
 export default Header;

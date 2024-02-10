@@ -6,6 +6,9 @@ export default {
       backgroundImage: {
         "fondo-web": "url('/img/fondoWeb.svg')",
       },
+      width: {
+        128: "32rem",
+      },
     },
   },
   plugins: [],

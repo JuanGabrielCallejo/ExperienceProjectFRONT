@@ -64,7 +64,7 @@ const BorrarUsuario = () => {
   return (
     <div>
       <button
-        className="bg-red-500 text-white rounded-md px-2 py-1"
+        className="bg-red-500 hover:scale-95 text-white rounded-md px-2 py-1"
         onClick={borrarUsuario}
       >
         Eliminar Usuario

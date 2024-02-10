@@ -7,7 +7,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 const OwnExpList = ({ experience }) => {
   const [user] = useContext(AuthContext);
   const navigate = useNavigate();
-  console.log(experience);
+  // console.log(experience);
   const decodedToken = user && user.token ? jwtDecode(user.token) : null;
 
   const userId = decodedToken && decodedToken.id ? decodedToken.id : null;
@@ -85,9 +85,9 @@ const OwnExpList = ({ experience }) => {
             </h1>
 
             {userOf ? (
-              <div className="flex flex-row gap-4 ml-6">
+              <div className="flex flex-row justify-center gap-4 ">
                 <div
-                  className="rounded-full bg-blue-500 text-white p-2 text-sm hover:cursor-pointer"
+                  className="rounded-xl bg-blue-500 text-center text-white w-2/4 p-4 text-sm hover:cursor-pointer"
                   onClick={(evento) => {
                     evento.preventDefault();
                     navigate(`/user/experience/${exp.id}/settings`);
@@ -96,7 +96,7 @@ const OwnExpList = ({ experience }) => {
                   Modificar
                 </div>
                 <div
-                  className="rounded-full bg-red-500 text-white p-2 text-sm hover:cursor-pointer"
+                  className="rounded-xl bg-red-500 text-center text-white w-2/4 p-4 text-sm hover:cursor-pointer"
                   onClick={(evento) => {
                     evento.preventDefault();
                     eliminarExperiencia(exp.id);
