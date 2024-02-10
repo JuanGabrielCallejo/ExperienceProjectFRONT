@@ -1,12 +1,14 @@
 import PropTypes from "prop-types";
 import AnswersList from "./AnswersList";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import ReplyComment from "./ReplyComment";
 import getAnswers from "../../services/getAnswers";
+import { AuthContext } from "../providers/AuthProvider";
 
 const Comments = ({ com }) => {
   const [showAnswers, setShowAnswers] = useState(false);
   const [showTextArea, setShowTextArea] = useState(false);
+  const [user] = useContext(AuthContext);
   const date = com.comment_created_at;
   const formatedDate = new Date(date).toLocaleString("es-ES", {
     year: "numeric",
@@ -55,24 +57,26 @@ const Comments = ({ com }) => {
         <p className=" S400">{com.comment_text}</p>
         <div className="flex flex-col items-start mt-4 space-x-4">
           <div className="flex gap-2">
-            <button
-              type="button"
-              onClick={() => {
-                setShowTextArea(!showTextArea);
-              }}
-              className="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400"
-            >
-              <svg
-                className="mr-1.5 w-3 h-3"
-                aria-hidden="true"
-                xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor"
-                viewBox="0 0 20 18"
+            {user ? (
+              <button
+                type="button"
+                onClick={() => {
+                  setShowTextArea(!showTextArea);
+                }}
+                className="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400"
               >
-                <path d="M18 0H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2v4a1 1 0 0 0 1.707.707L10.414 13H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5 4h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2ZM5 4h5a1 1 0 1 1 0 2H5a1 1 0 0 1 0-2Zm2 5H5a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 1 1 0 2Z" />
-              </svg>
-              {showTextArea ? <p>Cancelar</p> : <p>Responder</p>}
-            </button>
+                <svg
+                  className="mr-1.5 w-3 h-3"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 18"
+                >
+                  <path d="M18 0H2a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h2v4a1 1 0 0 0 1.707.707L10.414 13H18a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2Zm-5 4h2a1 1 0 1 1 0 2h-2a1 1 0 1 1 0-2ZM5 4h5a1 1 0 1 1 0 2H5a1 1 0 0 1 0-2Zm2 5H5a1 1 0 0 1 0-2h2a1 1 0 0 1 0 2Zm9 0h-6a1 1 0 0 1 0-2h6a1 1 0 1 1 0 2Z" />
+                </svg>
+                {showTextArea ? <p>Cancelar</p> : <p>Responder</p>}
+              </button>
+            ) : null}
             <button
               type="button"
               onClick={() => setShowAnswers(!showAnswers)}
@@ -109,8 +113,7 @@ const Comments = ({ com }) => {
 };
 
 Comments.propTypes = {
-  com: PropTypes.any,
-  exp: PropTypes.any,
+  com: PropTypes.object,
 };
 
 export default Comments;
