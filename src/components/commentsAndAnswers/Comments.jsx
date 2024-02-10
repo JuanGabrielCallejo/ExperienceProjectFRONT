@@ -109,8 +109,8 @@ const Comments = ({ com }) => {
 };
 
 Comments.propTypes = {
-  com: PropTypes.any,
-  exp: PropTypes.any,
+  com: PropTypes.object,
+  exp: PropTypes.object,
 };
 
 export default Comments;

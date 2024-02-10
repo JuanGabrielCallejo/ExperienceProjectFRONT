@@ -37,7 +37,7 @@ const Answers = ({ ans }) => {
 };
 
 Answers.propTypes = {
-  ans: PropTypes.any,
+  ans: PropTypes.object.isRequired,
 };
 
 export default Answers;

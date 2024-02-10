@@ -59,11 +59,11 @@ const LikeHeart = ({ exp_id, setLike }) => {
 };
 
 LikeHeart.propTypes = {
-  exp_id: PropTypes.any,
-  like: PropTypes.any,
-  setLike: PropTypes.any,
-  isClick: PropTypes.any,
-  setClick: PropTypes.any,
+  exp_id: PropTypes.number.isRequired,
+  like: PropTypes.number.isRequired,
+  setLike: PropTypes.func.isRequired,
+  isClick: PropTypes.bool.isRequired,
+  setClick: PropTypes.func.isRequired,
 };
 
 export default LikeHeart;
