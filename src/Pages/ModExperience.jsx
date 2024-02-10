@@ -21,6 +21,11 @@ const ModExp = () => {
   const [mensaje, setMensaje] = useState("");
   const { exp_id } = useParams();
 
+  useEffect(() => {
+    fetchData();
+    setMensaje("");
+  }, [user.id, user.token]);
+
   const fetchData = async () => {
     try {
       const response = await fetch(
@@ -31,24 +36,21 @@ const ModExp = () => {
           },
         }
       );
+      const data = await response.json();
+      setMensaje(data.message);
       if (response.ok) {
-        const data = await response.json();
         setExpData(data.data);
         setCurrentExpData(data.data);
         setLoading(false);
       } else {
-        const data = await response.json();
+        setMensaje("Error al intentar modificar: " + data.message);
         console.error(data);
       }
     } catch (error) {
+      setMensaje("Error indefinido");
       console.error(error);
     }
   };
-
-  useEffect(() => {
-    fetchData();
-    setMensaje("");
-  }, [user.id, user.token]);
 
   const cambiarValorCampo = (e) => {
     const { name, value } = e.target;

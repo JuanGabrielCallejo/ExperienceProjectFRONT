@@ -40,7 +40,7 @@ const Formulary = ({ setExito }) => {
           body: formData,
         }
       );
-      console.log(respuesta);
+      // console.log(respuesta);
       datos = await respuesta.json();
       // console.log(datos);
       setMensaje(datos.message);

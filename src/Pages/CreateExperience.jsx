@@ -13,40 +13,10 @@ const CreateExperience = () => {
   const [exitoExperiencia, setExitoExperiencia] = useState(false);
   const [categorias, setCategorias] = useState([]);
   const [user] = useContext(AuthContext);
-  // const [, , , setViewBar] = useContext(SearchContext);
   const navigate = useNavigate();
-
-  // useEffect(() => {
-  //   setViewBar(true);
-  // }, [setViewBar]);
-
-  // const fetchData = async () => {
-  //   try {
-  //     const response = await fetch(
-  //       `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${user.token}`,
-  //         },
-  //       }
-  //     );
-  //     if (response.ok) {
-  //       const data = await response.json();
-  //       setExpData(data.data);
-  //       setCurrentExpData(data.data);
-  //       setLoading(false);
-  //     } else {
-  //       const data = await response.json();
-  //       console.error(data);
-  //     }
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   useEffect(() => {
     obtenerCategorias();
-    // fetchData();
     setMensaje("");
   }, []);
 
@@ -187,8 +157,6 @@ const CreateExperience = () => {
     }
     setMensaje(mensaje);
   };
-
-  // const mensajeParaElUsuario = `${statusMessage}`;
 
   if (exitoExperiencia) {
     Swal.fire({
