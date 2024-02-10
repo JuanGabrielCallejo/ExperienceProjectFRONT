@@ -60,10 +60,10 @@ const LikeHeart = ({ exp_id, setLike }) => {
 
 LikeHeart.propTypes = {
   exp_id: PropTypes.number.isRequired,
-  like: PropTypes.number.isRequired,
-  setLike: PropTypes.func.isRequired,
-  isClick: PropTypes.bool.isRequired,
-  setClick: PropTypes.func.isRequired,
+  like: PropTypes.number,
+  setLike: PropTypes.func,
+  isClick: PropTypes.bool,
+  setClick: PropTypes.func,
 };
 
 export default LikeHeart;

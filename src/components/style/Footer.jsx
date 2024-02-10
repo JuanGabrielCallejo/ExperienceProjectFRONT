@@ -33,7 +33,7 @@ export const Footer = () => {
         y{" "}
         <a
           href="https://www.linkedin.com/in/hugooteroiglesias/"
-          className="hover:text-gray-500"q
+          className="hover:text-gray-500"
         >
           Hugo Otero
         </a>

@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import PostExpComment from "../../services/postExpComment";
 import Swal from "sweetalert2";
 import { AuthContext } from "../providers/AuthProvider";
@@ -8,11 +8,21 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
   const [commentText, setCommentText] = useState("");
   const [length, setLength] = useState("");
   const [user] = useContext(AuthContext);
-  const postComment = async () => {
-    if (commentText.length < 10) {
-      setLength("El texto debe tener mínimo 10 carácteres");
-      throw new Error("El texto debe tener mínimo 10 carácteres");
+
+  useEffect(() => {
+    if (length) {
+      setTimeout(() => {
+        setLength("");
+      }, 2000);
     }
+  }, [length]);
+
+  const postComment = async () => {
+    if (commentText.length < 1) {
+      setLength("El texto debe tener mínimo 1 carácteres");
+      throw new Error("El texto debe tener mínimo 1 carácteres");
+    }
+
     const createdComment = await PostExpComment(exp.id, commentText, user);
 
     Swal.fire({
@@ -76,13 +86,15 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
             required
           ></textarea>
         </div>
-        <div>{length}</div>
-        <button
-          type="submit"
-          className="mx-2 hover:bg-gray-100 flex items-center justify-center self-end mr-28 bg-gray-200 p-4 rounded-2xl shadow-2xl h-4"
-        >
-          Enviar
-        </button>
+        <div className="flex w-full justify-between">
+          <div className="ml-28 text-white">{length}</div>
+          <button
+            type="submit"
+            className="mx-2 hover:bg-gray-100 flex items-center justify-center self-end mr-28 bg-gray-200 p-4 rounded-2xl shadow-2xl h-4"
+          >
+            Enviar
+          </button>
+        </div>
       </form>
     </div>
   );
