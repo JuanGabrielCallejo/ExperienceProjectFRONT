@@ -13,12 +13,8 @@ const CreateExperience = () => {
   const [exitoExperiencia, setExitoExperiencia] = useState(false);
   const [categorias, setCategorias] = useState([]);
   const [user] = useContext(AuthContext);
+  // const [, , , setViewBar] = useContext(SearchContext);
   const navigate = useNavigate();
-
-  useEffect(() => {
-    obtenerCategorias();
-    setMensaje("");
-  }, []);
 
   useEffect(() => {
     if (mensaje) {
@@ -27,6 +23,40 @@ const CreateExperience = () => {
       }, 2000);
     }
   }, [mensaje]);
+
+  // useEffect(() => {
+  //   setViewBar(true);
+  // }, [setViewBar]);
+
+  // const fetchData = async () => {
+  //   try {
+  //     const response = await fetch(
+  //       `${import.meta.env.VITE_REACT_HOST}/experience/${exp_id}`,
+  //       {
+  //         headers: {
+  //           Authorization: `Bearer ${user.token}`,
+  //         },
+  //       }
+  //     );
+  //     if (response.ok) {
+  //       const data = await response.json();
+  //       setExpData(data.data);
+  //       setCurrentExpData(data.data);
+  //       setLoading(false);
+  //     } else {
+  //       const data = await response.json();
+  //       console.error(data);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  // };
+
+  useEffect(() => {
+    obtenerCategorias();
+    // fetchData();
+    setMensaje("");
+  }, []);
 
   async function obtenerCategorias() {
     try {
@@ -147,8 +177,10 @@ const CreateExperience = () => {
           const body = await res.json();
           setStatusMessage("Tu experiencia ha sido creada con exito", body);
           setExitoExperiencia(true);
+          console.log(user.token);
         } else {
           const body = await res.json();
+          console.log(body);
           setStatusMessage(body.message);
         }
       } catch (error) {
@@ -157,6 +189,8 @@ const CreateExperience = () => {
     }
     setMensaje(mensaje);
   };
+
+  // const mensajeParaElUsuario = `${statusMessage}`;
 
   if (exitoExperiencia) {
     Swal.fire({
@@ -172,8 +206,8 @@ const CreateExperience = () => {
     });
   } else {
     return (
-      <div className="flex flex-row justify-center items-center h-screen w-full gap-4">
-        <div>
+      <div className="flex items-center">
+        <div className="flex flex-col justify-center h-screen w-full ">
           <div className="text-center mb-4">
             <h1 className="text-2xl text-white font-bold text-gray-800">
               NUEVA EXPERIENCIA
@@ -261,8 +295,7 @@ const CreateExperience = () => {
             </div>
           </form>
         </div>
-
-        <div className="flex justify-center h-4 w-[200px] items-center">
+        <div className="flex justify-center items-center h-4 w-full  w-[300px]">
           {mensaje && (
             <div className={`w-fit mt-6 p-2 bg-white rounded text-center`}>
               {mensaje}

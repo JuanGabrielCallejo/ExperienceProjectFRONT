@@ -150,9 +150,6 @@ const ModExp = () => {
           }
         }
 
-        console.log(formData);
-        // console.log(exp_id);
-        console.log(CamposValidos);
         if (!formData.entries().next().done && CamposValidos) {
           const response = await fetch(
             `${import.meta.env.VITE_REACT_HOST}/modExperience/${exp_id}`,
@@ -175,7 +172,7 @@ const ModExp = () => {
             });
             console.log("Experiencia actualizada con éxito");
             mensaje = "Experiencia actualizada con éxito";
-            fetchData(); // Actualizar datos actuales después de modificar
+            fetchData();
             Swal.fire({
               title: "Experiencia actualizada con éxito",
               icon: "success",
@@ -334,7 +331,9 @@ const ModExp = () => {
             />
           </figure>
           <p className="lead text-gray-400 mb-4">4 me gusta</p>
-          <p className="lead text-gray-700 S400">{currentExpData.text}</p>
+          <p className="lead text-gray-700 w-[525px] max-h-[150px] overflow-hidden overflow-y-auto break-words leading-7 S400">
+            {currentExpData.text}
+          </p>
           <div className="flex items-center mt-8">
             <div className="rounded-full bg-[url('/img/fondoWeb.svg')] bg-cover text-white p-2 text-sm">
               Category

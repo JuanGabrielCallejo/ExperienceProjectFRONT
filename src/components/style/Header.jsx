@@ -19,6 +19,7 @@ export const Header = () => {
       <button
         className="flex justify-content"
         onClick={() => {
+          window.scrollTo(0, 0);
           navigate("/");
         }}
       >

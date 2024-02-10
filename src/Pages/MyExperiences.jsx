@@ -6,6 +6,7 @@ import loadIcon from "/img/bouncing-circles.svg";
 const MyExperiences = () => {
   const [user] = useContext(AuthContext);
   const [data, setData] = useState(null);
+  const [height, setHeight] = useState("h-screen");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,11 +30,23 @@ const MyExperiences = () => {
     fetchData();
   }, [user]);
 
+  useEffect(() => {
+    if (data) {
+      const expList = document.getElementById("OwnExpList");
+      if (expList.clientHeight > window.innerHeight) {
+        setHeight("h-full");
+      }
+    }
+  }, [data]);
+
   return (
-    <div className="flex flex-col self-start m-12 h-screen">
+    <div className={`flex flex-col self-start m-12 ${height}`}>
       <h1 className="text-4xl mt-10 mb-2">Mis Experiencias</h1>
       <div className="bg-black h-1 mb-8"></div>
-      <ul className="grid grid-cols-1 grid-cols-[1fr_1fr_1fr] gap-4">
+      <ul
+        id="OwnExpList"
+        className="grid grid-cols-1 grid-cols-[1fr_1fr_1fr] gap-4"
+      >
         {data ? (
           <OwnExpList experience={data} />
         ) : (

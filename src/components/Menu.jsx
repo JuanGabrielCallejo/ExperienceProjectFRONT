@@ -10,7 +10,11 @@ export const MenuNav = () => {
 
   return (
     <div className=" text-black w-max p-6 flex flex-col gap-8 ">
-      <NavLink to="/" className="mx-2 hover:font-bold">
+      <NavLink
+        onClick={window.scrollTo(0, 0)}
+        to="/"
+        className="mx-2 hover:font-bold"
+      >
         <div className="flex gap-2">
           <GrHomeRounded />
           <p>HOME</p>
