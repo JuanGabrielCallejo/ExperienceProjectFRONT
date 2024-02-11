@@ -159,7 +159,7 @@ const LoginDropDown = ({ user }) => {
             <p className="mobile:hidden sm:block">Hola, {user.name} !</p>
           </div>
         </MenuButton>
-        <Menu slots={{ listbox: Listbox }}>
+        <Menu className={"mobile:z-20"} slots={{ listbox: Listbox }}>
           <div className="flex flex-col w-full gap-2 p-6 ">
             <p className="flex self-center drop-shadow-lg">
               {user.name} {user.lastName}
