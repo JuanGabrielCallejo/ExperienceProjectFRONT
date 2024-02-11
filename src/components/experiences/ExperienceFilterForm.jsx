@@ -19,7 +19,10 @@ const ExperienceFilterForm = () => {
 
   return (
     <div className="flex flex-col">
-      <form onSubmit={handleSubmit} className="flex flex-row">
+      <form
+        onSubmit={handleSubmit}
+        className="flex sm:flex-row mobile:flex-col"
+      >
         <label htmlFor="inputText">
           <PrimarySearchAppBar />
         </label>
@@ -36,7 +39,7 @@ const ExperienceFilterForm = () => {
             <option value="ASC">Menos votados</option>
           </select>
         </label>
-        <button className="mx-2 text-white self-center bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 p-2 rounded-xl shadow-lg">
+        <button className="mx-2 mobile:mt-4 sm:mt-0 text-white self-center bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 p-2 rounded-xl shadow-lg">
           Buscar
         </button>
       </form>

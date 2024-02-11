@@ -20,15 +20,17 @@ export const MenuNav = () => {
           <p>HOME</p>
         </div>
       </NavLink>
-      <NavLink
-        onClick={window.scrollTo(0, 0)}
-        to="/"
-        className="mx-2 sm:hidden md:hidden lg:hidden xl:hidden hover:scale-95"
-      >
-        <div className="flex gap-2">
-          <GrHomeRounded />
-        </div>
-      </NavLink>
+      {user && (
+        <NavLink
+          onClick={window.scrollTo(0, 0)}
+          to="/"
+          className="mx-2 sm:hidden md:hidden lg:hidden xl:hidden hover:scale-95"
+        >
+          <div className="flex gap-2">
+            <GrHomeRounded />
+          </div>
+        </NavLink>
+      )}
       <NavLink
         to="/experiences"
         className="mx-2 hover:scale-95  sm:hidden md:hidden lg:hidden xl:hidden"
