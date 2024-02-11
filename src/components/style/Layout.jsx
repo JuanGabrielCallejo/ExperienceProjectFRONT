@@ -4,8 +4,8 @@ import { Footer } from "./Footer";
 
 const Layout = () => {
   return (
-    <main className="grid grid-cols-[320px_1fr] grid-rows-[1fr_1px_10px] bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover ">
-      <header className="">
+    <main className="grid xl:grid-cols-[320px_1fr] lg:grid-cols-[200px_1fr] md:grid-cols-[150px_1fr] grid-rows-[1fr_1px_10px] bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover ">
+      <header>
         {" "}
         <Header />
       </header>

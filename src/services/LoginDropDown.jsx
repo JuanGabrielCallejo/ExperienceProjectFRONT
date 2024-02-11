@@ -143,20 +143,20 @@ const LoginDropDown = ({ user }) => {
   };
 
   return (
-    <div className="flex flex-col grow justify-end pb-6 mx-2 ">
+    <div className="flex flex-col grow justify-end pb-6 mx-2 mt-4 ">
       <Dropdown>
         <MenuButton>
           {" "}
-          <div className="flex justify-center text-white">
+          <div className="flex mobile:flex-col sm:flex-row justify-center text-white">
             <img
               src={
                 valoresCamposActuales
                   ? valoresCamposActuales.data.photo
                   : user.photo
               }
-              className="w-6 h-6 mr-2 w-16 h-16 rounded-full object-cover"
+              className="sm:mr-2 sm:w-6 mobile:w-10 mobile:h-10 sm:h-6 rounded-full object-cover"
             />
-            <p>Hola, {user.name} !</p>
+            <p className="mobile:hidden sm:block">Hola, {user.name} !</p>
           </div>
         </MenuButton>
         <Menu slots={{ listbox: Listbox }}>

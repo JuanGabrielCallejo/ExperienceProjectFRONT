@@ -15,7 +15,7 @@ export const Header = () => {
     useContext(SearchContext);
   // console.log(user);
   return (
-    <div className=" shadow-2xl fixed bg-white rounded-2xl m-4 h-5/6 flex flex-col justify-end ">
+    <div className=" shadow-2xl fixed bg-white rounded-2xl m-4 sm:h-5/6 mobile:h-fit flex md:flex-col sm:flex-row justify-end mobile:items-center ">
       <button
         className="flex justify-content"
         onClick={() => {
@@ -24,11 +24,12 @@ export const Header = () => {
         }}
       >
         <img
-          className="object-fit drop-shadow-2xl h-64"
+          className="object-fit drop-shadow-2xl xl:h-64 lg:h-48 sm:h-36 mobile: h-20 "
           src="/img/prototipo1.png"
         />
       </button>
       <form
+        className="mobile:hidden md:hidden lg:hidden xl:block"
         onSubmit={(e) => {
           e.preventDefault();
           navigate("/experiences");

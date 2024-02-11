@@ -63,10 +63,10 @@ const Experience = ({ exp }) => {
 
   return (
     <>
-      <main className="pt-8 pb-16 lg:pt-16 lg:pb-24 antialiased w-full ">
+      <main className="pt-8 pb-16 pt-16 lg:pb-24 antialiased w-full ">
         <div className="flex justify-center items-center">
           <div className="shadow-2xl ">
-            <article className="mx-auto w-[850px] h-[1100px] grid grid-cols-1 bg-white p-6 lg:p-8 rounded-2xl grid-rows-[280px,420px,40px,170px,90px]">
+            <article className="mx-auto xl:w-[850px] xl:h-[1100px] lg:w-[600px] md:w-[450px] lg:h-[900px] md:h-[750px] grid grid-cols-1 bg-white p-6 lg:p-8 rounded-2xl xl:grid-rows-[280px,420px,40px,170px,90px] lg:grid-rows-[260px,340px,30px,120px,50px] md:grid-rows-[230px,300px,20px,100px,50px]">
               <header className="mb-8">
                 <address className="flex items-center mb-6">
                   <div className="inline-flex w-full items-center mr-3 text-sm text-gray-900 ">
@@ -124,10 +124,10 @@ const Experience = ({ exp }) => {
                     ) : null}
                   </div>
                 </address>
-                <h1 className="mb-4 text-4xl font-extrabold leading-tight text-gray-800 ">
+                <h1 className="mb-4 lg:text-4xl md:text-2xl font-extrabold leading-tight text-gray-800 ">
                   {exp.title}
                 </h1>
-                <h2 className="mb-6 text-3xl font-extrabold leading-tight text-gray-400 S700">
+                <h2 className="mb-6 lg:text-3xl md:text-xl font-extrabold leading-tight text-gray-400 S700">
                   {exp.subTitle}
                 </h2>
               </header>
@@ -139,7 +139,7 @@ const Experience = ({ exp }) => {
                 />
               </figure>
               <p className="lead text-gray-400 mb-4">{like} me gusta</p>
-              <p className="lead text-gray-700 w-[800px] max-h-[150px] overflow-hidden overflow-y-auto break-words leading-7 S400">
+              <p className="lead text-gray-700 max-h-[150px] overflow-hidden overflow-y-auto break-words leading-7 S400">
                 {exp.text}
               </p>
               <div className="flex items-center mt-8">

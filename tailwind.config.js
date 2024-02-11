@@ -9,6 +9,9 @@ export default {
       width: {
         128: "32rem",
       },
+      screens: {
+        mobile: "425px",
+      },
     },
   },
   plugins: [],
