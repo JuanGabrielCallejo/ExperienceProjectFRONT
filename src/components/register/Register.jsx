@@ -16,7 +16,7 @@ const Register = ({ setSuccessMsg }) => {
     });
   };
   return (
-    <div className="mt-4">
+    <div className="lg:mt-4 w-3/4">
       {exito ? success() : <Formulary setExito={setExito} />}{" "}
     </div>
   );

@@ -198,9 +198,9 @@ const ModUser = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-screen bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
-      <div className="p-6 bg-none lg:bg-white rounded-lg shadow-2xl w-3/4 flex justify-center lg:opacity-100 opacity-100  h-6/7">
+      <div className="p-6 bg-none bg-white rounded-lg shadow-2xl w-3/4 flex justify-center h-6/7">
         <div className="w-2/4">
-          <h1 className="lg:text-3xl lg:font-semibold lg:text-gray-800 lg:mb-6 lg:text-center text-2x1 ">
+          <h1 className="lg:text-3xl lg:font-semibold lg:text-gray-800 lg:mb-6 lg:text-center text-3x1 ">
             Editar perfil
           </h1>
           <form onSubmit={modificarDatos} className="space-y-6">

@@ -177,8 +177,10 @@ const CreateExperience = () => {
           const body = await res.json();
           setStatusMessage("Tu experiencia ha sido creada con exito", body);
           setExitoExperiencia(true);
+          // console.log(user.token);
         } else {
           const body = await res.json();
+          console.log(body);
           setStatusMessage(body.message);
         }
       } catch (error) {
@@ -204,8 +206,8 @@ const CreateExperience = () => {
     });
   } else {
     return (
-      <div className="flex items-center">
-        <div className="flex flex-col justify-center h-screen w-full ">
+      <div className="lg:flex lg:items-center">
+        <div className="flex flex-col justify-center h-screen w-full">
           <div className="text-center mb-4">
             <h1 className="text-2xl text-white font-bold text-gray-800">
               NUEVA EXPERIENCIA
@@ -213,7 +215,7 @@ const CreateExperience = () => {
           </div>
           <form
             onSubmit={nuevaExperiencia}
-            className="max-w-md mx-auto p-4 mb-4 bg-white shadow-md rounded-md flex flex-col "
+            className="max-w-md mx-auto p-4 mb-4 bg-white shadow-md rounded-md flex flex-col w-3/4 lg:w-screen"
           >
             <div className="mb-4">
               <label htmlFor="category" className="text-gray-700">
@@ -293,7 +295,7 @@ const CreateExperience = () => {
             </div>
           </form>
         </div>
-        <div className="flex justify-center items-center h-4 w-[300px]">
+        <div className="flex justify-center items-center h-4 w-full  w-[300px]">
           {mensaje && (
             <div className={`w-fit mt-6 p-2 bg-white rounded text-center`}>
               {mensaje}
