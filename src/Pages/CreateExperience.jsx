@@ -102,7 +102,7 @@ const CreateExperience = () => {
     ({ isValid: CampoValido, message: mensajeCampo } = validateText(
       title,
       2,
-      20,
+      25,
       "título"
     ));
     CamposValidos = CamposValidos && CampoValido;
@@ -115,7 +115,7 @@ const CreateExperience = () => {
     ({ isValid: CampoValido, message: mensajeCampo } = validateText(
       subTitle,
       2,
-      20,
+      25,
       "subtítulo"
     ));
     CamposValidos = CamposValidos && CampoValido;
@@ -128,7 +128,7 @@ const CreateExperience = () => {
     ({ isValid: CampoValido, message: mensajeCampo } = validateText(
       place,
       2,
-      20,
+      25,
       "lugar"
     ));
     CamposValidos = CamposValidos && CampoValido;
