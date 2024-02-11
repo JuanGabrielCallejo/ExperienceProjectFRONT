@@ -84,7 +84,7 @@ const ModUser = () => {
       try {
         setMensaje("");
         let CamposValidos = true;
-        let CampoValido = true;
+        let campoValido = true;
         let mensajeCampo = "";
 
         const formData = new FormData();
@@ -98,9 +98,9 @@ const ModUser = () => {
         }
 
         if (!vacioONull(userData.name)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validateText(userData.name, 2, 30, "nombre"));
-          CamposValidos = CamposValidos && CampoValido;
-          if (CampoValido) {
+          ({ isValid: campoValido, message: mensajeCampo } = validateText(userData.name, 2, 30, "nombre"));
+          CamposValidos = CamposValidos && campoValido;
+          if (campoValido) {
             formData.append("name", userData.name);
           } else {
             mensaje = mensaje + " -  " + mensajeCampo;
@@ -108,9 +108,9 @@ const ModUser = () => {
         }
 
         if (!vacioONull(userData.lastName)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validateText(userData.lastName, 2, 30, "apellido"));
-          CamposValidos = CamposValidos && CampoValido;
-          if (CampoValido) {
+          ({ isValid: campoValido, message: mensajeCampo } = validateText(userData.lastName, 2, 30, "apellido"));
+          CamposValidos = CamposValidos && campoValido;
+          if (campoValido) {
             formData.append("lastName", userData.lastName);
           } else {
             mensaje = mensaje + " -  " + mensajeCampo;
@@ -118,9 +118,9 @@ const ModUser = () => {
         }
 
         if (!vacioONull(userData.email)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validateEmail(userData.email));
-          CamposValidos = CamposValidos && CampoValido;
-          if (CampoValido) {
+          ({ isValid: campoValido, message: mensajeCampo } = validateEmail(userData.email));
+          CamposValidos = CamposValidos && campoValido;
+          if (campoValido) {
             formData.append("email", userData.email);
           } else {
             mensaje = mensaje + " -  " + mensajeCampo;
@@ -128,9 +128,9 @@ const ModUser = () => {
         }
 
         if (!vacioONull(userData.password)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validatePassword(userData.password));
-          CamposValidos = CamposValidos && CampoValido;
-          if (CampoValido) {
+          ({ isValid: campoValido, message: mensajeCampo } = validatePassword(userData.password));
+          CamposValidos = CamposValidos && campoValido;
+          if (campoValido) {
             formData.append("password", userData.password);
           } else {
             mensaje = mensaje + " -  " + mensajeCampo;

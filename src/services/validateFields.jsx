@@ -25,12 +25,12 @@ const validatePassword = (password) => {
         isValid = false;
         message = "El password no puede estar vacío";
     } else {
-        // descomentar para comprobar el formato del password
-        //   const passwordRegex = ;
-        //   if (!passwordRegex.test(password)) {
-        //     isValid = false;
-        //     message = "El password ...";
-        //   }
+        const passwordRegex = new RegExp(/^.*(?=.{1,})(?=.*[a-zA-Z])(?=.*\d)(?=.*[!@#$%^&*()_+{}[\]:;<>,.?~]).*$/);
+        // password = "1fF.";
+        if (!passwordRegex.test(password)) {
+            isValid = false;
+            message = "El password debe tener letras, números y algún caracter especial";
+        }
     }
 
     return { isValid, message };
