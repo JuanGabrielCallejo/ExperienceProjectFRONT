@@ -198,9 +198,9 @@ const ModUser = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-screen bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
-      <div className="p-8 bg-white rounded-lg shadow-2xl w-3/4 flex justify-center lg:opacity-100 opacity-80  w-auto h-3/4">
+      <div className="p-6 bg-none lg:bg-white rounded-lg shadow-2xl w-3/4 flex justify-center lg:opacity-100 opacity-100  h-6/7">
         <div className="w-2/4">
-          <h1 className="lg:text-3xl lg:font-semibold lg:text-gray-800 lg:mb-6 lg:text-center text-2x1">
+          <h1 className="lg:text-3xl lg:font-semibold lg:text-gray-800 lg:mb-6 lg:text-center text-2x1 ">
             Editar perfil
           </h1>
           <form onSubmit={modificarDatos} className="space-y-6">
@@ -279,16 +279,18 @@ const ModUser = () => {
               )}
             </div>
             <div className="flex justify-center mb-3">{mensaje}</div>
-            <div className="flex justify-center">
-              <button
-                className="mx-2 text-white self-center bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 py-2 px-4 rounded-xl shadow-lg"
-                type="submit"
-              >
-                Guardar Cambios
-              </button>
-            </div>
-            <div className="flex justify-center mt-4">
-              <BorrarUsuario />
+            <div className="lg:block flex justify-center gap-8">
+              <div className="flex justify-center">
+                <button
+                  className="mx-2 text-white self-center bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 lg:py-2 lg:px-4 rounded-xl shadow-lg  px-2 py-1"
+                  type="submit"
+                >
+                  Guardar Cambios
+                </button>
+              </div>
+              <div className="lg:flex justify-center lg:mt-4 rounded-xl ">
+                <BorrarUsuario />
+              </div>
             </div>
           </form>
         </div>
