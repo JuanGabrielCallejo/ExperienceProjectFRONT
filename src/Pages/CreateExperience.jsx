@@ -102,7 +102,7 @@ const CreateExperience = () => {
     ({ isValid: CampoValido, message: mensajeCampo } = validateText(
       title,
       2,
-      20,
+      25,
       "título"
     ));
     CamposValidos = CamposValidos && CampoValido;
@@ -115,7 +115,7 @@ const CreateExperience = () => {
     ({ isValid: CampoValido, message: mensajeCampo } = validateText(
       subTitle,
       2,
-      20,
+      25,
       "subtítulo"
     ));
     CamposValidos = CamposValidos && CampoValido;
@@ -128,7 +128,7 @@ const CreateExperience = () => {
     ({ isValid: CampoValido, message: mensajeCampo } = validateText(
       place,
       2,
-      20,
+      25,
       "lugar"
     ));
     CamposValidos = CamposValidos && CampoValido;
@@ -295,7 +295,7 @@ const CreateExperience = () => {
             </div>
           </form>
         </div>
-        <div className="flex justify-center items-center h-4 w-full  w-[300px]">
+        <div className="flex justify-center items-center h-4 w-[300px]">
           {mensaje && (
             <div className={`w-fit mt-6 p-2 bg-white rounded text-center`}>
               {mensaje}

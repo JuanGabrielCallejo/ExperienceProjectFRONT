@@ -28,7 +28,7 @@ export const Header = () => {
         />
         <img
           className="object-fit drop-shadow-2xl sm:hidden mobile:h-20 "
-          src="/img/logoResponsiveSmall.svg"
+          src="/img/logoResponsiveLarge.svg"
         />
       </button>
 
