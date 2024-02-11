@@ -4,7 +4,7 @@ import { useState } from "react";
 const RegisterPage = () => {
   const [successMsg, setSuccessMsg] = useState(false);
   return (
-    <div className="flex flex-col h-screen w-full justify-center">
+    <div className="flex flex-col  w-full justify-center items-center h-screen">
       <Header successMsg={successMsg} />
       <Register setSuccessMsg={setSuccessMsg} />
     </div>

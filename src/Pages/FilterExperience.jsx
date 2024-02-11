@@ -20,7 +20,7 @@ const FilterExperience = () => {
     <div
       className={`flex flex-col self-start h-full w-full bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover`}
     >
-      <div className="flex flex-col p-10 m-4 rounded-xl shadow-2xl bg-white w-fit ">
+      <div className="flex flex-col lg:p-10 mobile:p-2 md:p-4 m-4 md:ml-20 lg:ml-16 xl:ml-4 rounded-xl shadow-2xl bg-white w-fit ">
         <h1>Buscar Experiencias</h1>
         <ExperienceFilterForm />
       </div>

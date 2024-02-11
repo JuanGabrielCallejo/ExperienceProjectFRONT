@@ -2,7 +2,6 @@ import { useNavigate } from "react-router-dom";
 import { MenuNav } from "../Menu";
 import { useContext } from "react";
 import { AuthContext } from "../providers/AuthProvider";
-
 import PrimarySearchAppBar from "../../services/searchBar";
 import { LoginMenu } from "../users/LoginMenu";
 import LoginDropDown from "../../services/LoginDropDown";
@@ -24,10 +23,15 @@ export const Header = () => {
         }}
       >
         <img
-          className="object-fit drop-shadow-2xl xl:h-64 lg:h-48 sm:h-36 mobile: h-20 "
+          className="object-fit drop-shadow-2xl xl:h-64 lg:h-48 sm:h-36 sm:block mobile:hidden "
           src="/img/prototipo1.png"
         />
+        <img
+          className="object-fit drop-shadow-2xl sm:hidden mobile:h-20 "
+          src="/img/logoResponsiveSmall.svg"
+        />
       </button>
+
       <form
         className="mobile:hidden md:hidden lg:hidden xl:block"
         onSubmit={(e) => {

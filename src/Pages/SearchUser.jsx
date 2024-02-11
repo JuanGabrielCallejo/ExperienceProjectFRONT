@@ -56,7 +56,7 @@ const SearchUser = () => {
     <div className={`flex flex-col self-start m-12 ${height}`}>
       <div className="flex justify-between">
         <div>
-          <h1 className="text-4xl mt-10 mb-2">
+          <h1 className="lg:text-4xl md:text-3xl mobile:text-2xl mt-10 mb-2">
             Perfil de {userData ? `${userData.name} ${userData.lastName}` : ""}
           </h1>
           <p>Cuenta creada el {userData ? `${formatedDate}` : ""}</p>
@@ -64,7 +64,7 @@ const SearchUser = () => {
 
         {userOf ? (
           <img
-            className="w-64 h-64 rounded-full object-cover"
+            className="lg:w-64 lg:h-64 md:w-32 md:h-32 mobile:w-24 mobile:h-24 rounded-full object-cover"
             src={
               valoresCamposActuales
                 ? valoresCamposActuales.data.photo
@@ -74,7 +74,7 @@ const SearchUser = () => {
           />
         ) : (
           <img
-            className="w-64 h-64 rounded-full object-cover"
+            className="lg:w-64 lg:h-64 md:w-32 md:h-32 mobile:w-24 mobile:h-24 rounded-full object-cover"
             src={userData && userData.photo}
             alt=""
           />
@@ -84,7 +84,7 @@ const SearchUser = () => {
       <div className="bg-black h-1 mb-8 mt-8"></div>
       <ul
         id="OwnExpList"
-        className="grid  grid-cols-1 grid-cols-[1fr_1fr_1fr] gap-4"
+        className="grid grid-cols-1 xl:grid-cols-[1fr_1fr_1fr] lg:grid-cols-[1fr_1fr] gap-4"
       >
         {data ? (
           <OwnExpList experience={data} />

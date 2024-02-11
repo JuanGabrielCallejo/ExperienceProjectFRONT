@@ -199,8 +199,8 @@ const ModExp = () => {
       onSubmit={modificarDatos}
       className=" h-screen w-2/3 flex flex-col justify-center items-center"
     >
-      <div className="p-8 bg-white rounded-lg shadow-2xl flex gap-6">
-        <div className="w-2/4">
+      <div className="p-8 bg-white rounded-lg shadow-2xl flex gap-6 justify-center">
+        <div className="w-4/5">
           <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
             Edita tu experiencia
           </h1>
@@ -286,7 +286,7 @@ const ModExp = () => {
             </div>
           </div>
         </div>
-        <article className=" w-2/4 p-6 lg:p-8 rounded-2xl shadow-2xl border w-[750px] h-[850px] grid grid-cols-1 grid-rows-[220px_360px_30px_1fr_50px]">
+        <article className=" lg:w-2/4 lg:p-6 lg:p-8 lg:rounded-2xl lg:shadow-2xl lg:border lg:w-[750px] lg:h-[850px] lg:grid lg:grid-cols-1 lg:grid-rows-[220px_360px_30px_1fr_50px] hidden">
           <header className="mb-8">
             <address className="flex items-center mb-6">
               <div className="inline-flex items-center mr-3 text-sm text-gray-900 ">

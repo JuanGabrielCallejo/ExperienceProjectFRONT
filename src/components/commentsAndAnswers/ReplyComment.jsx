@@ -56,8 +56,8 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
           Comentario
         </h3>
       </div>
-      <form className="mb-6 w-96" onSubmit={handleSubmit}>
-        <div className="py-2 px-4 mb-4 rounded-lg rounded-t-lg bg-gray-800 border-gray-700">
+      <form className="mb-6 sm:w-96" onSubmit={handleSubmit}>
+        <div className="py-2 px-4 mb-4 bg-white rounded-lg rounded-t-lg border border-gray-200 dark:bg-gray-800 border-gray-700">
           <label htmlFor="comment" className="sr-only">
             Your comment
           </label>
@@ -65,7 +65,7 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
             id="comment"
             rows="6"
             ref={textareaRef}
-            className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
+            className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 text-white dark:placeholder-gray-400 bg-gray-800"
             placeholder="Escribe tu respuesta..."
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}

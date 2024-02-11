@@ -75,7 +75,7 @@ const ExpComment = ({ exp, newComment, setNewComment }) => {
         </h2>
       </div>
       <form className="mb-6 flex flex-col items-center" onSubmit={handleSubmit}>
-        <div className=" py-2 px-4 mb-4 rounded-lg rounded-t-lg xl:w-[600px] lg:w-[400px] md:w-[350px] border bg-gray-800 border-gray-700 ">
+        <div className=" py-2 px-4 mb-4 rounded-lg rounded-t-lg xl:w-[600px] lg:w-[400px] md:w-[350px] mobile:w-[300px] border bg-gray-800 border-gray-700 ">
           <label htmlFor="comment" className="sr-only"></label>
           <textarea
             id="comment"
