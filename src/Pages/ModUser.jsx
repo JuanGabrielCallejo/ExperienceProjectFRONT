@@ -3,7 +3,11 @@ import BorrarUsuario from "../components/users/borrarUsuario";
 import { AuthContext } from "../components/providers/AuthProvider";
 import { ReloadContext } from "../components/providers/ReloadProvider";
 import Swal from "sweetalert2";
-import { validateEmail, validatePassword, validateText } from "../services/validateFields";
+import {
+  validateEmail,
+  validatePassword,
+  validateText,
+} from "../services/validateFields";
 import resizeImage from "../services/resizeImg";
 
 const ModUser = () => {
@@ -14,14 +18,12 @@ const ModUser = () => {
     password: "",
     photo: undefined,
   });
-  const [currentUserData, setCurrentUserData] = useState()
-
+  const [currentUserData, setCurrentUserData] = useState();
 
   const [user, setUser] = useContext(AuthContext);
   const [exito, setExito] = useState(false);
   const [loading, setLoading] = useState(true);
   const [mensaje, setMensaje] = useState("");
-
 
   useEffect(() => {
     fetchData();
@@ -68,7 +70,7 @@ const ModUser = () => {
     } else {
       return false;
     }
-  }
+  };
 
   const modificarDatos = async (e) => {
     e.preventDefault();
@@ -93,12 +95,21 @@ const ModUser = () => {
         if (photo) {
           const imgMaxWidth = 400;
           const imgMaxHeight = 200;
-          const resizedPhoto = await resizeImage(photo, imgMaxWidth, imgMaxHeight);
+          const resizedPhoto = await resizeImage(
+            photo,
+            imgMaxWidth,
+            imgMaxHeight
+          );
           formData.append("photo", resizedPhoto);
         }
 
         if (!vacioONull(userData.name)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validateText(userData.name, 2, 30, "nombre"));
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(
+            userData.name,
+            2,
+            30,
+            "nombre"
+          ));
           CamposValidos = CamposValidos && CampoValido;
           if (CampoValido) {
             formData.append("name", userData.name);
@@ -108,7 +119,12 @@ const ModUser = () => {
         }
 
         if (!vacioONull(userData.lastName)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validateText(userData.lastName, 2, 30, "apellido"));
+          ({ isValid: CampoValido, message: mensajeCampo } = validateText(
+            userData.lastName,
+            2,
+            30,
+            "apellido"
+          ));
           CamposValidos = CamposValidos && CampoValido;
           if (CampoValido) {
             formData.append("lastName", userData.lastName);
@@ -118,7 +134,9 @@ const ModUser = () => {
         }
 
         if (!vacioONull(userData.email)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validateEmail(userData.email));
+          ({ isValid: CampoValido, message: mensajeCampo } = validateEmail(
+            userData.email
+          ));
           CamposValidos = CamposValidos && CampoValido;
           if (CampoValido) {
             formData.append("email", userData.email);
@@ -128,7 +146,9 @@ const ModUser = () => {
         }
 
         if (!vacioONull(userData.password)) {
-          ({ isValid: CampoValido, message: mensajeCampo } = validatePassword(userData.password));
+          ({ isValid: CampoValido, message: mensajeCampo } = validatePassword(
+            userData.password
+          ));
           CamposValidos = CamposValidos && CampoValido;
           if (CampoValido) {
             formData.append("password", userData.password);
@@ -159,7 +179,8 @@ const ModUser = () => {
             console.log(updatedUser);
           } else {
             const data = await response.json();
-            mensaje = "Error intentando guardar cambios, revise el formato de los datos";
+            mensaje =
+              "Error intentando guardar cambios, revise el formato de los datos";
             console.error(data);
           }
         }
@@ -177,9 +198,9 @@ const ModUser = () => {
 
   return (
     <div className="flex flex-col justify-center items-center w-full h-screen bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
-      <div className="p-8 bg-white rounded-lg shadow-2xl w-3/4 flex justify-between">
+      <div className="p-6 bg-none bg-white rounded-lg shadow-2xl w-3/4 flex justify-center h-6/7">
         <div className="w-2/4">
-          <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
+          <h1 className="lg:text-3xl lg:font-semibold lg:text-gray-800 lg:mb-6 lg:text-center text-3x1 ">
             Editar perfil
           </h1>
           <form onSubmit={modificarDatos} className="space-y-6">
@@ -257,22 +278,23 @@ const ModUser = () => {
                 </p>
               )}
             </div>
-            <div className="flex justify-center mb-3">
-              {mensaje}</div>
-            <div className="flex justify-center">
-              <button
-                className="mx-2 text-white self-center bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 py-2 px-4 rounded-xl shadow-lg"
-                type="submit"
-              >
-                Guardar Cambios
-              </button>
-            </div>
-            <div className="flex justify-center mt-4">
-              <BorrarUsuario />
+            <div className="flex justify-center mb-3">{mensaje}</div>
+            <div className="lg:block flex justify-center gap-8">
+              <div className="flex justify-center">
+                <button
+                  className="mx-2 text-white self-center bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 lg:py-2 lg:px-4 rounded-xl shadow-lg  px-2 py-1"
+                  type="submit"
+                >
+                  Guardar Cambios
+                </button>
+              </div>
+              <div className="lg:flex justify-center lg:mt-4 rounded-xl ">
+                <BorrarUsuario />
+              </div>
             </div>
           </form>
         </div>
-        <div className="w-2/4 flex flex-col justify-center items-center ">
+        <div className="w-2/4 flex flex-col justify-center items-center hidden lg:flex">
           <h1 className="text-3xl font-semibold text-gray-800 mb-6 text-center">
             Datos Actuales
           </h1>
@@ -292,18 +314,14 @@ const ModUser = () => {
             </div>
             <div className="border border-gray-300 rounded-md p-2 mb-4 shadow-md">
               <p className="text-gray-700 font-semibold">Apellido:</p>
-              <p className="text-gray-900">
-                {currentUserData.lastName}
-              </p>
+              <p className="text-gray-900">{currentUserData.lastName}</p>
             </div>
             <div
               className="border border-gray-300 rounded-md p-2 mb-4 shadow-md"
               style={{ marginBottom: "1rem" }}
             >
               <p className="text-gray-700 font-semibold">Correo electrónico:</p>
-              <p className="text-gray-900">
-                {currentUserData.email}
-              </p>
+              <p className="text-gray-900">{currentUserData.email}</p>
             </div>
           </div>
         </div>
