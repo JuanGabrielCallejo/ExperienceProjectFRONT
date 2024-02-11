@@ -295,7 +295,7 @@ const CreateExperience = () => {
             </div>
           </form>
         </div>
-        <div className="flex justify-center items-center h-4 w-full  w-[300px]">
+        <div className="flex justify-center items-center h-4 w-[300px]">
           {mensaje && (
             <div className={`w-fit mt-6 p-2 bg-white rounded text-center`}>
               {mensaje}
