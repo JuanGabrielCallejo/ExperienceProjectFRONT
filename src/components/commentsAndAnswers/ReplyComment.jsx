@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import postReplyComment from "../../services/postReplyComment";
 import Swal from "sweetalert2";
 import getAnswers from "../../services/getAnswers";
@@ -9,11 +9,12 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
   const [commentText, setCommentText] = useState("");
   const [length, setLength] = useState("");
   const [user] = useContext(AuthContext);
+  const textareaRef = useRef(null);
 
   const postComment = async () => {
-    if (commentText.length < 10) {
-      setLength("El texto debe tener mínimo 10 carácteres");
-      throw new Error("El texto debe tener mínimo 10 carácteres");
+    if (commentText.length < 1) {
+      setLength("El texto debe tener mínimo 1 caracter");
+      throw new Error("El texto debe tener mínimo 1 caracter");
     }
 
     const replyData = await postReplyComment(
@@ -44,6 +45,10 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
     }
   };
 
+  useEffect(() => {
+    textareaRef.current.focus();
+  }, []);
+
   return (
     <div className="mt-4">
       <div className="flex justify-between items-center mb-6">
@@ -59,7 +64,8 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
           <textarea
             id="comment"
             rows="6"
-            className="px-0 w-full text-sm border-0 focus:ring-0 text-white placeholder-gray-400 bg-gray-800"
+            ref={textareaRef}
+            className="px-0 w-full text-sm text-gray-900 border-0 focus:ring-0 dark:text-white dark:placeholder-gray-400 dark:bg-gray-800"
             placeholder="Escribe tu respuesta..."
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
@@ -79,8 +85,8 @@ const ReplyComment = ({ comment, setShowTextArea, setAnswers }) => {
 };
 
 ReplyComment.propTypes = {
-  setShowTextArea: PropTypes.func.isRequired,
-  setAnswers: PropTypes.func.isRequired,
+  setShowTextArea: PropTypes.func,
+  setAnswers: PropTypes.func,
   comment: PropTypes.string,
   exp: PropTypes.object,
 };

@@ -14,7 +14,7 @@ const Answers = ({ ans }) => {
   });
   return (
     <>
-      <article className="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg w-[548px] ">
+      <article className="p-6 mb-6 ml-6 lg:ml-12 text-base bg-white rounded-lg lg:w-[548px] md:w-[350px] ">
         <footer className="flex justify-between items-center mb-2">
           <div className="flex items-center">
             <p className="inline-flex items-center mr-3 font-semibold text-sm text-gray-900 S700">

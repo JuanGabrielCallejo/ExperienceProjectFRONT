@@ -1,7 +1,7 @@
 export const Footer = () => {
   return (
-    <div className="p-4 flex justify-center items-center">
-      <div>
+    <div className="p-4 flex flex-col items-center text-center">
+      <div className="mb-2">
         Creado por{" "}
         <a
           href="https://www.linkedin.com/in/carlos-nieves-lameiro/"
@@ -33,7 +33,7 @@ export const Footer = () => {
         y{" "}
         <a
           href="https://www.linkedin.com/in/hugooteroiglesias/"
-          className="hover:text-gray-500"q
+          className="hover:text-gray-500"
         >
           Hugo Otero
         </a>

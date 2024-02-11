@@ -5,18 +5,25 @@ const AnswersList = ({ answers }) => {
   // console.log(answers);
   return (
     <>
-      {answers.map((answer, index) => (
-        <div key={index}>
-          <Answers ans={answer} />
+      {answers.length === 0 ? (
+        <div className="bg-white p-4 rounded-lg">
+          <p>No hay respuestas.</p>
         </div>
-      ))}
+      ) : (
+        answers.map((answer, index) => (
+          <div key={index}>
+            <Answers ans={answer} />
+          </div>
+        ))
+      )}
     </>
   );
 };
 
 AnswersList.propTypes = {
   answers: PropTypes.shape({
-    map: PropTypes.object.isRequired,
+    map: PropTypes.object,
+    length: PropTypes.number,
   }),
 };
 

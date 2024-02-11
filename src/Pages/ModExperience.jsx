@@ -93,8 +93,8 @@ const ModExp = () => {
         if (!vacioONull(expData.title)) {
           ({ isValid: CampoValido, message: mensajeCampo } = validateText(
             expData.title,
-            10,
-            100,
+            2,
+            20,
             "título"
           ));
           CamposValidos = CamposValidos && CampoValido;
@@ -108,8 +108,8 @@ const ModExp = () => {
         if (!vacioONull(expData.subTitle)) {
           ({ isValid: CampoValido, message: mensajeCampo } = validateText(
             expData.subTitle,
-            10,
-            100,
+            2,
+            20,
             "subtítulo"
           ));
           CamposValidos = CamposValidos && CampoValido;
@@ -123,8 +123,8 @@ const ModExp = () => {
         if (!vacioONull(expData.place)) {
           ({ isValid: CampoValido, message: mensajeCampo } = validateText(
             expData.place,
-            10,
-            100,
+            2,
+            20,
             "lugar"
           ));
           CamposValidos = CamposValidos && CampoValido;
@@ -139,7 +139,7 @@ const ModExp = () => {
           ({ isValid: CampoValido, message: mensajeCampo } = validateText(
             expData.text,
             10,
-            100,
+            500,
             "texto"
           ));
           CamposValidos = CamposValidos && CampoValido;
