@@ -191,7 +191,6 @@ const CreateExperience = () => {
   };
 
   // const mensajeParaElUsuario = `${statusMessage}`;
-
   if (exitoExperiencia) {
     Swal.fire({
       title: statusMessage,
@@ -204,6 +203,24 @@ const CreateExperience = () => {
         navigate("/");
       }
     });
+  }
+
+  if (exitoExperiencia) {
+    return (
+      <div className="h-screen flex flex-col justify-center">
+        <div className="flex flex-col items-center gap-3 text-white">
+          <p>EXPERIENCIA CREADA CON ÉXITO</p>
+          <button
+            className="bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 text-white py-2 px-4 rounded-md "
+            onClick={() => {
+              navigate("/");
+            }}
+          >
+            HOME
+          </button>
+        </div>
+      </div>
+    );
   } else {
     return (
       <div className="lg:flex lg:items-center">

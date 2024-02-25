@@ -8,7 +8,7 @@ const Header = (props) => {
   return (
     <div>
       {successMsg ? (
-        <div className="flex flex-col items-center gap-3">
+        <div className="flex flex-col items-center gap-3 text-white">
           <p>REGISTRO COMPLETADO CON ÉXITO</p>
           <button
             className="bg-[url('/img/fondoWeb.svg')] bg-cover hover:scale-95 text-white py-2 px-4 rounded-md "
