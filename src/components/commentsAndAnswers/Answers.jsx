@@ -2,6 +2,7 @@ import PropTypes from "prop-types";
 
 const Answers = ({ ans }) => {
   const date = ans.answer_created_at;
+  console.log(ans.answer_created_at);
   const formatedDate = new Date(date).toLocaleString("es-ES", {
     year: "numeric",
     month: "numeric",

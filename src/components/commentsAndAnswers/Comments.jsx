@@ -50,7 +50,7 @@ const Comments = ({ com }) => {
               />
               {com.comment_user} {com.comment_userLast}
             </p>
-            <p className="text-sm text-gray-600 dark:text-gray-400">
+            <p className="text-sm text-gray-400">
               <time title="February 8th, 2022">{formatedDate}</time>
             </p>
           </div>
@@ -81,7 +81,7 @@ const Comments = ({ com }) => {
             <button
               type="button"
               onClick={() => setShowAnswers(!showAnswers)}
-              className="flex items-center font-medium text-sm text-gray-500 hover:underline dark:text-gray-400"
+              className="flex items-center font-medium text-sm hover:underline text-gray-400"
             >
               <svg
                 className="mr-1.5 w-3 h-3"

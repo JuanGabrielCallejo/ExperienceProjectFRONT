@@ -122,7 +122,7 @@ const LoginPage = () => {
             Email
           </label>
           <input
-            type="text" // elegimos tipo texto para subsanar un error en firefox, que no muestra los mensajes de autocomprobación del email del navegador, y bloquea el código
+            type="text"
             id="email"
             className="w-full mt-2 p-2 border border-gray-300 rounded-md"
             autoComplete="email"

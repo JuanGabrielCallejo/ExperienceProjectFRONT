@@ -310,7 +310,7 @@ const ModExp = () => {
                   <p className="text-base text-gray-400 S700">
                     {currentExpData.place}
                   </p>
-                  <p className="text-base text-gray-500 dark:text-gray-400">
+                  <p className="text-base text-gray-400">
                     <time>1/1/2024, 00:00:00</time>
                   </p>
                 </div>
