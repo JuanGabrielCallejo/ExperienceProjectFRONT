@@ -45,12 +45,20 @@ const HomePage = () => {
                     se el primero !
                   </NavLink>
                 ) : (
-                  <NavLink
-                    to="/login"
-                    className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md "
-                  >
-                    loggeate !
-                  </NavLink>
+                  <div className="flex flex-row gap-2">
+                    <NavLink
+                      to="/register"
+                      className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md "
+                    >
+                      Registrate!
+                    </NavLink>
+                    <NavLink
+                      to="/login"
+                      className="bg-[url('/img/fondoWeb.svg')] hover:scale-95 bg-cover text-white py-2 px-4 rounded-md "
+                    >
+                      Logueate!
+                    </NavLink>
+                  </div>
                 )}
               </div>
             </div>
