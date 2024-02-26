@@ -94,7 +94,7 @@ const ModExp = () => {
           ({ isValid: CampoValido, message: mensajeCampo } = validateText(
             expData.title,
             2,
-            20,
+            25,
             "título"
           ));
           CamposValidos = CamposValidos && CampoValido;
@@ -109,7 +109,7 @@ const ModExp = () => {
           ({ isValid: CampoValido, message: mensajeCampo } = validateText(
             expData.subTitle,
             2,
-            20,
+            25,
             "subtítulo"
           ));
           CamposValidos = CamposValidos && CampoValido;
@@ -124,7 +124,7 @@ const ModExp = () => {
           ({ isValid: CampoValido, message: mensajeCampo } = validateText(
             expData.place,
             2,
-            20,
+            25,
             "lugar"
           ));
           CamposValidos = CamposValidos && CampoValido;
