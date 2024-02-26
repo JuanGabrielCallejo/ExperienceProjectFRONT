@@ -159,9 +159,10 @@ const Experience = ({ exp }) => {
             />
           )}
         </div>
-
-        <h3 className="mt-4">Lista de Comentarios</h3>
-        <CommentsList newComment={newComment} />
+        <div className="mobile:ml-12 lg:ml-0">
+          <h3 className="mt-4">Lista de Comentarios</h3>
+          <CommentsList newComment={newComment} />
+        </div>
       </main>
     </>
   );
