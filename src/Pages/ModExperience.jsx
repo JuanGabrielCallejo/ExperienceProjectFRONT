@@ -17,7 +17,7 @@ const ModExp = () => {
   const [currentExpData, setCurrentExpData] = useState();
   const [loading, setLoading] = useState(true);
   const [user] = useContext(AuthContext);
-  const { valoresCamposActuales } = useContext(ReloadContext);
+  const { currentUserData } = useContext(ReloadContext);
   const [mensaje, setMensaje] = useState("");
   const { exp_id } = useParams();
 
@@ -292,11 +292,7 @@ const ModExp = () => {
               <div className="inline-flex items-center mr-3 text-sm text-gray-900 ">
                 <img
                   className="mr-4 w-16 h-16 rounded-full object-cover"
-                  src={
-                    valoresCamposActuales
-                      ? valoresCamposActuales.data.photo
-                      : user.photo
-                  }
+                  src={currentUserData ? currentUserData.photo : user.photo}
                   alt=""
                 />
                 <div>
