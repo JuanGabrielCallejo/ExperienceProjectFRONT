@@ -122,13 +122,13 @@ const MenuButton = styled(BaseMenuButton)(
 
 const LoginDropDown = ({ user }) => {
   const navigate = useNavigate();
-  const { reload, valoresCamposActuales } = useContext(ReloadContext);
+  const { currentUserData } = useContext(ReloadContext);
   // console.log(user);
   // console.log(valoresCamposActuales);
 
-  useEffect(() => {
-    console.log("Se ha actualizado el estado");
-  }, [reload]);
+  // useEffect(() => {
+  //   console.log("Se ha actualizado el estado");
+  // }, [reload]);
 
   const handleLogout = () => {
     localStorage.removeItem("user");
@@ -149,11 +149,7 @@ const LoginDropDown = ({ user }) => {
           {" "}
           <div className="flex mobile:flex-col sm:flex-row justify-center text-white">
             <img
-              src={
-                valoresCamposActuales
-                  ? valoresCamposActuales.data.photo
-                  : user.photo
-              }
+              src={currentUserData ? currentUserData.photo : user.photo}
               className="sm:mr-2 sm:w-6 mobile:w-10 mobile:h-10 sm:h-6 rounded-full object-cover"
             />
             <p className="mobile:hidden sm:block">Hola, {user.name} !</p>
@@ -165,11 +161,7 @@ const LoginDropDown = ({ user }) => {
               {user.name} {user.lastName}
             </p>
             <img
-              src={
-                valoresCamposActuales
-                  ? valoresCamposActuales.data.photo
-                  : user.photo
-              }
+              src={currentUserData ? currentUserData.photo : user.photo}
               className="drop-shadow-lg w-16 h-16 rounded-full self-center object-cover"
             />
           </div>

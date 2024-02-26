@@ -18,8 +18,8 @@ const ModUser = () => {
     password: "",
     photo: undefined,
   });
-  const [currentUserData, setCurrentUserData] = useState();
-
+  // const [currentUserData, setCurrentUserData] = useState();
+  const { currentUserData, setCurrentUserData } = useContext(ReloadContext);
   const [user, setUser] = useContext(AuthContext);
   const [exito, setExito] = useState(false);
   const [loading, setLoading] = useState(true);

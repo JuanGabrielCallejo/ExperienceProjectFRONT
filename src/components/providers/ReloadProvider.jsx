@@ -6,7 +6,7 @@ const ReloadContext = createContext();
 const ReloadProvider = ({ children }) => {
   const [reload, setReload] = useState(false);
   const [valoresCamposActuales, setValoresCamposActuales] = useState();
-
+  const [currentUserData, setCurrentUserData] = useState();
   const toggleReload = () => {
     setReload((prevReload) => !prevReload);
   };
@@ -18,6 +18,8 @@ const ReloadProvider = ({ children }) => {
         toggleReload,
         valoresCamposActuales,
         setValoresCamposActuales,
+        currentUserData,
+        setCurrentUserData,
       }}
     >
       {children}
