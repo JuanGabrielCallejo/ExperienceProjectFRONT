@@ -1,13 +1,13 @@
-import { Header } from "./Header";
+import { Izquierda } from "./Izquierda";
 import { Outlet } from "react-router-dom";
-import { Footer } from "./Footer";
+import { Pie } from "./Pie";
 
 const Layout = () => {
   return (
     <main className="grid grid-cols-[320px_1px_1fr] h-screen">
       <header className="bg-white flex  ">
         {" "}
-        <Header />
+        <Izquierda />
       </header>
       <div className="bg-black"></div>
       <div className="flex flex-col">
@@ -17,7 +17,7 @@ const Layout = () => {
         </article>
         <div className="bg-black h-px"></div>
         <footer className="bg-gray-100 flex justify-center ">
-          <Footer />
+          <Pie />
         </footer>
       </div>
     </main>

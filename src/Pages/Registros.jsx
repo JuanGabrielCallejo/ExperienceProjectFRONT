@@ -1,39 +1,43 @@
-import useExperiences from "../components/experiences/useExperiences";
-import ExpList from "../components/experiences/ExpList";
+// import useExperiences from "../components/experiences/useExperiences";
+// import ExpList from "../components/experiences/ExpList";
 import { useContext, useEffect, useState } from "react";
-import { SearchContext } from "../components/providers/SearchProvider";
-import { AuthContext } from "../components/providers/AuthProvider";
-import { NavLink } from "react-router-dom";
+// import { SearchContext } from "../components/providers/SearchProvider";
+// import { AuthContext } from "../components/providers/AuthProvider";
+// import { NavLink } from "react-router-dom";
 import loadIcon from "/img/bouncing-circles.svg";
+import getRegistros from "../services/getRegistos";
+import RegistrosLista from "../components/experiences/RegistrosLista";
+// import { globalAgent } from "http";
+import useRegistros from "../hooks/useRegistros";
 
-const HomePage = () => {
-  const [, setSearch, , setViewBar] = useContext(SearchContext);
+const Registros = () => {
+  // const [, setSearch, , setViewBar] = useContext(SearchContext);
   const [loading, setLoading] = useState(true);
-  const [user] = useContext(AuthContext);
+  // const [user] = useContext(AuthContext);;
 
-  useEffect(() => {
-    setSearch("");
-    setViewBar(true);
-  }, [setViewBar, setSearch]);
+  // setTimeout(() => {
+  //   setLoading(false);
+  // }, 500);
 
-  setTimeout(() => {
-    setLoading(false);
-  }, 500);
-
-  const { exp } = useExperiences();
+  // const registros_temp = await getRegistros();
+  // console.log(registros_temp)
   // console.log(exp);
+
+  const { registros } = useRegistros();
+  // if (registros) setLoading(false);
+
   return (
     <div className="h-full w-full flex flex-col items-center bg-[url('/img/fondoWeb.svg')] bg-fixed bg-cover">
-      {loading ? (
+      {!registros ? (
         <div className="flex flex-col items-center justify-center">
           <img className="h-32 w-32" src={loadIcon} alt="Loading Icon"></img>
         </div>
       ) : (
         <div className="flex flex-col justify-center h-full">
-          {exp.length === 0 ? (
+          {registros.length === 0 ? (
             <div className="flex flex-col p-6 rounded-xl items-center gap-4 bg-white w-fit">
-              <p>Todavía no hay experiencias.</p>
-              <div>
+              <p>No hay registros.</p>
+              {/* <div>
                 {user ? (
                   <NavLink
                     to="/compose/experience"
@@ -49,11 +53,11 @@ const HomePage = () => {
                     loggeate !
                   </NavLink>
                 )}
-              </div>
+              </div> */}
             </div>
           ) : (
             <ul>
-              <ExpList experience={exp} />
+              <RegistrosLista registros={registros} />
             </ul>
           )}
         </div>
@@ -62,4 +66,4 @@ const HomePage = () => {
   );
 };
 
-export default HomePage;
+export default Registros;
