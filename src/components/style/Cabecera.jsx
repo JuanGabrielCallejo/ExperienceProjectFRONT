@@ -4,19 +4,31 @@ import { PiMagnifyingGlassBold } from "react-icons/pi";
 import { HiOutlinePencilSquare } from "react-icons/hi2";
 
 
-export const Izquierda = () => {
+export const Cabecera = () => {
 
   return (
-    <div className=" text-black w-max p-6 flex flex-col gap-8 ">
+    <div className=" text-black w-max p-6 flex gap6 ">
       <NavLink to="/" className="mx-2 hover:font-bold">
         <div className="flex gap-2">
-          <GrHomeRounded />
-          <p>INICIO</p>
+          {/* <GrHomeRounded /> */}
+          <b>INICIO</b>
         </div>
       </NavLink>
       <NavLink to="/registros" className="mx-2 hover:font-bold">
         <div className="flex gap-2">
-          <PiMagnifyingGlassBold /> <p>REGISTROS</p>
+          {/* <PiMagnifyingGlassBold />  */}
+          <b>REGISTROS</b>
+        </div>
+      </NavLink>
+      {/* <NavLink to="/lugares" className="mx-2 hover:font-bold">
+        <div className="flex gap-2">
+          <p>LUGARES</p>
+        </div>
+      </NavLink> */}
+      <NavLink to="/registro/insertar" className="mx-2 hover:font-bold">
+        <div className="flex gap-2">
+          {/* <PiMagnifyingGlassBold />  */}
+          <b>NUEVO REGISTRO</b>
         </div>
       </NavLink>
       {/* {user && (

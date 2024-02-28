@@ -18,6 +18,9 @@ import { Layout } from "./components/style/Layout";
 // import SearchUser from "./Pages/SearchUser";
 import PaginaPrincipal from "./Pages/PaginaPrincipal";
 import Registros from "./Pages/Registros";
+import Lugares from "./Pages/Lugares";
+import InsertarRegistro from "./Pages/InsertarRegistro"
+import Camara from "./Pages/Camara";
 
 const router = createBrowserRouter([
   {
@@ -31,6 +34,18 @@ const router = createBrowserRouter([
       {
         path: "/registros",
         element: <Registros />,
+      },
+      {
+        path: "/lugares",
+        element: <Lugares />,
+      },
+      {
+        path: "/registro/insertar",
+        element: <InsertarRegistro />,
+      },
+      {
+        path: "/camara",
+        element: <Camara />,
       },
       // {
       //   path: "/user/experiences/:exp_id",

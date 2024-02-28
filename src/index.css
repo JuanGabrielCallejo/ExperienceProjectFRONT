@@ -1,12 +1,14 @@
-@import url(https://db.onlinewebfonts.com/c/1ce44cc25409dd2c93dd1163395cfc8f?family=Samsung+Sharp+Sans+Bold);
+/* @import url(https://db.onlinewebfonts.com/c/1ce44cc25409dd2c93dd1163395cfc8f?family=Samsung+Sharp+Sans+Bold);
 @import url(https://db.onlinewebfonts.com/c/00487ece712f86b9b503997ceb17daff?family=SamsungOne-700);
-@import url(https://db.onlinewebfonts.com/c/174b2ec3d1b18323f2021ce3fdda6028?family=SamsungOne-400);
+@import url(https://db.onlinewebfonts.com/c/174b2ec3d1b18323f2021ce3fdda6028?family=SamsungOne-400); */
+
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
+/* * {
   font-family: "Samsung Sharp Sans Bold";
 }
 
@@ -16,4 +18,16 @@
 
 .S700 {
   font-family: "SamsungOne-700";
+} */
+
+* {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.S400 {
+  font-family: "Ubuntu", sans-serif;
+}
+
+.S700 {
+  font-family: "Ubuntu", sans-serif;
 }

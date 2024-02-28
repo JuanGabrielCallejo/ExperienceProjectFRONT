@@ -14,7 +14,7 @@ const RegistrosLista = ({ registros }) => {
     // exp.self = userId === registro.user_id;
     // console.log(exp);
     return (
-      <li key={registro.id}>
+      <li key={registro.id} className="pb-8">
         <Registro registro={registro} />
       </li>
     );
