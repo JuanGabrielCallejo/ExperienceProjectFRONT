@@ -7,7 +7,7 @@ const getLugares = async () => {
       throw new Error(`Error: ${result.status} - ${result.statusText}`);
     }
     const res = await result.json();
-    console.log(res);
+    // console.log(res);
     return res.data;
   } catch (error) {
     console.error(error.message);

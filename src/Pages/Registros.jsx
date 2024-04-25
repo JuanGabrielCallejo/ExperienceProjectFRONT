@@ -1,51 +1,60 @@
-// import useExperiences from "../components/experiences/useExperiences";
-// import ExpList from "../components/experiences/ExpList";
-import { useContext, useEffect, useState } from "react";
-// import { SearchContext } from "../components/providers/SearchProvider";
-// import { AuthContext } from "../components/providers/AuthProvider";
-// import { NavLink } from "react-router-dom";
-import loadIcon from "/img/bouncing-circles.svg";
-// import getRegistros from "../services/getRegistos";
+import loadIcon from "/img/wave_peq.gif";
 import RegistrosLista from "../components/registros/RegistrosLista";
-// import { globalAgent } from "http";
-import useRegistros from "../hooks/useRegistros";
+import { useEffect, useState } from "react";
+import getRegistros from "../services/getRegistos";
+import { ContextoPersonal } from "../Contexts/ContextoPersonal";
+import React, { useContext } from "react";
 
-const Registros = () => {
-  // const [, setSearch, , setViewBar] = useContext(SearchContext);
-  // const [loading, setLoading] = useState(true);
-  // const [user] = useContext(AuthContext);;
+const Registros = ({ pruebas }) => {
+  const [registros, setRegistros] = useState();
+  const [actualizar, setActualizar] = useState();
 
-  // setTimeout(() => {
-  //   setLoading(false);
-  // }, 500);
+  const { admin_estado } = useContext(ContextoPersonal);
+  const [admin, setAdmin] = admin_estado
 
-  // const registros_temp = await getRegistros();
-  // console.log(registros_temp)
-  // console.log(exp);
+  useEffect(() => {
+    const recogerRegistros = async () => {
+      try {
+        setRegistros(null);
+        const data = await getRegistros(pruebas);
+        // setTimeout(() => {
+        setRegistros(data);
+        // setCargando(false);
+        // }, 2000);
+        // setRegistros(data);
 
-  const { registros } = useRegistros();
-  // if (registros) setLoading(false);
+      } catch (error) {
+        console.error(error.message);
+      }
+    };
+    recogerRegistros();
+  }, [pruebas, actualizar]);
 
   return (
-    <div className="h-full w-full items-center bg-fixed bg-cover p-8">
+    <div className="h-full w-full items-center bg-fixed bg-cover p-3">
+      {pruebas && <p>Registros de pruebas</p>}
+
       {!registros ? (
         <div className="flex flex-col items-center justify-center">
-          <img className="h-32 w-32" src={loadIcon} alt="Loading Icon"></img>
+          <img className="h-40 w-40 rounded-full" src={loadIcon} alt="Loading Icon"></img>
         </div>
       ) : (
         <>
-          <p>Registros</p>
           <div className="flex flex-col justify-center h-full">
-            {registros.length === 0 ? (
-              <div className="flex flex-col p-6 rounded-xl items-center gap-4 bg-white w-fit">
-                <p>No hay registros.</p>
-
-              </div>
-            ) : (
-              <ul>
-                <RegistrosLista registros={registros} />
-              </ul>
+            {admin && (
+              <>Base de datos: {registros.bd}</>
             )}
+            {
+              registros.length === 0 ? (
+                <div className="flex flex-col p-6 rounded-xl items-center gap-4 bg-white w-fit">
+                  <p>No hay registros.</p>
+                </div>
+              ) : (
+                <ul>
+                  <RegistrosLista registros={registros} setActualizar={setActualizar} pruebas={pruebas} />
+                </ul>
+              )
+            }
           </div>
         </>
 

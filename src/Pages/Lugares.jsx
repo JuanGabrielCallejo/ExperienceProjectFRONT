@@ -1,5 +1,5 @@
 
-import loadIcon from "/img/bouncing-circles.svg";
+import loadIcon from "/img/cargando_sol.gif";
 import LugaresLista from "../components/lugares/LugaresLista";
 import useLugares from "../hooks/useLugares";
 

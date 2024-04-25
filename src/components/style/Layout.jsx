@@ -22,12 +22,12 @@ const Layout = () => {
     //   </div>
     // </main>
     <main className="h-screen">
-      <header className="bg-white flex  ">
+      <header className="bg-white flex fixed w-full z-10">
         <Cabecera />
       </header>
-      <div className="bg-black"></div>
-      <div className="flex flex-col">
-        <article className="bg-gray-300 text-rgb(53, 53, 53)  flex justify-center items-center grow">
+      <div className="bg-black h-px"></div>
+      <div className="flex flex-col mt-9">
+        <article className="bg-gray-300 text-rgb(53, 53, 53) flex flex-col justify-center items-center grow">
           <Outlet />
         </article>
         <div className="bg-black h-px"></div>
